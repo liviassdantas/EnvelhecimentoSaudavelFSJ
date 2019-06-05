@@ -12,8 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".View.OximetriaAntropometria"
+        <activity
+            android:name=".View.DobrasCutaneas"
             tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +22,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.DadosPaciente"
+        <activity android:name=".View.TesteCaminhada"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator"/>
+        <activity
+            android:name=".View.DadosPaciente"
             android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator" />
-        <activity android:name=".View.TesteCaminhada"
+        <activity
+            android:name=".View.OximetriaAntropometria"
             android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator" />
         <activity
