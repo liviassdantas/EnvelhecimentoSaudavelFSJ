@@ -38,13 +38,24 @@
     <string name="IMCresult">0.00</string>
     <string name="RCQ">RCQ =</string>
     <string name="RCQresult">0.00</string>
+
+    <!--Strings de Teste Caminhada-->
     <string name="testecaminhada">Teste de Caminhada</string>
     <string name="distancia">Distância(cm)</string>
     <string name="vo2max">VO² Máximo</string>
     <string name="papreteste">P.A. Pré-Teste</string>
     <string name="paposteste">P.A. Pós-Teste</string>
+
+    <!--Dobras Cutâneas-->
     <string name="dobrascutaneas">Dobras Cutâneas</string>
     <string name="dobrasresult">Resultado (%)</string>
+
+    <!--Strings Resultados-->
+    <string name="resultado">Resultado:</string>
+    <string name="nomepessoa">nomepessoa</string>
+    <string name="idade">12</string>
+    <string name="fcResultLaudo">0.00</string>
+    <string name="PAResultado">130X90</string>
 
     <!--Array de estados-->
     <string-array name="estados">

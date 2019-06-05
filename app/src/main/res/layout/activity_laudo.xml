@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <!--Resultado-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/resultado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/resultado"
+                android:textColor="@color/cinza40"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <!--Informações da pessoa-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/nome_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nome:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/nomepessoa_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_toEndOf="@id/nome_laudo"
+                android:layout_toRightOf="@id/nome_laudo"
+                android:text="@string/nomepessoa"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/idade_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Idade:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/idadeexibe_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/idade_laudo"
+                android:layout_toRightOf="@id/idade_laudo"
+                android:text="@string/idade"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/sexoExibe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toEndOf="@id/idadeexibe_laudo"
+                android:layout_toRightOf="@id/idade_laudo"
+                android:text="Sexo:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/sexoExibir_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/sexoExibe"
+                android:layout_toRightOf="@id/sexoExibe"
+                android:text="Masculino"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+        <!--Antropometria-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/antropometria_laudo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/antropometria"
+                android:textColor="@color/cinza40"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+        <!--peso, IMC e FC-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/peso_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Peso:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/pesoexibe_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/peso_laudo"
+                android:layout_toRightOf="@id/peso_laudo"
+                android:text="@string/peso"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/imcExibe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toEndOf="@id/pesoexibe_laudo"
+                android:layout_toRightOf="@id/pesoexibe_laudo"
+                android:text="IMC:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/resultado_imc_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/imcExibe"
+                android:layout_toRightOf="@id/imcExibe"
+                android:text="@string/IMCresult"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/fcExibe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toEndOf="@id/resultado_imc_laudo"
+                android:layout_toRightOf="@id/resultado_imc_laudo"
+                android:text="F.C.:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/frequencia_exibe_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/fcExibe"
+                android:layout_toRightOf="@id/fcExibe"
+                android:text="@string/fcResultLaudo"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+        <!--Altura, PA, RCQ-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/altura_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Altura:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/alturaexibe_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/altura_laudo"
+                android:layout_toRightOf="@id/altura_laudo"
+                android:text="@string/altura"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/rcqExibe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toEndOf="@id/alturaexibe_laudo"
+                android:layout_toRightOf="@id/alturaexibe_laudo"
+                android:text="RCQ:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/rcq_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/rcqExibe"
+                android:layout_toRightOf="@id/rcqExibe"
+                android:text="@string/IMCresult"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/paExibe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_toEndOf="@id/rcq_laudo"
+                android:layout_toRightOf="@id/rcq_laudo"
+                android:text="P.A.:"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/pa_exibe_laudo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@id/paExibe"
+                android:layout_toRightOf="@id/paExibe"
+                android:text="@string/PAResultado"
+                android:textColor="@color/black" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

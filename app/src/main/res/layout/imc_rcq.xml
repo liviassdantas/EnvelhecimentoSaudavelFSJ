@@ -9,6 +9,7 @@
         android:layout_height="match_parent">
         <TableRow>
             <TextView
+                android:id="@+id/imc_rcqIMC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/IMC"
@@ -16,7 +17,7 @@
                 android:textSize="20sp"
                 android:textStyle="normal" />
             <TextView
-                android:id="@+id/IMCresultado"
+                android:id="@+id/imc_rcqIMCresultado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/IMCresult"
@@ -26,6 +27,7 @@
         </TableRow>
         <TableRow>
             <TextView
+                android:id="@+id/imc_rcqRCQ"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/RCQ"
@@ -33,7 +35,7 @@
                 android:textSize="20sp"
                 android:textStyle="normal" />
             <TextView
-                android:id="@+id/RCQresultado"
+                android:id="@+id/imc_rcqRCQresultado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/RCQresult"

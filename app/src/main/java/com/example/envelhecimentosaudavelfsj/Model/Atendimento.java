@@ -1,11 +1,11 @@
 package com.example.envelhecimentosaudavelfsj.Model;
+
 import java.util.Date;
 
 /**
  * Created by Raphael Rodrigues on 04/06/2019.
  */
-public class Atendimento
-{
+public class Atendimento {
     private Long atendimentoId;
     private Long servidorId;
     private String cpfPaciente;
@@ -13,6 +13,8 @@ public class Atendimento
     private Double peso;
     private String frequenciaCardiaca;
     private String pressaoArterial;
+    private String pressaoDiastolica;
+    private String pressaoSistolica;
     private String distanciaTesteErg;
     private String VOobtidoTesteErg;
     private String PAposTeste;
@@ -34,6 +36,11 @@ public class Atendimento
     }
 
     //TODO método RCQ
+
+    //pressão arterial
+    public String PressaoArterial(){
+        return (this.getPressaoSistolica()+"X"+this.getPressaoDiastolica()+"mmHg");
+    }
 
     public Long getAtendimentoId() {
         return atendimentoId;
@@ -82,7 +89,6 @@ public class Atendimento
     public void setFrequenciaCardiaca(String frequenciaCardiaca) {
         this.frequenciaCardiaca = frequenciaCardiaca;
     }
-
     public String getPressaoArterial() {
         return pressaoArterial;
     }
@@ -105,6 +111,20 @@ public class Atendimento
 
     public void setVOobtidoTesteErg(String VOobtidoTesteErg) {
         this.VOobtidoTesteErg = VOobtidoTesteErg;
+    }
+
+    public String getPressaoDiastolica() { return pressaoDiastolica;
+    }
+
+    public void setPressaoDiastolica(String pressaoDiastolica) {
+        this.pressaoDiastolica = pressaoDiastolica;
+    }
+
+    public String getPressaoSistolica() { return pressaoSistolica;
+    }
+
+    public void setPressaoSistolica(String pressaoSistolica) {
+        this.pressaoSistolica = pressaoSistolica;
     }
 
     public String getPAposTeste() {
