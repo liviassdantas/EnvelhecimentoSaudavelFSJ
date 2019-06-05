@@ -11,6 +11,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+//region
+//Activity criada por Raphael Rodrigues
+//Tela de cadastro dos pacientes
+//endregion
 
 public class Main2Activity extends AppCompatActivity {
 
@@ -23,6 +27,8 @@ public class Main2Activity extends AppCompatActivity {
 
         mDataNascimento = findViewById(R.id.cadastro_dataNascimento);
 
+        //region
+        //tratamento da Data e calendário - por Raphael Rodrigues
         mDataNascimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +52,9 @@ public class Main2Activity extends AppCompatActivity {
                         mDataNascimento.setText(data);
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+
             }
         });
+        //endregion
     }
 }

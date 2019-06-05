@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--Tela por Raphael Rodrigues-->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -219,6 +220,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/proximo"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:textColor="@color/pink"
             android:layout_gravity="center"/>
+        <!--Livia: alterei o botão para ser sem borda e com o texto rosa. Caso queira devolver as bordas,
+        só apagar o style-->
     </LinearLayout>
 </ScrollView>
