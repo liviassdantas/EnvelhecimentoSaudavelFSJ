@@ -1,4 +1,4 @@
-package com.example.envelhecimentosaudavelfsj;
+package com.example.envelhecimentosaudavelfsj.View;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+
+import com.example.envelhecimentosaudavelfsj.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,19 +18,17 @@ import java.util.Locale;
 //Tela de cadastro dos pacientes
 //endregion
 
-public class Main2Activity extends AppCompatActivity {
+public class DadosPaciente extends AppCompatActivity {
 
     private EditText mDataNascimento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_tela_paciente);
 
         mDataNascimento = findViewById(R.id.cadastro_dataNascimento);
 
-        //region
-        //tratamento da Data e calendário - por Raphael Rodrigues
         mDataNascimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,7 +43,7 @@ public class Main2Activity extends AppCompatActivity {
                     }
                 }
 
-                new DatePickerDialog(Main2Activity.this, new DatePickerDialog.OnDateSetListener() {
+                new DatePickerDialog(DadosPaciente.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar c = Calendar.getInstance();
@@ -55,6 +55,6 @@ public class Main2Activity extends AppCompatActivity {
 
             }
         });
-        //endregion
+
     }
 }

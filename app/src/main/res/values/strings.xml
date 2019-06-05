@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Envelhecimento Saudavel FSJ</string>
-    <!--Strings da Main Activity 2-->
+
+    <!--Strings da tela de cadastro dos pacientes-->
     <string name="uf">Estado</string>
     <string name="logradouro">Rua</string>
     <string name="complemento">Complemento</string>
@@ -18,9 +19,25 @@
     <string name="endereco">Endereco</string>
     <string name="sexo">Sexo</string>
     <string name="proximo">Próximo</string>
+
     <!--Strings da tela inicial-->
     <string name="novo_paciente">Novo Paciente</string>
     <string name="relatório">Relatório</string>
+
+    <!--Strings da tela Oximetria/Antropometria-->
+    <string name="oximetria">Oximetria</string>
+    <string name="v_pre_teste">Valor Pré-Teste</string>
+    <string name="v_pos_teste">Valor Pós Teste</string>
+    <string name="antropometria">Antropometria</string>
+    <string name="peso">Peso</string>
+    <string name="altura">Altura</string>
+    <string name="pressaosistolica">P.Sistólica</string>
+    <string name="pressaodiastolica">P.Diastólica</string>
+    <string name="fc">Frequência Cardíaca</string>
+    <string name="IMC">IMC = </string>
+    <string name="IMCresult">0.00</string>
+    <string name="RCQ">RCQ =</string>
+    <string name="RCQresult">0.00</string>
 
     <!--Array de estados-->
     <string-array name="estados">

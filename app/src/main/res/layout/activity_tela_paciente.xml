@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dados_do_paciente"
-            android:textColor="#99000000"
+            android:textColor="@color/cinza40"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/endereco"
-            android:textColor="#99000000"
+            android:textColor="@color/cinza40"
             android:textSize="26sp"
             android:textStyle="bold" />
 
@@ -222,7 +222,7 @@
             android:text="@string/proximo"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:textColor="@color/pink"
-            android:layout_gravity="center"/>
+            android:layout_gravity="right"/>
         <!--Livia: alterei o botão para ser sem borda e com o texto rosa. Caso queira devolver as bordas,
         só apagar o style-->
     </LinearLayout>
