@@ -11,6 +11,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 
 import com.example.envelhecimentosaudavelfsj.R;
+import com.example.envelhecimentosaudavelfsj.cep.CepListener;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +42,8 @@ public class DadosPaciente extends AppCompatActivity {
         CEP = findViewById(R.id.endereco_edtCepId);
         Numero = findViewById(R.id.endereco_edtNumeroId);
         Cidade = findViewById(R.id.endereco_edtCidadeId);
+
+        CEP.getEditText().addTextChangedListener(new CepListener(this));
 
 
         mDataNascimento = findViewById(R.id.telaPaciente_dataNascimento);
