@@ -1,11 +1,16 @@
 package com.example.envelhecimentosaudavelfsj.Model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+
 import java.util.Date;
 
 /**
  * Created by Raphael Rodrigues on 04/06/2019.
  */
+@Entity
 public class Atendimento {
+    @PrimaryKey
     private Long atendimentoId;
     private Long servidorId;
     private String cpfPaciente;

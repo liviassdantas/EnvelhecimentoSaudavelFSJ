@@ -1,6 +1,7 @@
 package com.example.envelhecimentosaudavelfsj;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -9,8 +10,12 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.envelhecimentosaudavelfsj.Dao.Banco;
+import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.View.DadosPaciente;
 import com.example.envelhecimentosaudavelfsj.View.Relatorio;
+
+import java.util.Date;
 
 public class Principal extends AppCompatActivity {
 

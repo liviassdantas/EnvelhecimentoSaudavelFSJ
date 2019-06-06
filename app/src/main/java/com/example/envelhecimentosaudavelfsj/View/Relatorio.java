@@ -1,11 +1,13 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.envelhecimentosaudavelfsj.Adapter.AtendimentoAdapter;
+import com.example.envelhecimentosaudavelfsj.Dao.Banco;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.R;
 
@@ -19,25 +21,29 @@ public class Relatorio extends AppCompatActivity {
 
     RecyclerView recyclerView;
     List<Atendimento> atendimentoList;
+    String CPF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatorio);
         recyclerView = findViewById(R.id.relatorio_recyclerView);
-        atendimentoList = new ArrayList<>();
 
-        LinearLayoutManager llm = new LinearLayoutManager(Relatorio.this);
-        recyclerView.setLayoutManager(llm);
+        CPF = getIntent().getStringExtra("cpf");  //pega o CPF digitado no alert dialog da tela anterior
 
-        atendimentoList.add(new Atendimento("Yanzin mec mec",new Date()));
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                atendimentoList = Banco.getAtendimentoDatabase(Relatorio.this).servicoDatabase().getAllAtendimentos();
 
-        atendimentoList.add(new Atendimento("Joãozinho Arroz",new Date()));
+                LinearLayoutManager llm = new LinearLayoutManager(Relatorio.this);
+                recyclerView.setLayoutManager(llm);
 
-        atendimentoList.add(new Atendimento("Estou Sem Criatividade",new Date()));
+                AtendimentoAdapter adapter = new AtendimentoAdapter(atendimentoList);
+                recyclerView.setAdapter(adapter);
 
-        AtendimentoAdapter adapter = new AtendimentoAdapter(atendimentoList);
+            }
+        });
 
-        recyclerView.setAdapter(adapter);
     }
 }
