@@ -23,16 +23,16 @@ public class DobrasCutaneas extends AppCompatActivity {
         setContentView(R.layout.activity_dobras_cutaneas);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        dobraResult = findViewById(R.id.dobras_cutaneas_valor);
+//        dobraResult = findViewById(R.id.dobras_cutaneas_valor);
 
         findViewById(R.id.dobras_cutaneas_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!dobraResult.getEditText().getText().toString().isEmpty()) {
+//                if (!dobraResult.getEditText().getText().toString().isEmpty()) {
                     startActivity(new Intent(DobrasCutaneas.this, TesteCaminhada.class));
-                } else {
-                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                }
+//                } else {
+//                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+//                }
 
             }
         });

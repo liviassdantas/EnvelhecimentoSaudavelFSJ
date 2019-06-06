@@ -8,7 +8,7 @@
     android:weightSum="2">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/telaInicial_btnNovoPaciente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -33,7 +33,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout4"
+        android:id="@+id/telaInicial_btnRelatorio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"

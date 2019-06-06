@@ -9,8 +9,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.R;
 
@@ -26,7 +24,7 @@ import java.util.Locale;
 
 public class DadosPaciente extends AppCompatActivity {
 
-    private TextInputLayout  Nome, CPF, Rua, Bairro, CEP, Numero, Cidade;
+    private TextInputLayout Nome, CPF, Rua, Bairro, CEP, Numero, Cidade;
     private EditText mDataNascimento;
 
 
@@ -34,6 +32,7 @@ public class DadosPaciente extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_paciente);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Nome = findViewById(R.id.telaPaciente_nomePaciente);
         CPF = findViewById(R.id.telaPaciente_cpf);
@@ -66,8 +65,7 @@ public class DadosPaciente extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar c = Calendar.getInstance();
                         c.set(year, month, dayOfMonth);
-                        String data = new SimpleDateFormat("dd/MM/YYYY",
-                                new Locale("pt-BR")).format(c.getTime());
+                        String data = new SimpleDateFormat("dd/MM/YYYY", new Locale("pt-BR")).format(c.getTime());
                         mDataNascimento.setText(data);
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -78,11 +76,11 @@ public class DadosPaciente extends AppCompatActivity {
         findViewById(R.id.telaPaciente_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ValidarCampos()) {
-                    startActivity(new Intent(DadosPaciente.this, OximetriaAntropometria.class));
-                } else {
-                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                }
+//                if (ValidarCampos()) {
+                startActivity(new Intent(DadosPaciente.this, OximetriaAntropometria.class));
+//                } else {
+//                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
     }
@@ -96,6 +94,10 @@ public class DadosPaciente extends AppCompatActivity {
                         CEP.getEditText().getText().toString().isEmpty() ||
                         Numero.getEditText().getText().toString().isEmpty() ||
                         Cidade.getEditText().getText().toString().isEmpty());
+    }
+
+    public String getUriCep() {
+        return "https://viacep.com.br/ws/" + CEP.getEditText().getText() + "/json/";
     }
 
     @Override

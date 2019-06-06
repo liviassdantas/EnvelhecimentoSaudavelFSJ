@@ -33,6 +33,8 @@ public class OximetriaAntropometria extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_oximetria_antro);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 //        vPreTeste = findViewById(R.id.oximetria_valor_pre_teste);
 //        vPosTeste = findViewById(R.id.oximetria_valor_pos_teste);
 //        peso = findViewById(R.id.antropometria_peso);
@@ -49,11 +51,11 @@ public class OximetriaAntropometria extends AppCompatActivity {
         findViewById(R.id.oximetria_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validarCampos()) {
+//                if (validarCampos()) {
                     startActivity(new Intent(OximetriaAntropometria.this, DobrasCutaneas.class));
-                } else {
-                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                }
+//                } else {
+//                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
     }
