@@ -1,11 +1,12 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.R;
 
@@ -26,7 +27,12 @@ public class DobrasCutaneas extends AppCompatActivity {
         findViewById(R.id.dobras_cutaneas_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DobrasCutaneas.this, TesteCaminhada.class));
+                if (!dobraResult.getText().toString().isEmpty()) {
+                    startActivity(new Intent(DobrasCutaneas.this, TesteCaminhada.class));
+                } else {
+                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

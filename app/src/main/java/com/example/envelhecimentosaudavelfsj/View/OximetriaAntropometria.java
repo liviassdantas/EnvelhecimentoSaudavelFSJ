@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.R;
 /*
@@ -27,14 +28,11 @@ public class OximetriaAntropometria extends AppCompatActivity {
     private TextView IMCresult;
     private TextView RCQ;
     private TextView RCQresult;
-    private Button   btnProximo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_oximetria_antro);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 //        vPreTeste = findViewById(R.id.oximetria_valor_pre_teste);
 //        vPosTeste = findViewById(R.id.oximetria_valor_pos_teste);
 //        peso = findViewById(R.id.antropometria_peso);
@@ -51,7 +49,11 @@ public class OximetriaAntropometria extends AppCompatActivity {
         findViewById(R.id.oximetria_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(OximetriaAntropometria.this, DobrasCutaneas.class));
+                if (validarCampos()) {
+                    startActivity(new Intent(OximetriaAntropometria.this, DobrasCutaneas.class));
+                } else {
+                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -64,5 +66,13 @@ public class OximetriaAntropometria extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean validarCampos() {
+        return !(
+                vPreTeste.getText().toString().isEmpty() || vPosTeste.getText().toString().isEmpty() || peso.getText().toString().isEmpty()
+                        || altura.getText().toString().isEmpty() || pressaoDiastolica.getText().toString().isEmpty() || pressaoSistolica.getText().toString().isEmpty()
+                        || frequeciaCardiaca.getText().toString().isEmpty()
+        );
     }
 }

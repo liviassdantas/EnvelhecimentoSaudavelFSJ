@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.R;
 
@@ -15,6 +16,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+
 //region
 //Activity criada por Raphael Rodrigues
 //Tela de cadastro dos pacientes
@@ -22,13 +24,20 @@ import java.util.Locale;
 
 public class DadosPaciente extends AppCompatActivity {
 
-    private EditText mDataNascimento;
+    private EditText mDataNascimento, Nome, CPF, Rua, Bairro, CEP, Numero, Cidade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_paciente);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//        Nome = findViewById(R.id.txt_nome);
+//        CPF = findViewById(R.id.txt_cpf);
+//        Rua = findViewById(R.id.txt_rua);
+//        Bairro = findViewById(R.id.txt_bairro);
+//        CEP = findViewById(R.id.txt_cep);
+//        Numero = findViewById(R.id.txt_numero);
+//        Cidade = findViewById(R.id.txt_cidade);
 
         mDataNascimento = findViewById(R.id.telaPaciente_dataNascimento);
 
@@ -62,9 +71,21 @@ public class DadosPaciente extends AppCompatActivity {
         findViewById(R.id.telaPaciente_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DadosPaciente.this, OximetriaAntropometria.class));
+                if (ValidarCampos()) {
+                    startActivity(new Intent(DadosPaciente.this, OximetriaAntropometria.class));
+                } else {
+                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+
+    private boolean ValidarCampos() {
+        return !(
+                Nome.getText().toString().isEmpty() || CPF.getText().toString().isEmpty() || Rua.getText().toString().isEmpty()
+                        || Bairro.getText().toString().isEmpty() || CEP.getText().toString().isEmpty() || Numero.getText().toString().isEmpty()
+                        || Cidade.getText().toString().isEmpty()
+        );
     }
 
     @Override
