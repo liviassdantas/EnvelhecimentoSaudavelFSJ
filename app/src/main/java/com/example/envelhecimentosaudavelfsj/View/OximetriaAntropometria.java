@@ -1,8 +1,11 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,17 +33,36 @@ public class OximetriaAntropometria extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_oximetria_antro);
-        vPreTeste = findViewById(R.id.oximetria_valor_pre_teste);
-        vPosTeste = findViewById(R.id.oximetria_valor_pos_teste);
-        peso = findViewById(R.id.antropometria_peso);
-        altura = findViewById(R.id.antropometria_altura);
-        pressaoDiastolica = findViewById(R.id.antropometria_pressaodiastolica);
-        pressaoSistolica = findViewById(R.id.antropometria_pressaosistolica);
-        frequeciaCardiaca = findViewById(R.id.antropometria_fc);
-        IMC = findViewById(R.id.imc_rcqIMC);
-        IMCresult = findViewById(R.id.imc_rcqIMCresultado);
-        RCQ = findViewById(R.id.imc_rcqRCQ);
-        RCQresult = findViewById(R.id.imc_rcqRCQresultado);
-        btnProximo = findViewById(R.id.oximetria_btnProximo);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//        vPreTeste = findViewById(R.id.oximetria_valor_pre_teste);
+//        vPosTeste = findViewById(R.id.oximetria_valor_pos_teste);
+//        peso = findViewById(R.id.antropometria_peso);
+//        altura = findViewById(R.id.antropometria_altura);
+//        pressaoDiastolica = findViewById(R.id.antropometria_pressaodiastolica);
+//        pressaoSistolica = findViewById(R.id.antropometria_pressaosistolica);
+//        frequeciaCardiaca = findViewById(R.id.antropometria_fc);
+//        IMC = findViewById(R.id.imc_rcqIMC);
+//        IMCresult = findViewById(R.id.imc_rcqIMCresultado);
+//        RCQ = findViewById(R.id.imc_rcqRCQ);
+//        RCQresult = findViewById(R.id.imc_rcqRCQresultado);
+//        btnProximo = findViewById(R.id.oximetria_btnProximo);
+
+        findViewById(R.id.oximetria_btnProximo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(OximetriaAntropometria.this, DobrasCutaneas.class));
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

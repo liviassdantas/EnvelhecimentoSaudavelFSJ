@@ -12,9 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".View.Laudo"></activity>
+
         <activity
-            android:name=".View.DobrasCutaneas"
+            android:name=".Principal"
+            android:label="Envelhecimento Saudável"
             tools:ignore="InnerclassSeparator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,21 +24,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".View.TesteCaminhada"
+            android:label="Teste de caminhada"
             android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator" />
+
         <activity
-            android:name=".View.DadosPaciente"
+            android:name=".View.DobrasCutaneas"
+            android:label="Dobras cutaneas"
             android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator" />
+
         <activity
             android:name=".View.OximetriaAntropometria"
+            android:label="Oximetria e Antropometria"
             android:screenOrientation="portrait"
             tools:ignore="InnerclassSeparator" />
+
         <activity
-            android:name=".Principal"
-            android:screenOrientation="portrait" />
+            android:name=".View.DadosPaciente"
+            android:label="Dados do paciente"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator" />
+
+        <activity
+            android:name=".View.Laudo"
+            android:label="Laudo"
+            android:screenOrientation="portrait"
+            tools:ignore="InnerclassSeparator" />
     </application>
 
 </manifest>

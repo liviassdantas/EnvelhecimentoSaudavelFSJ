@@ -1,8 +1,10 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -26,8 +28,9 @@ public class DadosPaciente extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_paciente);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mDataNascimento = findViewById(R.id.cadastro_dataNascimento);
+        mDataNascimento = findViewById(R.id.telaPaciente_dataNascimento);
 
         mDataNascimento.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,5 +59,21 @@ public class DadosPaciente extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.telaPaciente_btnProximo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DadosPaciente.this, OximetriaAntropometria.class));
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
