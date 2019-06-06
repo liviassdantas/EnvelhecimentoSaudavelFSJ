@@ -1,12 +1,12 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.R;
@@ -83,12 +83,11 @@ public class DadosPaciente extends AppCompatActivity {
     {
         if(ValidarCampos())
         {
-
+            startActivity(new Intent(DadosPaciente.this,OximetriaAntropometria.class));
         }
         else
         {
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
         }
     }
-
 }

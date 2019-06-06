@@ -20,12 +20,12 @@
             android:textStyle="bold" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/oximetria_valor_pre_teste"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/oximetria_valor_pre_teste"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/v_pre_teste"
@@ -33,12 +33,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/oximetria_valor_pos_teste"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/oximetria_valor_pos_teste"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/v_pos_teste"
@@ -54,12 +54,12 @@
             android:textStyle="bold" />
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/antropometria_peso"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/antropometria_peso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/peso"
@@ -67,12 +67,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/antropometria_altura"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/antropometria_altura"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:hint="@string/altura"
@@ -86,22 +86,25 @@
             <TableRow>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/antropometria_pressaosistolica"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true">
+
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/antropometria_pressaosistolica"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:hint="@string/pressaosistolica"
                         android:inputType="number" />
                 </android.support.design.widget.TextInputLayout>
+
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/antropometria_pressaodiastolica"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     app:errorEnabled="true">
+
                     <android.support.design.widget.TextInputEditText
+                        android:id="@+id/antropometria_pressaodiastolica"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:hint="@string/pressaodiastolica"
@@ -111,12 +114,12 @@
         </TableLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/antropometria_fc"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             app:errorEnabled="true">
 
             <android.support.design.widget.TextInputEditText
+                android:id="@+id/antropometria_fc"
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
                 android:hint="@string/fc"
@@ -132,6 +135,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:onClick="btnProximo"
             android:text="@string/proximo"
             android:textColor="@color/pink" />
     </LinearLayout>

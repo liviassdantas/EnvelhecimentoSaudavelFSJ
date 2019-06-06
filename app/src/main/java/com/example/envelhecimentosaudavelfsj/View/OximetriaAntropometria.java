@@ -1,11 +1,14 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.R;
 /*
@@ -13,6 +16,7 @@ import com.example.envelhecimentosaudavelfsj.R;
  */
 
 public class OximetriaAntropometria extends AppCompatActivity {
+
     private EditText vPreTeste;
     private EditText vPosTeste;
     private EditText peso;
@@ -20,14 +24,15 @@ public class OximetriaAntropometria extends AppCompatActivity {
     private EditText pressaoDiastolica;
     private EditText pressaoSistolica;
     private EditText frequeciaCardiaca;
+
     private TextView IMC;
     private TextView IMCresult;
     private TextView RCQ;
     private TextView RCQresult;
-    private Button   btnProximo;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_oximetria_antro);
         vPreTeste = findViewById(R.id.oximetria_valor_pre_teste);
@@ -41,6 +46,27 @@ public class OximetriaAntropometria extends AppCompatActivity {
         IMCresult = findViewById(R.id.imc_rcqIMCresultado);
         RCQ = findViewById(R.id.imc_rcqRCQ);
         RCQresult = findViewById(R.id.imc_rcqRCQresultado);
-        btnProximo = findViewById(R.id.oximetria_btnProximo);
     }
+
+    private boolean validarCampos()
+    {
+        return !(
+                vPreTeste.getText().toString().isEmpty() || vPosTeste.getText().toString().isEmpty() || peso.getText().toString().isEmpty()
+                || altura.getText().toString().isEmpty() || pressaoDiastolica.getText().toString().isEmpty() || pressaoSistolica.getText().toString().isEmpty()
+                || frequeciaCardiaca.getText().toString().isEmpty()
+        );
+    }
+
+    public void btnProximo(View v)
+    {
+        if(validarCampos())
+        {
+            startActivity(new Intent(OximetriaAntropometria.this,DobrasCutaneas.class));
+        }
+        else
+        {
+            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }
