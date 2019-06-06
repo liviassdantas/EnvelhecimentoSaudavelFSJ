@@ -19,6 +19,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
+            android:onClick="btnNovoPaciente"
             android:src="@drawable/ic_048_start"
             android:tint="@color/pink" />
 
@@ -46,6 +47,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
+            android:onClick="btnRelatorio"
             android:src="@drawable/ic_045_search"
             android:tint="@color/pink" />
 

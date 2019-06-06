@@ -21,20 +21,6 @@ public class Principal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial);
 
-        findViewById(R.id.telaInicial_btnNovoPaciente).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnNovoPaciente(v);
-            }
-        });
-
-        (findViewById(R.id.Txv_tela_inicial_relatório)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                btnRelatorio(v);
-            }
-        });
-
     }
 
     public void btnNovoPaciente(View v) {
@@ -42,9 +28,6 @@ public class Principal extends AppCompatActivity {
     }
 
     public void btnRelatorio(View v) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        alerta = builder.create();
 
         LayoutInflater li = getLayoutInflater();
 
@@ -57,21 +40,29 @@ public class Principal extends AppCompatActivity {
             }
         });
 
-        view.findViewById(R.id.alert_txt_cpf).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.alert_btn_pesquisar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String cpf = ((EditText) view.findViewById(R.id.alert_txt_cpf)).getText().toString();
 
-                if (!cpf.isEmpty() && cpf.length() == 11) {
+                if (cpf.length() == 11) {
                     Intent i = new Intent(Principal.this, Relatorio.class);
                     i.putExtra("cpf", cpf);
                     startActivity(i);
                 } else {
-                    Toast.makeText(Principal.this, "Insira um CPF", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Principal.this, "Insira um CPF correto", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        builder.setTitle("Consulta");
+        builder.setView(view);
+        alerta = builder.create();
+
+        alerta.show();
 
     }
 

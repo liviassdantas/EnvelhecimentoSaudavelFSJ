@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/alert_txt_cpf" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/alert_btn_pesquisar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

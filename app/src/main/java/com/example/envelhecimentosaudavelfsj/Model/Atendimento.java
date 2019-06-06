@@ -31,6 +31,12 @@ public class Atendimento {
     public Atendimento() {
     }
 
+    public Atendimento(String CPF,Date hora)  //Construtor de teste , deve ser removido na versão final
+    {
+        this.cpfPaciente = CPF;
+        this.dataEHoraAtendimento = hora;
+    }
+
     public Double IMC(Double peso, Double altura) {
         return peso / (altura * altura);
     }
