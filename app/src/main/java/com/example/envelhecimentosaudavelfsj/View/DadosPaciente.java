@@ -3,11 +3,13 @@ package com.example.envelhecimentosaudavelfsj.View;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.R;
@@ -24,20 +26,23 @@ import java.util.Locale;
 
 public class DadosPaciente extends AppCompatActivity {
 
-    private EditText mDataNascimento, Nome, CPF, Rua, Bairro, CEP, Numero, Cidade;
+    private TextInputLayout  Nome, CPF, Rua, Bairro, CEP, Numero, Cidade;
+    private EditText mDataNascimento;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_paciente);
 
-//        Nome = findViewById(R.id.txt_nome);
-//        CPF = findViewById(R.id.txt_cpf);
-//        Rua = findViewById(R.id.txt_rua);
-//        Bairro = findViewById(R.id.txt_bairro);
-//        CEP = findViewById(R.id.txt_cep);
-//        Numero = findViewById(R.id.txt_numero);
-//        Cidade = findViewById(R.id.txt_cidade);
+        Nome = findViewById(R.id.telaPaciente_nomePaciente);
+        CPF = findViewById(R.id.telaPaciente_cpf);
+        Rua = findViewById(R.id.endereco_edtRuaId);
+        Bairro = findViewById(R.id.endereco_edtBairroId);
+        CEP = findViewById(R.id.endereco_edtCepId);
+        Numero = findViewById(R.id.endereco_edtNumeroId);
+        Cidade = findViewById(R.id.endereco_edtCidadeId);
+
 
         mDataNascimento = findViewById(R.id.telaPaciente_dataNascimento);
 
@@ -47,7 +52,8 @@ public class DadosPaciente extends AppCompatActivity {
                 final Calendar calendar = Calendar.getInstance();
 
                 if (!mDataNascimento.getText().toString().isEmpty()) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt-BR"));
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy",
+                            new Locale("pt-BR"));
                     try {
                         calendar.setTime(sdf.parse(mDataNascimento.getText().toString()));
                     } catch (ParseException e) {
@@ -60,7 +66,8 @@ public class DadosPaciente extends AppCompatActivity {
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         Calendar c = Calendar.getInstance();
                         c.set(year, month, dayOfMonth);
-                        String data = new SimpleDateFormat("dd/MM/YYYY", new Locale("pt-BR")).format(c.getTime());
+                        String data = new SimpleDateFormat("dd/MM/YYYY",
+                                new Locale("pt-BR")).format(c.getTime());
                         mDataNascimento.setText(data);
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -82,10 +89,13 @@ public class DadosPaciente extends AppCompatActivity {
 
     private boolean ValidarCampos() {
         return !(
-                Nome.getText().toString().isEmpty() || CPF.getText().toString().isEmpty() || Rua.getText().toString().isEmpty()
-                        || Bairro.getText().toString().isEmpty() || CEP.getText().toString().isEmpty() || Numero.getText().toString().isEmpty()
-                        || Cidade.getText().toString().isEmpty()
-        );
+                Nome.getEditText().getText().toString().isEmpty() ||
+                        CPF.getEditText().getText().toString().isEmpty() ||
+                        Rua.getEditText().getText().toString().isEmpty() ||
+                        Bairro.getEditText().getText().toString().isEmpty() ||
+                        CEP.getEditText().getText().toString().isEmpty() ||
+                        Numero.getEditText().getText().toString().isEmpty() ||
+                        Cidade.getEditText().getText().toString().isEmpty());
     }
 
     @Override
