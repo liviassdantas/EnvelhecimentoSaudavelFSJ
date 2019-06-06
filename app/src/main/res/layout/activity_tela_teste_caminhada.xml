@@ -48,33 +48,79 @@
                     android:hint="@string/vo2max"
                     android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/teste_caminhada_pa_pre"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
+                android:layout_height="match_parent"
+                android:text="@string/pressao_pre"
+                android:textColor="@color/cinza40"
+                android:textStyle="bold"
+                android:textSize="20sp"/>
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <android.support.design.widget.TextInputEditText
+                <TableRow>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/teste_caminhada_pa_sistolica_pre"
+                        android:layout_width="181dp"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/pasistolicapreteste"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/teste_caminhada_pa_diastolica_pre"
+                        android:layout_width="181dp"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true">
+
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/padiastolicapreteste"
+                            android:inputType="numberDecimal" />
+                    </android.support.design.widget.TextInputLayout>
+                </TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/pressao_pos"
+                    android:textColor="@color/cinza40"
+                    android:textStyle="bold"
+                    android:textSize="20sp"/>
+                <TableRow>
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/teste_caminhada_pa_sistolica_pos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/papreteste"
-                    android:inputType="numberDecimal" />
-            </android.support.design.widget.TextInputLayout>
+                    app:errorEnabled="true">
 
-            <android.support.design.widget.TextInputLayout
-                android:id="@+id/teste_caminhada_pa_pos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:errorEnabled="true">
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/pasistolicaposteste"
+                        android:inputType="numberDecimal" />
+                </android.support.design.widget.TextInputLayout>
+                    <android.support.design.widget.TextInputLayout
+                        android:id="@+id/teste_caminhada_pa_diastolica_pos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:errorEnabled="true">
 
-                <android.support.design.widget.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/paposteste"
-                    android:inputType="numberDecimal" />
-            </android.support.design.widget.TextInputLayout>
-
+                        <android.support.design.widget.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/padiastolicaposteste"
+                            android:inputType="numberDecimal" />
+                </android.support.design.widget.TextInputLayout>
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
     </ScrollView>
 

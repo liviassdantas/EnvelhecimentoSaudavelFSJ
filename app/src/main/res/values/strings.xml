@@ -43,8 +43,10 @@
     <string name="testecaminhada">Teste de Caminhada</string>
     <string name="distancia">Distância(cm)</string>
     <string name="vo2max">VO² Máximo</string>
-    <string name="papreteste">P.A. Pré-Teste</string>
-    <string name="paposteste">P.A. Pós-Teste</string>
+    <string name="padiastolicapreteste">P.A.Diastólica</string>
+    <string name="pasistolicapreteste">P.A.Sistólica </string>
+    <string name="padiastolicaposteste">P.A.Diastólica</string>
+    <string name="pasistolicaposteste">P.A.Sistólica</string>
 
     <!--Dobras Cutâneas-->
     <string name="dobrascutaneas">Dobras Cutâneas</string>
@@ -56,6 +58,14 @@
     <string name="idade">12</string>
     <string name="fcResultLaudo">0.00</string>
     <string name="PAResultado">130X90</string>
+    <string name="pressao_pre">Pressão Pré-Teste:</string>
+    <string name="pressao_pos">Pressão Pós-Teste</string>
+    <string name="laudo_exibe_valorpreoximetria">0.00</string>
+    <string name="laudo_oximetria_valorposteste">0.00</string>
+    <string name="pressaoPreTesteCaminhada_laudo">0.0</string>
+    <string name="pressaoPosTesteCaminhada_laudo">0.00</string>
+    <string name="vo2maxLaudoExibe">0.0</string>
+    <string name="salvar">Salvar</string>
 
     <!--Array de estados-->
     <string-array name="estados">
