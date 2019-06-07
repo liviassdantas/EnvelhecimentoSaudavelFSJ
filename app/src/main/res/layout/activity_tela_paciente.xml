@@ -14,13 +14,28 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/dados_do_paciente"
-                android:textColor="@color/cinza40"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dados_do_paciente"
+                    android:textColor="@color/cinza40"
+                    android:textSize="26sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="1/5"
+                    android:textColor="@color/cinza40"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/telaPaciente_nomePaciente"
@@ -62,6 +77,7 @@
                     android:id="@+id/telaPaciente_sexoFeminino"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:checked="true"
                     android:text="@string/feminino" />
 
                 <RadioButton

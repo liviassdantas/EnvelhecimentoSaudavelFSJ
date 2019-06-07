@@ -23,6 +23,16 @@
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:text="2/5"
+                    android:textColor="@color/cinza40"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/oximetria_valor_pre_teste"
                 android:layout_width="match_parent"
@@ -143,12 +153,35 @@
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:id="@+id/oximetria_layout_imcRcr"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/antropometria_fc">
+                android:layout_below="@id/antropometria_fc"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-                <!--Layout do IMC/RCQ-->
-                <include layout="@layout/imc_rcq" />
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="IMC" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="RCQ" />
+                </android.support.design.widget.TextInputLayout>
+
 
             </LinearLayout>
 
@@ -160,6 +193,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:layout_below="@id/oximetria_layout_imcRcr"
                 android:text="@string/proximo"
                 android:textColor="@color/pink" />
 
