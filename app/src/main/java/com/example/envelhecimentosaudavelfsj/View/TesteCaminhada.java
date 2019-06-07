@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
+import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
+import com.google.gson.Gson;
 /*
  *Created by: Livia Dantas - 05/06/2019
  */
@@ -37,14 +41,36 @@ public class TesteCaminhada extends AppCompatActivity {
         paSistolicaposTeste = findViewById(R.id.teste_caminhada_pa_sistolica_pos);
         paDiastolicaposTeste = findViewById(R.id.teste_caminhada_pa_diastolica_pos);
 
-        pressaoPre = PressaoPreTeste();
-        pressaoPos = PressaoPosTeste();
-
 
         findViewById(R.id.teste_caminhada_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TesteCaminhada.this, Laudo.class));
+                Atendimento atendTesteCaminha = new Gson().fromJson(getIntent()
+                        .getStringExtra("atendimentoDobras"), Atendimento.class);
+                Paciente pacienteTesteCaminha = new Gson().fromJson(getIntent()
+                        .getStringExtra("pacientedobras"),Paciente.class);
+
+                atendTesteCaminha.setPressaoSis(paSistolicapreTeste.getEditText().getText().toString());
+                atendTesteCaminha.setPressaoDias(paDiastolicapreTeste.getEditText().getText().toString());
+                atendTesteCaminha.setPApreTeste(atendTesteCaminha.PressaoArterialPreTeste());
+
+                atendTesteCaminha.setPressaoSis(paSistolicaposTeste.getEditText().getText().toString());
+                atendTesteCaminha.setPressaoDias(paDiastolicaposTeste.getEditText().getText().toString());
+                atendTesteCaminha.setPAposTeste(atendTesteCaminha.PressaoArterialPosTeste());
+
+                atendTesteCaminha.setDistanciaTesteErg(distancia.getEditText().getText().toString());
+                atendTesteCaminha.setVOobtidoTesteErg(vo2max.getEditText().getText().toString());
+
+                String pacienteTesteCaminhada = new Gson().toJson(pacienteTesteCaminha);
+                String atendimentoTesteCaminhada = new Gson().toJson(atendTesteCaminha);
+
+                Intent atendimentoTCaminhada = new Intent(TesteCaminhada.this, Laudo.class);
+
+                atendimentoTCaminhada.putExtra("pacienteCaminhada", pacienteTesteCaminhada);
+                atendimentoTCaminhada.putExtra("atendimentoCaminhada",atendimentoTesteCaminhada);
+
+                Log.v("caminhada","\n"+pacienteTesteCaminhada + "\n"+atendimentoTesteCaminhada);
+                startActivity(atendimentoTCaminhada);
             }
         });
     }
@@ -59,11 +85,4 @@ public class TesteCaminhada extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public String PressaoPreTeste() {
-        return this.paSistolicapreTeste + "x" + this.paDiastolicapreTeste + "mmHg";
-    }
-
-    public String PressaoPosTeste() {
-        return this.paSistolicaposTeste + "x" + this.paDiastolicaposTeste + "mmHg";
-    }
 }

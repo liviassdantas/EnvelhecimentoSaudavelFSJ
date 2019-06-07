@@ -210,12 +210,12 @@ public class Atendimento {
     }
 
     //pressão arterial pré teste
-    private String PressaoArterialPreTeste() {
+    public String PressaoArterialPreTeste() {
         return (this.getPressaoSis() + "X" + this.getPressaoDias() + "mmHg");
     }
 
     //pressão arterial pós Teste
-    private String PressaoArterialPosTeste() {
+    public String PressaoArterialPosTeste() {
         return (this.getPressaoSis() + "X" + this.getPressaoDias() + "mmHg");
     }
 
