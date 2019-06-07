@@ -21,6 +21,7 @@ import com.example.envelhecimentosaudavelfsj.Model.Endereco;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
 import com.example.envelhecimentosaudavelfsj.cep.CepListener;
+import com.google.gson.Gson;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,8 +36,8 @@ import java.util.Locale;
 
 public class DadosPaciente extends AppCompatActivity {
 
-    private TextInputLayout Nome, CPF, Rua, Bairro, CEP, Numero, Cidade, Complemento;
-    private EditText mDataNascimento;
+    private TextInputLayout Nome, CPF, Rua, Bairro, CEP, Numero, Cidade;
+    private EditText mDataNascimento, Complemento;
     private Spinner Estado;
     private RadioButton btnFeminino;
     private RadioButton btnMasculino;
@@ -60,7 +61,7 @@ public class DadosPaciente extends AppCompatActivity {
         Cidade = findViewById(R.id.endereco_edtCidadeId);
         btnFeminino = findViewById(R.id.telaPaciente_sexoFeminino);
         btnMasculino = findViewById(R.id.telaPaciente_sexoMasculino);
-//        Complemento = findViewById(R.id.endereco_edtComplementoId);
+        Complemento = findViewById(R.id.endereco_edtComplementoId);
         Estado = findViewById(R.id.endereco_spinnerEstados);
 
 
@@ -98,67 +99,50 @@ public class DadosPaciente extends AppCompatActivity {
         });
 
         findViewById(R.id.telaPaciente_btnProximo).setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SimpleDateFormat")
             @Override
             public void onClick(View v) {
-//                if (ValidarCampos()) {
-//                new Thread(new Runnable() {
-//                    @SuppressLint("SimpleDateFormat")
-//                    @Override
-//                    public void run() {
-//                        Paciente paciente = new Paciente();
-//                        Endereco endereco = new Endereco();
-//
-//                        paciente.setCpf(Long.parseLong(CPF.getEditText().getText().toString()));
-//                        paciente.setNome(Nome.getEditText().getText().toString());
-//
-//                        //sexo
-//                        if (btnFeminino.isChecked()) {
-//                            paciente.setSexo("Feminino");
-//                        } else {
-//                            paciente.setSexo("Masculino");
-//                        }
-//
-//                        if (btnMasculino.isChecked()) {
-//                            paciente.setSexo("Masculino");
-//                        } else {
-//                            paciente.setSexo("Feminino");
-//                        }
-//
-//                        //data de nascimento
-//                        try {
-//                            paciente.setDataNascimento(new SimpleDateFormat("dd/MM/YYYY").parse(mDataNascimento.getText().toString()));
-//                        } catch (ParseException e) {
-//                            e.printStackTrace();
-//                        }
-//
-//
-//                        endereco.setBairro(Bairro.getEditText().getText().toString());
-//                        endereco.setCep(CEP.getEditText().getText().toString());
-//                        endereco.setComplemento(Complemento.getEditText().getText().toString());
-//                        endereco.setLogradouro(Rua.getEditText().getText().toString());
-//                        endereco.setLocalidade(Cidade.getEditText().getText().toString());
-//                        endereco.setUf(Estado.getSelectedItem().toString());
-//                        endereco.setNumero(Numero.getEditText().toString());
-//                        paciente.setEndereco(endereco);
-//
-//                        banco.pacienteDao().insert(paciente);
-//                        for (PacienteAtendimento p : banco.pacienteDao().getAll()) {
-//                            if (p.getPaciente().getEndereco() != null) {
-//                                Endereco end = p.getPaciente().getEndereco();
-//                                Log.v("banco", "" + p.getPaciente().getNome() + " " + p.getPaciente().getCpf()+""
-//                                        +paciente.getDataNascimento() + "" + end.getBairro()+""+end.getCep()+""+end.getComplemento()+""+end.getLogradouro()+""
-//                                        +end.getLocalidade()+""+end.getUf());
-//                            } else {
-//                                Log.v("banco", "" + p.getPaciente().getNome() + " " + p.getPaciente().getCpf());
-//                            }
-//                        }
-//
-//                    }
-//                }).start();
-                startActivity(new Intent(DadosPaciente.this, OximetriaAntropometria.class));
-//                } else {
-//                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-//                }
+                if (ValidarCampos()) {
+
+                    Paciente paciente = new Paciente();
+                    Endereco endereco = new Endereco();
+
+                    paciente.setCpf(Long.parseLong(CPF.getEditText().getText().toString()));
+                    paciente.setNome(Nome.getEditText().getText().toString());
+
+                    //sexo
+                    if (btnFeminino.isChecked()) {
+                        paciente.setSexo("Feminino");
+                    } else {
+                        paciente.setSexo("Masculino");
+                    }
+
+                    //data de nascimento
+                    try {
+                        paciente.setDataNascimento(new SimpleDateFormat("dd/MM/YYYY").parse(mDataNascimento.getText().toString()));
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+
+                    endereco.setBairro(Bairro.getEditText().getText().toString());
+                    endereco.setCep(CEP.getEditText().getText().toString());
+                    endereco.setComplemento(Complemento.getText().toString());
+                    endereco.setLogradouro(Rua.getEditText().getText().toString());
+                    endereco.setLocalidade(Cidade.getEditText().getText().toString());
+                    endereco.setUf(Estado.getSelectedItem().toString());
+                    endereco.setNumero(Numero.getEditText().toString());
+                    paciente.setEndereco(endereco);
+
+                    String pacienteGson = new Gson().toJson(paciente);
+                    Intent intentPaciente = new Intent(DadosPaciente.this, OximetriaAntropometria.class);
+                    intentPaciente.putExtra("paciente", pacienteGson);
+
+                    startActivity(intentPaciente);
+
+                } else {
+                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

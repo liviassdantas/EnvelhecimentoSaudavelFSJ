@@ -34,6 +34,7 @@ public class Relatorio extends AppCompatActivity {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
+                //atendimentoList = Banco.getAtendimentoDatabase(Relatorio.this).servicoDatabase().getAllAtendimentos();
 //                atendimentoList = Banco.getAtendimentoDatabase(Relatorio.this).servicoDatabase().getAllAtendimentos();
 
                 LinearLayoutManager llm = new LinearLayoutManager(Relatorio.this);
