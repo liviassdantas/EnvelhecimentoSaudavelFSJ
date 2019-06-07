@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?><!--Tela por Livia Dantas-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -153,7 +154,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout
-                android:id="@+id/oximetria_layout_imcRcr"
+                android:id="@+id/oximetria_layout_imcRcq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/antropometria_fc"
@@ -172,6 +173,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/oximetria_rcq_edit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -191,12 +193,13 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/oximetria_layout_imcRcr"
+                android:layout_below="@id/oximetria_layout_imcRcq"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:text="@string/proximo"
-                android:textColor="@color/pink" />
+                android:textColor="@color/pink"
+                />
 
         </RelativeLayout>
     </ScrollView>

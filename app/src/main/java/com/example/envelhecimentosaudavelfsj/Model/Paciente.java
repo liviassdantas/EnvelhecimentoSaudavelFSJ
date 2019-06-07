@@ -30,8 +30,7 @@ public class Paciente {
     private Date dataNascimento;
     @ColumnInfo(name = "idade")
     private Integer idade;
-    @ColumnInfo(name = "altura")
-    private Double altura;
+
 
     public List<Atendimento> getAtendimento() {
         return atendimento;
@@ -55,7 +54,6 @@ public class Paciente {
         this.sexo = sexo;
         this.dataNascimento = dataNascimento;
         this.idade = idade;
-        this.altura = altura;
     }
 
     public Long getCpf() {
@@ -114,11 +112,4 @@ public class Paciente {
         this.idade = idade;
     }
 
-    public Double getAltura() {
-        return altura;
-    }
-
-    public void setAltura(Double altura) {
-        this.altura = altura;
-    }
 }

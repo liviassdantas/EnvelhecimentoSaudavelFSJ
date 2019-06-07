@@ -34,7 +34,6 @@
     <string name="pressaosistolica">P.Sistólica</string>
     <string name="pressaodiastolica">P.Diastólica</string>
     <string name="fc">Frequência Cardíaca</string>
-    <string name="IMC">IMC = </string>
     <string name="IMCresult">0.00</string>
     <string name="RCQ">RCQ =</string>
     <string name="RCQresult">0.00</string>
@@ -66,9 +65,8 @@
     <string name="pressaoPosTesteCaminhada_laudo">0.00</string>
     <string name="vo2maxLaudoExibe">0.0</string>
     <string name="salvar">Salvar</string>
-    <string name="imc">IMC</string>
     <string name="rcq">RCQ</string>
-
+    <string name="imc">IMC</string>
     <!--Array de estados-->
     <string-array name="estados">
         <item>AC</item>
