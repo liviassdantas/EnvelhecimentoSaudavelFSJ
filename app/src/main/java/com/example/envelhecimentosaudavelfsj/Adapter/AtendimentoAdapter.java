@@ -42,8 +42,8 @@ public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.
     @Override
     public void onBindViewHolder(@NonNull CardViewRelatorio cardViewRelatorio, int i) {
 
-        cardViewRelatorio.txtNome.setText(atendimentos.get(i).getCpfPaciente()); //Mudar para o nome do paciente
-        cardViewRelatorio.txtData.setText(atendimentos.get(i).getDataEHoraAtendimento().toString());
+        /*cardViewRelatorio.txtNome.setText(atendimentos.get(i).getCpfPaciente()); //Mudar para o nome do paciente
+        cardViewRelatorio.txtData.setText(atendimentos.get(i).getDataEHoraAtendimento().toString());*/
 
     }
 

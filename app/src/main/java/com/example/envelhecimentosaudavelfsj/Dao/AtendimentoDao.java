@@ -14,21 +14,12 @@ import java.util.List;
 //Criado por Yan Vitor 06/06/2019
 
 @Dao
-public interface AtendimentoDao {
+public abstract class AtendimentoDao {
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
-    Long Inserir(Atendimento atendimento);
+    @Insert
+    public abstract Long insertAtendimento(Atendimento atendimento);
 
-    @Update
-    int Atualizar(Atendimento atendimento);
-
-    @Delete
-    int Deletar(Atendimento atendimento);
-
-    @Query("SELECT * FROM Atendimento")
-    List<Atendimento> getAllAtendimentos();
-
-    @Query("SELECT * FROM Atendimento WHERE cpfPaciente = :CPF")
-    List<Atendimento> getAtendimentosByCpf(String CPF);
+    @Query("SELECT * FROM atendimento WHERE cpfPaciente = :idPaciente")
+    public abstract List<Atendimento> getByPaciente (long idPaciente);
 
 }

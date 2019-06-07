@@ -7,18 +7,18 @@ import android.content.Context;
 
 public class Banco {
 
-    private static AtendimentoDatabase servicoDatabase;
-    private static final Object LOCK = new Object();
-
-    public synchronized static AtendimentoDatabase getAtendimentoDatabase(Context context){
-        if(servicoDatabase == null) {
-            synchronized (LOCK) {
-                if (servicoDatabase == null) {
-                    servicoDatabase = Room.databaseBuilder(context,AtendimentoDatabase.class, "atentimento BD").build();
-                }
-            }
-        }
-        return servicoDatabase;
-    }
-
+//    private static AtendimentoDatabase servicoDatabase;
+//    private static final Object LOCK = new Object();
+//
+//    public synchronized static AtendimentoDatabase getAtendimentoDatabase(Context context){
+//        if(servicoDatabase == null) {
+//            synchronized (LOCK) {
+//                if (servicoDatabase == null) {
+//                    servicoDatabase = Room.databaseBuilder(context,AtendimentoDatabase.class, "atentimento BD").build();
+//                }
+//            }
+//        }
+//        return servicoDatabase;
+//    }
+//
 }
