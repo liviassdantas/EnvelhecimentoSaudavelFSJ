@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.R;
+import com.example.envelhecimentosaudavelfsj.Util.TextListener;
 /*
  *Created by: Livia Dantas - 05/06/2019
  */
@@ -32,6 +33,9 @@ public class OximetriaAntropometria extends AppCompatActivity {
     private TextView IMCresult;
     private TextView RCQresult;
     private Button btnProximo;
+
+    private String alturaInserida;
+    private String pesoInserido;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,13 +78,16 @@ public class OximetriaAntropometria extends AppCompatActivity {
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                //TODO fazer o restante do rcq
                             }
                         })
                         .create()
                         .show();
             }
         });
+
+        altura.getEditText().addTextChangedListener(new TextListener(this, "altura"));
+        peso.getEditText().addTextChangedListener(new TextListener(this, "peso"));
     }
 
     @Override
@@ -103,5 +110,25 @@ public class OximetriaAntropometria extends AppCompatActivity {
                         pressaoSistolica.getEditText().getText().toString().isEmpty() ||
                         frequeciaCardiaca.getEditText().getText().toString().isEmpty()
         );
+    }
+
+    public void setAlturaInserida(String altura) {
+        this.alturaInserida = altura;
+    }
+
+    public void setPesoInserido(String peso) {
+        this.pesoInserido = peso;
+    }
+
+    public String getAlturaInserida() {
+        return alturaInserida;
+    }
+
+    public String getPesoInserido() {
+        return pesoInserido;
+    }
+
+    public void setIMC(String imc) {
+        IMC.getEditText().setText(imc);
     }
 }

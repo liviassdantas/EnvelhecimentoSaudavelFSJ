@@ -81,12 +81,6 @@ public class Atendimento {
         this.RCQ = RCQ;
     }
 
-    public Double IMC(Double peso, Double altura) {
-        return peso / (altura * altura);
-    }
-
-    //TODO método RCQ
-
     //pressão arterial
     private String PressaoArterial() {
         return (this.getPressaoSis() + "X" + this.getPressaoDias() + "mmHg");

@@ -158,31 +158,29 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/antropometria_fc"
                 android:orientation="horizontal"
-                android:weightSum="2">
+                android:weightSum="3">
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/oximetria_imc"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent">
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:hint="IMC" />
+                        android:hint="@string/imc" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <EditText
                         android:id="@+id/oximetria_rcq"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:focusable="false"
-                        android:hint="RCQ" />
+                        android:hint="@string/rcq" />
                 </android.support.design.widget.TextInputLayout>
 
 
