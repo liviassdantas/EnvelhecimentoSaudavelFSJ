@@ -40,7 +40,7 @@
 
     <!--Strings de Teste Caminhada-->
     <string name="testecaminhada">Teste de Caminhada</string>
-    <string name="distancia">Distância(cm)</string>
+    <string name="distancia">Distância(km)</string>
     <string name="vo2max">VO² Máximo</string>
     <string name="padiastolicapreteste">P.A.Diastólica</string>
     <string name="pasistolicapreteste">P.A.Sistólica </string>

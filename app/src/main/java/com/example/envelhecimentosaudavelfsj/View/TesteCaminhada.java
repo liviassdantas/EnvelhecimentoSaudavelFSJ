@@ -69,7 +69,7 @@ public class TesteCaminhada extends AppCompatActivity {
                 atendimentoTCaminhada.putExtra("pacienteCaminhada", pacienteTesteCaminhada);
                 atendimentoTCaminhada.putExtra("atendimentoCaminhada",atendimentoTesteCaminhada);
 
-                Log.v("caminhada","\n"+pacienteTesteCaminhada + "\n"+atendimentoTesteCaminhada);
+
                 startActivity(atendimentoTCaminhada);
             }
         });

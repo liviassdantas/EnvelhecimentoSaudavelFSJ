@@ -124,6 +124,8 @@ public class DadosPaciente extends AppCompatActivity {
                         e.printStackTrace();
                     }
 
+                    paciente.setIdade(paciente.getIdade());
+
 
                     endereco.setBairro(Bairro.getEditText().getText().toString());
                     endereco.setCep(CEP.getEditText().getText().toString());

@@ -6,6 +6,7 @@ import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -56,6 +57,7 @@ public class Paciente {
         this.idade = idade;
     }
 
+
     public Long getCpf() {
         return cpf;
     }
@@ -105,11 +107,25 @@ public class Paciente {
     }
 
     public Integer getIdade() {
-        return idade;
-    }
+        if (this.dataNascimento != null) {
+            Calendar dataAtual = Calendar.getInstance();
+            dataAtual.getTime();
 
+            Calendar dataNascimento = Calendar.getInstance();
+            dataNascimento.setTime(this.dataNascimento);
+
+            this.idade = dataAtual.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR);
+
+            if (dataAtual.get(Calendar.MONTH) < dataNascimento.get(Calendar.MONTH))
+                this.idade--;
+            else if (dataAtual.get(Calendar.MONTH) == dataNascimento.get(Calendar.MONTH)
+                    && dataAtual.get(Calendar.DAY_OF_MONTH) < dataNascimento.get(Calendar.DAY_OF_MONTH))
+                this.idade--;
+
+        }
+        return this.idade;
+    }
     public void setIdade(Integer idade) {
         this.idade = idade;
     }
-
 }
