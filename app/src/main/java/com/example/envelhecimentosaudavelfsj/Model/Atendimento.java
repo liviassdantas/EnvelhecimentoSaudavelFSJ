@@ -82,10 +82,6 @@ public class Atendimento {
         this.RCQ = RCQ;
     }
 
-    public Double IMC(Double peso, Double altura) {
-        return peso / (altura * altura);
-    }
-
     public String RCQ(double circunferenciaCintura,double circunferenciaQuadril , String sexo , int idade)
     {
         Double restul = circunferenciaCintura / circunferenciaQuadril;

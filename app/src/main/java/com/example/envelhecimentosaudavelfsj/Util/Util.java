@@ -20,6 +20,4 @@ public class Util {
         }
         return String.format(new Locale("pt-BR"),"%.2f", imc) + " - " + situacao;
     }
-
-    //TODO método RCQ
 }
