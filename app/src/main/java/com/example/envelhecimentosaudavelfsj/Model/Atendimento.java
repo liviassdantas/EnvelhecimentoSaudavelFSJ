@@ -1,6 +1,8 @@
 package com.example.envelhecimentosaudavelfsj.Model;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.util.Date;
@@ -8,38 +10,75 @@ import java.util.Date;
 /**
  * Created by Raphael Rodrigues on 04/06/2019.
  */
-@Entity
+@Entity(tableName = "atendimento", foreignKeys = {@ForeignKey(
+        entity = Paciente.class, parentColumns = "cpf", childColumns = "cpfPaciente")})
 public class Atendimento {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Long atendimentoId;
+    @ColumnInfo(name = "servidorID")
     private Long servidorId;
-    private String cpfPaciente;
+    @ColumnInfo(name = "cpfPaciente")
+    private Long cpfPaciente;
+    @ColumnInfo(name = "dataAtendimento")
     private Date dataEHoraAtendimento;
+    @ColumnInfo(name = "peso")
     private Double peso;
-    private String frequenciaCardiaca;
+    @ColumnInfo(name = "pressao")
     private String pressaoArterial;
-    private String pressaoDiastolica;
-    private String pressaoSistolica;
-    private String distanciaTesteErg;
-    private String VOobtidoTesteErg;
+    @ColumnInfo(name = "PApreTeste")
+    private String PApreTeste;
+    @ColumnInfo(name = "PAposTeste")
     private String PAposTeste;
+    @ColumnInfo(name = "freqCardiaca")
+    private String frequenciaCardiaca;
+    @ColumnInfo(name = "distanciaTeste")
+    private String distanciaTesteErg;
+    @ColumnInfo(name = "VOobtido")
+    private String VOobtidoTesteErg;
+    @ColumnInfo(name = "oximetriaPre")
     private String OximetriaPre;
+    @ColumnInfo(name = "oximetriaPos")
     private String OximetriaPos;
-    private Double tricipial;
-    private Double suprailica;
-    private Double coxa;
-    private Double abdomen;
-    private Double peitoral;
+    @ColumnInfo(name = "dobrasResult")
+    private Double dobrasCutaneas;
+    @ColumnInfo(name = "imc")
     private Double IMC;
+    @ColumnInfo(name = "rcq")
     private Double RCQ;
+
+    private String pressaoSis;
+    private String pressaoDias;
+
 
     public Atendimento() {
     }
 
-    public Atendimento(String CPF,Date hora)  //Construtor de teste , deve ser removido na versão final
+    public Atendimento(Long CPF, Date hora)  //Construtor de teste , deve ser removido na versão final
     {
         this.cpfPaciente = CPF;
         this.dataEHoraAtendimento = hora;
+    }
+
+    public Atendimento(Long atendimentoId, Long cpfPaciente, Date dataEHoraAtendimento, Double peso,
+                       String pressaoArterial, String PApreTeste, String PAposTeste, String frequenciaCardiaca,
+                       String distanciaTesteErg, String VOobtidoTesteErg, String oximetriaPre,
+                       String oximetriaPos, Double dobrasCutaneas, Double IMC, Double RCQ) {
+
+        this.atendimentoId = atendimentoId;
+        this.cpfPaciente = cpfPaciente;
+        this.dataEHoraAtendimento = dataEHoraAtendimento;
+        this.peso = peso;
+        this.pressaoArterial = PressaoArterial();
+        this.PApreTeste = PressaoArterialPreTeste();
+        this.PAposTeste = PressaoArterialPosTeste();
+        this.frequenciaCardiaca = frequenciaCardiaca;
+        this.distanciaTesteErg = distanciaTesteErg;
+        this.VOobtidoTesteErg = VOobtidoTesteErg;
+        this.OximetriaPre = oximetriaPre;
+        this.OximetriaPos = oximetriaPos;
+        this.dobrasCutaneas = dobrasCutaneas;
+        this.IMC = IMC;
+        this.RCQ = RCQ;
     }
 
     public Double IMC(Double peso, Double altura) {
@@ -49,8 +88,18 @@ public class Atendimento {
     //TODO método RCQ
 
     //pressão arterial
-    public String PressaoArterial(){
-        return (this.getPressaoSistolica()+"X"+this.getPressaoDiastolica()+"mmHg");
+    private String PressaoArterial() {
+        return (this.getPressaoSis() + "X" + this.getPressaoDias() + "mmHg");
+    }
+
+    //pressão arterial pré teste
+    private String PressaoArterialPreTeste() {
+        return (this.getPressaoSis() + "X" + this.getPressaoDias() + "mmHg");
+    }
+
+    //pressão arterial pós Teste
+    private String PressaoArterialPosTeste() {
+        return (this.getPressaoSis() + "X" + this.getPressaoDias() + "mmHg");
     }
 
     public Long getAtendimentoId() {
@@ -69,11 +118,11 @@ public class Atendimento {
         this.servidorId = servidorId;
     }
 
-    public String getCpfPaciente() {
+    public Long getCpfPaciente() {
         return cpfPaciente;
     }
 
-    public void setCpfPaciente(String cpfPaciente) {
+    public void setCpfPaciente(Long cpfPaciente) {
         this.cpfPaciente = cpfPaciente;
     }
 
@@ -81,8 +130,22 @@ public class Atendimento {
         return dataEHoraAtendimento;
     }
 
-    public void setDataEHoraAtendimento(Date dataEHoraAtendimento) {
-        this.dataEHoraAtendimento = dataEHoraAtendimento;
+    public void setDataEHoraAtendimento(Date dataEHoraAtendimento) { this.dataEHoraAtendimento = dataEHoraAtendimento;
+    }
+
+    public String getPressaoSis() { return pressaoSis;
+    }
+
+    public void setPressaoSis(String pressaoSis) {
+        this.pressaoSis = pressaoSis;
+    }
+
+    public String getPressaoDias() {
+        return pressaoDias;
+    }
+
+    public void setPressaoDias(String pressaoDias) {
+        this.pressaoDias = pressaoDias;
     }
 
     public Double getPeso() {
@@ -99,13 +162,6 @@ public class Atendimento {
 
     public void setFrequenciaCardiaca(String frequenciaCardiaca) {
         this.frequenciaCardiaca = frequenciaCardiaca;
-    }
-    public String getPressaoArterial() {
-        return pressaoArterial;
-    }
-
-    public void setPressaoArterial(String pressaoArterial) {
-        this.pressaoArterial = pressaoArterial;
     }
 
     public String getDistanciaTesteErg() {
@@ -124,28 +180,6 @@ public class Atendimento {
         this.VOobtidoTesteErg = VOobtidoTesteErg;
     }
 
-    public String getPressaoDiastolica() { return pressaoDiastolica;
-    }
-
-    public void setPressaoDiastolica(String pressaoDiastolica) {
-        this.pressaoDiastolica = pressaoDiastolica;
-    }
-
-    public String getPressaoSistolica() { return pressaoSistolica;
-    }
-
-    public void setPressaoSistolica(String pressaoSistolica) {
-        this.pressaoSistolica = pressaoSistolica;
-    }
-
-    public String getPAposTeste() {
-        return PAposTeste;
-    }
-
-    public void setPAposTeste(String PAposTeste) {
-        this.PAposTeste = PAposTeste;
-    }
-
     public String getOximetriaPre() {
         return OximetriaPre;
     }
@@ -162,44 +196,36 @@ public class Atendimento {
         OximetriaPos = oximetriaPos;
     }
 
-    public Double getTricipial() {
-        return tricipial;
+    public String getPressaoArterial() {
+        return pressaoArterial;
     }
 
-    public void setTricipial(Double tricipial) {
-        this.tricipial = tricipial;
+    public void setPressaoArterial(String pressaoArterial) {
+        this.pressaoArterial = pressaoArterial;
     }
 
-    public Double getSuprailica() {
-        return suprailica;
+    public String getPApreTeste() {
+        return PApreTeste;
     }
 
-    public void setSuprailica(Double suprailica) {
-        this.suprailica = suprailica;
+    public void setPApreTeste(String PApreTeste) {
+        this.PApreTeste = PApreTeste;
     }
 
-    public Double getCoxa() {
-        return coxa;
+    public String getPAposTeste() {
+        return PAposTeste;
     }
 
-    public void setCoxa(Double coxa) {
-        this.coxa = coxa;
+    public void setPAposTeste(String PAposTeste) {
+        this.PAposTeste = PAposTeste;
     }
 
-    public Double getAbdomen() {
-        return abdomen;
+    public Double getDobrasCutaneas() {
+        return dobrasCutaneas;
     }
 
-    public void setAbdomen(Double abdomen) {
-        this.abdomen = abdomen;
-    }
-
-    public Double getPeitoral() {
-        return peitoral;
-    }
-
-    public void setPeitoral(Double peitoral) {
-        this.peitoral = peitoral;
+    public void setDobrasCutaneas(Double dobrasCutaneas) {
+        this.dobrasCutaneas = dobrasCutaneas;
     }
 
     public Double getIMC() {
