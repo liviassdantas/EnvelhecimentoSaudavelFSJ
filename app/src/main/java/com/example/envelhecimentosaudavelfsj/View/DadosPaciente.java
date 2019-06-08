@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -16,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
-import com.example.envelhecimentosaudavelfsj.Dao.PacienteAtendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Endereco;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
@@ -26,7 +24,6 @@ import com.google.gson.Gson;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 //region
@@ -102,7 +99,7 @@ public class DadosPaciente extends AppCompatActivity {
             @SuppressLint("SimpleDateFormat")
             @Override
             public void onClick(View v) {
-                if (ValidarCampos()) {
+                if (validarCampos(R.id.telaPaciente_nomePaciente, R.id.telaPaciente_cpf, R.id.telaPaciente_dataNascimento)) {
 
                     Paciente paciente = new Paciente();
                     Endereco endereco = new Endereco();
@@ -150,12 +147,6 @@ public class DadosPaciente extends AppCompatActivity {
         });
     }
 
-    private boolean ValidarCampos() {
-        return !(
-                Nome.getEditText().getText().toString().isEmpty() ||
-                        CPF.getEditText().getText().toString().isEmpty());
-    }
-
     public String getUriCep() {
         return "https://viacep.com.br/ws/" + CEP.getEditText().getText() + "/json/";
     }
@@ -168,5 +159,55 @@ public class DadosPaciente extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean validarCampos(int... ids) {
+
+        if (ids.length > 0) {
+            boolean[] resultado = new boolean[ids.length];
+            for (int i = 0; i < ids.length; i++) {
+                resultado[i] = checkCampo(ids[i]);
+            }
+
+            for (boolean b : resultado) {
+                if (!b) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean checkCampo(int id) {
+
+        switch (id) {
+            case R.id.telaPaciente_nomePaciente:
+                if (Nome.getEditText().getText().toString().trim().isEmpty()) {
+                    Nome.setError("Digite o nome do paciente");
+                    return false;
+                } else {
+                    Nome.setError(null);
+                    return true;
+                }
+            case R.id.telaPaciente_cpf:
+                if (CPF.getEditText().getText().toString().trim().isEmpty()) {
+                    CPF.setError("Digite o cpf do paciente");
+                    return false;
+                } else {
+                    CPF.setError(null);
+                    return true;
+                }
+            case R.id.telaPaciente_dataNascimento:
+                if (mDataNascimento.getText().toString().trim().isEmpty()) {
+                    mDataNascimento.setError("Informe a data de nascimento");
+                    return false;
+                } else {
+                    mDataNascimento.setError(null);
+                    return true;
+                }
+        }
+        return true;
     }
 }
