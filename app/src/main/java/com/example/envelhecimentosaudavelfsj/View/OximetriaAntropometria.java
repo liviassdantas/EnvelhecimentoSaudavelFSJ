@@ -1,4 +1,5 @@
 package com.example.envelhecimentosaudavelfsj.View;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.example.envelhecimentosaudavelfsj.Dao.PacienteAtendimento;
 
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
@@ -110,12 +110,16 @@ public class OximetriaAntropometria extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //convertidas
-                                cinturaRCQ = Double.parseDouble(cintura.getEditText().getText().toString());
-                                quadrilRCQ = Double.parseDouble(quadril.getEditText().getText().toString());
+                                if (!cintura.getEditText().getText().toString().isEmpty() &&
+                                        !quadril.getEditText().getText().toString().isEmpty()) {
 
-                                atendimento.setRCQ(new Util().RCQ(cinturaRCQ, quadrilRCQ, pacienteG.getSexo(), pacienteG.getIdade()));
+                                    cinturaRCQ = Double.parseDouble(cintura.getEditText().getText().toString());
+                                    quadrilRCQ = Double.parseDouble(quadril.getEditText().getText().toString());
 
-                                RCQedt.setText(atendimento.getRCQ());
+                                    atendimento.setRCQ(new Util().RCQ(cinturaRCQ, quadrilRCQ, pacienteG.getSexo(), pacienteG.getIdade()));
+
+                                    RCQedt.setText(atendimento.getRCQ());
+                                }
                             }
                         })
                         .create()
