@@ -13,7 +13,7 @@ import com.example.envelhecimentosaudavelfsj.Util.Conversor;
 //Criado por Yan Vitor 06/06/2019
 
 @TypeConverters(Conversor.class)
-@Database(entities = {Paciente.class, Atendimento.class}, version = 3)
+@Database(entities = {Paciente.class, Atendimento.class}, version = 4)
 public abstract class AtendimentoDatabase extends RoomDatabase {
         private static AtendimentoDatabase banco = null;
 

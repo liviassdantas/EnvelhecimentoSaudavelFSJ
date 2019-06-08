@@ -11,27 +11,27 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
-import com.example.envelhecimentosaudavelfsj.Dao.Banco;
-import com.example.envelhecimentosaudavelfsj.Dao.PacienteAtendimento;
-import com.example.envelhecimentosaudavelfsj.Dao.PacienteDao;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
-
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 @SuppressWarnings("ALL")
 //Criado por Yan Vitor 06/06/2019
 
-public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.CardViewRelatorio>
-{
+public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.CardViewRelatorio> {
 
     private List<Atendimento> pacienteatendimentos;
     private AppCompatActivity activity;
+    String nomeGeral;
+    String IMCGeral;
+    String DataGeral;
 
-    public AtendimentoAdapter(List<Atendimento> pacienteatendimentos, AppCompatActivity activity )
-    {
+    public AtendimentoAdapter(List<Atendimento> pacienteatendimentos, AppCompatActivity activity) {
         this.pacienteatendimentos = pacienteatendimentos;
         this.activity = activity;
     }
@@ -51,17 +51,47 @@ public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CardViewRelatorio cardViewRelatorio,final int i) {
+    public void onBindViewHolder(@NonNull final CardViewRelatorio cardViewRelatorio, final int i) {
 
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                Paciente paciente = AtendimentoDatabase.getInstance(activity.getApplicationContext()).pacienteDao().getPacienteById(pacienteatendimentos.get(i).getCpfPaciente());
-                cardViewRelatorio.txtNome.setText(paciente.getNome()); //Mudar para o nome do paciente
 
+                final Paciente paciente = AtendimentoDatabase.getInstance(activity.getApplicationContext()).pacienteDao().getPacienteById(pacienteatendimentos.get(i).getCpfPaciente());
+                final List<Atendimento> atendimento = AtendimentoDatabase.getInstance(activity.getApplicationContext()).atendimentoDao().getByPaciente(pacienteatendimentos.get(i).getCpfPaciente());
+
+                if (paciente != null && atendimento != null) {
+
+                    if (atendimento.size() > 0) {
+
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                String nome = paciente.getNome();
+                                nomeGeral = nome;
+
+                                if (atendimento != null) {
+                                    String IMC = atendimento.get(i).getIMC();
+                                    IMCGeral = IMC;
+
+                                    DataGeral = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt-BR")).format(atendimento.get(i).getDataEHoraAtendimento());
+
+                                }
+
+                                if (IMCGeral == null) {
+                                    IMCGeral = " ";
+                                }
+
+                                cardViewRelatorio.txtNome.append(nomeGeral);
+                                cardViewRelatorio.txtIMC.append(IMCGeral);
+                                cardViewRelatorio.txtData.append(DataGeral);
+                            }
+                        });
+                    }
+                }
             }
         });
-
     }
 
     @Override
@@ -72,14 +102,15 @@ public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.
     public static class CardViewRelatorio extends RecyclerView.ViewHolder {
 
         CardView cv;
-        TextView txtNome,txtIMC;
+        TextView txtNome, txtIMC, txtData;
 
         CardViewRelatorio(View itemView) {
             super(itemView);
 
-            cv = itemView.findViewById(R.id.cardView_atendimento);
-            txtNome = itemView.findViewById(R.id.card_txt_nome);
-            txtIMC = itemView.findViewById(R.id.card_txt_dataConsulta);
+            cv = itemView.findViewById(R.id.card);
+            txtNome = itemView.findViewById(R.id.cardView_paciente);
+            txtIMC = itemView.findViewById(R.id.cardView_imc);
+            txtData = itemView.findViewById(R.id.cardView_data);
 
         }
     }
