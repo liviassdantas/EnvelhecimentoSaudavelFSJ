@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.envelhecimentosaudavelfsj.Dao.PacienteAtendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 
 import com.example.envelhecimentosaudavelfsj.R;
@@ -18,16 +20,16 @@ import java.util.List;
 public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.CardViewRelatorio>
 {
 
-    List<Atendimento> atendimentos;
+    private List<PacienteAtendimento> pacienteatendimentos;
 
-    public AtendimentoAdapter(List<Atendimento> atendimentos)
+    public AtendimentoAdapter(List<PacienteAtendimento> pacienteatendimentos)
     {
-        this.atendimentos = atendimentos;
+        this.pacienteatendimentos = pacienteatendimentos;
     }
 
     @Override
     public int getItemCount() {
-        return atendimentos.size();
+        return pacienteatendimentos.size();
     }
 
     @NonNull
@@ -42,9 +44,7 @@ public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.
     @Override
     public void onBindViewHolder(@NonNull CardViewRelatorio cardViewRelatorio, int i) {
 
-        /*cardViewRelatorio.txtNome.setText(atendimentos.get(i).getCpfPaciente()); //Mudar para o nome do paciente
-        cardViewRelatorio.txtData.setText(atendimentos.get(i).getDataEHoraAtendimento().toString());*/
-
+        cardViewRelatorio.txtNome.setText(pacienteatendimentos.get(i).getPaciente().getNome()); //Mudar para o nome do paciente
     }
 
     @Override
@@ -55,14 +55,14 @@ public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.
     public static class CardViewRelatorio extends RecyclerView.ViewHolder {
 
         CardView cv;
-        TextView txtNome,txtData;
+        TextView txtNome,txtIMC;
 
         CardViewRelatorio(View itemView) {
             super(itemView);
 
             cv = itemView.findViewById(R.id.cardView_atendimento);
             txtNome = itemView.findViewById(R.id.card_txt_nome);
-            txtData = itemView.findViewById(R.id.card_txt_data);
+            txtIMC = itemView.findViewById(R.id.card_txt_data);
 
         }
     }

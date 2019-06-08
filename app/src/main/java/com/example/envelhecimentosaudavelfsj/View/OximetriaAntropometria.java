@@ -79,16 +79,17 @@ public class OximetriaAntropometria extends AppCompatActivity {
                     atendimento.setPressaoArterial(atendimento.PressaoArterial());
                     atendimento.setFrequenciaCardiaca(frequeciaCardiaca.getEditText().getText().toString());
                     atendimento.setIMC(IMC.getEditText().getText().toString());
+                    atendimento.setRCQ(Double.parseDouble(RCQedt.getText().toString()));
 
                     Intent atendimentoOximetria = new Intent(OximetriaAntropometria.this, DobrasCutaneas.class);
 
                     Paciente pacienteG = new Gson().fromJson(
                             getIntent().getStringExtra("paciente"), Paciente.class);
 
-                    /*atendimento.RCQ(cinturaRCQ, quadrilRCQ, pacienteG.getSexo(), pacienteG.getIdade());
-                    RCQedt.setText(atendimento.getRCQ().toString());
+                    atendimento.RCQ(cinturaRCQ, quadrilRCQ, pacienteG.getSexo(), pacienteG.getIdade());
+                    RCQedt.setText(String.valueOf(atendimento.getRCQ()));
 
-                    Log.v("rcq", ""+atendimento.getRCQ());*/
+                    Log.v("rcq", ""+atendimento.getRCQ());
 
                     String atendiOximetria = new Gson().toJson(atendimento);
                     String pacienteGs = new Gson().toJson(pacienteG);
@@ -115,8 +116,8 @@ public class OximetriaAntropometria extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 //convertidas
-                              /*  cinturaRCQ = Double.parseDouble(cintura.getEditText().getText().toString());
-                                quadrilRCQ = Double.parseDouble(quadril.getEditText().getText().toString());*/
+                               cinturaRCQ = Double.parseDouble(cintura.getEditText().getText().toString());
+                                quadrilRCQ = Double.parseDouble(quadril.getEditText().getText().toString());
 
                             }
                         })
@@ -124,8 +125,8 @@ public class OximetriaAntropometria extends AppCompatActivity {
                         .show();
             }
         });
-//        cintura.getEditText().addTextChangedListener(new TextListener(this, "cintura"));
-//        quadril.getEditText().addTextChangedListener(new TextListener(this, "quadril"));
+        cintura.getEditText().addTextChangedListener(new TextListener(this, "cintura"));
+       quadril.getEditText().addTextChangedListener(new TextListener(this, "quadril"));
         altura.getEditText().addTextChangedListener(new TextListener(this, "altura"));
         peso.getEditText().addTextChangedListener(new TextListener(this, "peso"));
     }

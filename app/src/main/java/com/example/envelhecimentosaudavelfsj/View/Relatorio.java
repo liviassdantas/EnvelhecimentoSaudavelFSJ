@@ -7,7 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.envelhecimentosaudavelfsj.Adapter.AtendimentoAdapter;
+import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
 import com.example.envelhecimentosaudavelfsj.Dao.Banco;
+import com.example.envelhecimentosaudavelfsj.Dao.PacienteAtendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.R;
 
@@ -20,7 +22,7 @@ import java.util.List;
 public class Relatorio extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    List<Atendimento> atendimentoList;
+    List<PacienteAtendimento> pacienteAtendimentoList;
     String CPF;
 
     @Override
@@ -29,22 +31,20 @@ public class Relatorio extends AppCompatActivity {
         setContentView(R.layout.activity_relatorio);
         recyclerView = findViewById(R.id.relatorio_recyclerView);
 
-        CPF = getIntent().getStringExtra("cpf");  //pega o CPF digitado no alert dialog da tela anterior
-
+       /* CPF = getIntent().getStringExtra("cpf");  //pega o CPF digitado no alert dialog da tela anterior
+        Lo
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                //atendimentoList = Banco.getAtendimentoDatabase(Relatorio.this).servicoDatabase().getAllAtendimentos();
+                pacienteAtendimentoList = AtendimentoDatabase.getInstance(getApplicationContext()).atendimentoDao().getByPaciente();
 //                atendimentoList = Banco.getAtendimentoDatabase(Relatorio.this).servicoDatabase().getAllAtendimentos();
-
+                    */
                 LinearLayoutManager llm = new LinearLayoutManager(Relatorio.this);
                 recyclerView.setLayoutManager(llm);
 
-                AtendimentoAdapter adapter = new AtendimentoAdapter(atendimentoList);
+                AtendimentoAdapter adapter = new AtendimentoAdapter(pacienteAtendimentoList);
                 recyclerView.setAdapter(adapter);
 
             }
-        });
+        }
 
-    }
-}
