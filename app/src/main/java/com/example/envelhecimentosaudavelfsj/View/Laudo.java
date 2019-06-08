@@ -108,6 +108,7 @@ public class Laudo extends AppCompatActivity {
                             });
                         }else{
                             banco.pacienteDao().update(pacienteLaudoExibe);
+                            banco.atendimentoDao().insertAtendimento(atendimentoLaudoExibe);
 
                         }
                         Log.v("bancoteste", " "+banco.pacienteDao().getAll());
