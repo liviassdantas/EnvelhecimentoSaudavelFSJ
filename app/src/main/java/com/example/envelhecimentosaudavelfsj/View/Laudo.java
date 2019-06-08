@@ -1,7 +1,10 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -98,8 +101,12 @@ public class Laudo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (ActivityCompat.checkSelfPermission(Laudo.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Laudo.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+                    return;
+                }
 
-                        if (PDF.salvar(" "+pacienteLaudoExibe.getNome(), ""+Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), pacienteLaudoExibe.getNome(),
+                        if (PDF.salvar(pacienteLaudoExibe.getNome(), Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath(), pacienteLaudoExibe.getNome(),
                                 String.valueOf(pacienteLaudoExibe.getIdade()), pacienteLaudoExibe.getSexo(), String.valueOf(atendimentoLaudoExibe.getPeso()),
                                 atendimentoLaudoExibe.getIMC(), atendimentoLaudoExibe.getFrequenciaCardiaca(),
                                 String.valueOf(atendimentoLaudoExibe.getAltura()), atendimentoLaudoExibe.getRCQ(), atendimentoLaudoExibe.getPressaoArterial(),
