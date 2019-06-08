@@ -22,4 +22,5 @@ public abstract class AtendimentoDao {
     @Query("SELECT * FROM atendimento WHERE cpfPaciente = :idPaciente")
     public abstract List<Atendimento> getByPaciente (long idPaciente);
 
+
 }

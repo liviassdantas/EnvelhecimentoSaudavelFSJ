@@ -1,5 +1,4 @@
 package com.example.envelhecimentosaudavelfsj.View;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import com.example.envelhecimentosaudavelfsj.Dao.PacienteAtendimento;
 
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;

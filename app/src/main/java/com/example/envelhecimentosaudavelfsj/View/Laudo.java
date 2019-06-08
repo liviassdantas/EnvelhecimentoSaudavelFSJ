@@ -1,5 +1,7 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
+import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +14,9 @@ import android.widget.Toast;
 import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
+import com.example.envelhecimentosaudavelfsj.Principal;
 import com.example.envelhecimentosaudavelfsj.R;
+import com.example.envelhecimentosaudavelfsj.Util.PDF;
 import com.google.gson.Gson;
 /*
  *Created by: Livia Dantas - 05/06/2019
@@ -80,7 +84,7 @@ public class Laudo extends AppCompatActivity {
         imcExibe.setText(atendimentoLaudoExibe.getIMC());
         freqCardExibe.setText(atendimentoLaudoExibe.getFrequenciaCardiaca());
         alturaExibe.setText(String.valueOf(atendimentoLaudoExibe.getAltura()));
-        //  rcqExibe.setText(String.valueOf(atendimentoLaudoExibe.getRCQ()));
+        rcqExibe.setText(String.valueOf(atendimentoLaudoExibe.getRCQ()));
         pressaoExibe.setText(atendimentoLaudoExibe.getPressaoArterial());
         oximetriaPreExibe.setText(String.valueOf(atendimentoLaudoExibe.getOximetriaPre()));
         oximetriaPosExibe.setText(String.valueOf(atendimentoLaudoExibe.getOximetriaPos()));
@@ -93,41 +97,34 @@ public class Laudo extends AppCompatActivity {
         btnSalvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (banco.pacienteDao().getPacienteById(Long.parseLong(pacienteLaudoExibe.getCpf().toString()))==null){
-                            banco.pacienteDao().insert(pacienteLaudoExibe);
-                            banco.atendimentoDao().insertAtendimento(atendimentoLaudoExibe);
 
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(),"Salvo com sucesso", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }else{
-                            banco.pacienteDao().update(pacienteLaudoExibe);
-                            banco.atendimentoDao().insertAtendimento(atendimentoLaudoExibe);
 
+                        if (PDF.salvar(" "+pacienteLaudoExibe.getNome(), ""+Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), pacienteLaudoExibe.getNome(),
+                                String.valueOf(pacienteLaudoExibe.getIdade()), pacienteLaudoExibe.getSexo(), String.valueOf(atendimentoLaudoExibe.getPeso()),
+                                atendimentoLaudoExibe.getIMC(), atendimentoLaudoExibe.getFrequenciaCardiaca(),
+                                String.valueOf(atendimentoLaudoExibe.getAltura()), atendimentoLaudoExibe.getRCQ(), atendimentoLaudoExibe.getPressaoArterial(),
+                                String.valueOf(atendimentoLaudoExibe.getDobrasCutaneas()), atendimentoLaudoExibe.getDistanciaTesteErg(), atendimentoLaudoExibe.PressaoArterialPreTeste(),
+                                atendimentoLaudoExibe.PressaoArterialPosTeste(), atendimentoLaudoExibe.getVOobtidoTesteErg())) {
+
+                            Toast.makeText(getApplicationContext(), "PDF Salvo", Toast.LENGTH_SHORT).show();
+                        }else  {
+                            Toast.makeText(getApplicationContext(), "Não salvo", Toast.LENGTH_SHORT).show();
                         }
-                        Log.v("bancoteste", " "+banco.pacienteDao().getAll());
 
+                Intent finalI = new Intent(Laudo.this, Principal.class);
+                startActivity(finalI);
                     }
-                }).start();
-            }
-        });
-    }
-
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            finish();
+            });
         }
 
-        return super.onOptionsItemSelected(item);
+
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            int id = item.getItemId();
+            if (id == android.R.id.home) {
+                finish();
+            }
+
+            return super.onOptionsItemSelected(item);
+        }
     }
-}
