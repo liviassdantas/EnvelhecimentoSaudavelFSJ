@@ -69,8 +69,8 @@ public class OximetriaAntropometria extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (validarCampos()) {
-                    atendimento.setOximetriaPre(vPreTeste.getEditText().getText().toString());
-                    atendimento.setOximetriaPos(vPosTeste.getEditText().getText().toString());
+                    atendimento.setOximetriaPre("SaO2 "+vPreTeste.getEditText().getText().toString()+"%");
+                    atendimento.setOximetriaPos("SaO2 "+vPosTeste.getEditText().getText().toString()+"%");
                     atendimento.setPeso(Double.parseDouble(peso.getEditText().getText().toString()));
                     atendimento.setAltura(Double.parseDouble(altura.getEditText().getText().toString()));
                     atendimento.setPressaoSis(pressaoSistolica.getEditText().getText().toString());

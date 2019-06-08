@@ -38,7 +38,7 @@ public class DobrasCutaneas extends AppCompatActivity {
                     Paciente pacienteDobras = new Gson().fromJson(getIntent()
                             .getStringExtra("pacienteGsonOxi"),Paciente.class);
 
-                    atendDobras.setDobrasCutaneas(Double.parseDouble(dobraResult.getEditText().getText().toString()));
+                    atendDobras.setDobrasCutaneas( Double.parseDouble(dobraResult.getEditText().getText().toString()));
 
                     String atendimentoDobras = new Gson().toJson(atendDobras);
                     String pacienteDobrasCut = new Gson().toJson(pacienteDobras);

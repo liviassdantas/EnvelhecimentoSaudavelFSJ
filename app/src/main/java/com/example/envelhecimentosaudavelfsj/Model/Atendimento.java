@@ -51,6 +51,7 @@ public class Atendimento {
 
     private String pressaoSis;
     private String pressaoDias;
+    
 
 
     public Atendimento() {
@@ -88,17 +89,17 @@ public class Atendimento {
 
     //pressão arterial
     public String PressaoArterial() {
-        return (this.getPressaoSis() + "X" + this.getPressaoDias() + "mmHg");
+        return (this.getPressaoSis() + "X" + this.getPressaoDias() + " mmHg");
     }
 
     //pressão arterial pré teste
     public String PressaoArterialPreTeste() {
-        return (this.getPressaoSis() + "X" + this.getPressaoDias() + "mmHg");
+        return (this.getPressaoSis() + "X" + this.getPressaoDias() + " mmHg");
     }
 
     //pressão arterial pós Teste
     public String PressaoArterialPosTeste() {
-        return (this.getPressaoSis() + "X" + this.getPressaoDias() + "mmHg");
+        return (this.getPressaoSis() + "X" + this.getPressaoDias() + " mmHg");
     }
 
     public Double getAltura() {

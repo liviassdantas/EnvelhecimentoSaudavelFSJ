@@ -23,7 +23,7 @@ import java.io.IOException;
 public class PDF {
     public static Boolean salvar(@NonNull String nomeArquivo, @NonNull String caminho, String nome, String idade, String sexo, String peso,
                                  String IMC, String frequenciaCardiaca, String altura, String RCQ, String PressaoArterial, String dobrasCutaneasResultado,
-                                 String Distancia, String PressaoArterialPre, String PressaoArterialPos, String VolumeMaximoOxigenioSangue
+                                 String Distancia, String PressaoArterialPre, String PressaoArterialPos, String VolumeMaximoOxigenioSangue, String vaOximetriaPre, String vaOximetriaPos
     ) {
         try {
 
@@ -50,6 +50,12 @@ public class PDF {
             documento.add(new Paragraph((" ")));
             documento.add(new Phrase("Idade: " + idade + "     sexo: " + sexo, normalFont));
             documento.add(new Paragraph((" ")));
+
+            documento.add(new Phrase("Oximetria:", boldFont));
+            documento.add(new Paragraph((" ")));
+            documento.add(new Phrase("V. Pré-Teste: " + vaOximetriaPre + "     V. Pós-Teste: " + vaOximetriaPos , normalFont));
+            documento.add(new Paragraph((" ")));
+
 
             documento.add(new Phrase("Antropometria:", boldFont));
             documento.add(new Paragraph((" ")));

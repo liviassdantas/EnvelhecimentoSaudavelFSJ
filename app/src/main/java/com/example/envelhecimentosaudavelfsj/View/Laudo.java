@@ -110,8 +110,8 @@ public class Laudo extends AppCompatActivity {
                                 String.valueOf(pacienteLaudoExibe.getIdade()), pacienteLaudoExibe.getSexo(), String.valueOf(atendimentoLaudoExibe.getPeso()),
                                 atendimentoLaudoExibe.getIMC(), atendimentoLaudoExibe.getFrequenciaCardiaca(),
                                 String.valueOf(atendimentoLaudoExibe.getAltura()), atendimentoLaudoExibe.getRCQ(), atendimentoLaudoExibe.getPressaoArterial(),
-                                String.valueOf(atendimentoLaudoExibe.getDobrasCutaneas()), atendimentoLaudoExibe.getDistanciaTesteErg(), atendimentoLaudoExibe.PressaoArterialPreTeste(),
-                                atendimentoLaudoExibe.PressaoArterialPosTeste(), atendimentoLaudoExibe.getVOobtidoTesteErg())) {
+                                String.valueOf(atendimentoLaudoExibe.getDobrasCutaneas()), atendimentoLaudoExibe.getDistanciaTesteErg(), atendimentoLaudoExibe.getPApreTeste(),
+                                atendimentoLaudoExibe.getPAposTeste(), atendimentoLaudoExibe.getVOobtidoTesteErg(),atendimentoLaudoExibe.getOximetriaPre(), atendimentoLaudoExibe.getOximetriaPos())) {
 
                             Toast.makeText(getApplicationContext(), "PDF Salvo", Toast.LENGTH_SHORT).show();
                         }else  {
