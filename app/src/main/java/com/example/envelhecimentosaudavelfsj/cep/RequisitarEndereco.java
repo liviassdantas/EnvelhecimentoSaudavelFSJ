@@ -1,5 +1,8 @@
 package com.example.envelhecimentosaudavelfsj.cep;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.support.design.widget.TextInputLayout;
 import android.widget.EditText;
@@ -50,10 +53,15 @@ public class RequisitarEndereco extends AsyncTask<Void, Void, Endereco> {
     @Override
     protected void onPostExecute(Endereco endereco) {
         super.onPostExecute(endereco);
+        if (!checkConnection()) {
+            Toast.makeText(dadosPacienteWeakReference.get(), "Sem internet", Toast.LENGTH_LONG).show();
+        }
 
         if (endereco != null) {
             if (endereco.getCep() != null && dadosPacienteWeakReference.get() != null) {
                 setDadosEndereco(endereco);
+            } else {
+                Toast.makeText(dadosPacienteWeakReference.get(), "Cep inválido", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -86,5 +94,11 @@ public class RequisitarEndereco extends AsyncTask<Void, Void, Endereco> {
             }
         }
         ((Spinner) dadosPacienteWeakReference.get().findViewById(id)).setSelection(0);
+    }
+
+    public boolean checkConnection() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) dadosPacienteWeakReference.get().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        return (networkInfo != null && networkInfo.isConnected());
     }
 }
