@@ -68,7 +68,7 @@ public class OximetriaAntropometria extends AppCompatActivity {
         findViewById(R.id.oximetria_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (/*validarCampos()*/ true) {
+                if (validarCampos()) {
                     atendimento.setOximetriaPre(vPreTeste.getEditText().getText().toString());
                     atendimento.setOximetriaPos(vPosTeste.getEditText().getText().toString());
                     atendimento.setPeso(Double.parseDouble(peso.getEditText().getText().toString()));
