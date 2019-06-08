@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.Dao.Banco;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
+import com.example.envelhecimentosaudavelfsj.Util.PDF;
 import com.example.envelhecimentosaudavelfsj.View.DadosPaciente;
 import com.example.envelhecimentosaudavelfsj.View.Relatorio;
 
@@ -25,7 +26,6 @@ public class Principal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial);
-
     }
 
     public void btnNovoPaciente(View v) {

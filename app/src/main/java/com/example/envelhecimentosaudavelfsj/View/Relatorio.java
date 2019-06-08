@@ -17,12 +17,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("ALL")
 //Criado por Yan Vitor 06/06/2019
 
 public class Relatorio extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    List<PacienteAtendimento> pacienteAtendimentoList;
+    List<Atendimento> pacienteAtendimentoList;
     String CPF;
 
     @Override
@@ -31,20 +32,24 @@ public class Relatorio extends AppCompatActivity {
         setContentView(R.layout.activity_relatorio);
         recyclerView = findViewById(R.id.relatorio_recyclerView);
 
-       /* CPF = getIntent().getStringExtra("cpf");  //pega o CPF digitado no alert dialog da tela anterior
-        Lo
+        pacienteAtendimentoList = new ArrayList<>();
+
+        CPF = getIntent().getStringExtra("cpf");  //pega o CPF digitado no alert dialog da tela anterior
+
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
-                pacienteAtendimentoList = AtendimentoDatabase.getInstance(getApplicationContext()).atendimentoDao().getByPaciente();
-//                atendimentoList = Banco.getAtendimentoDatabase(Relatorio.this).servicoDatabase().getAllAtendimentos();
-                    */
+
+                pacienteAtendimentoList = AtendimentoDatabase.getInstance(getApplicationContext()).atendimentoDao().getByPaciente(Long.parseLong(CPF));
+
                 LinearLayoutManager llm = new LinearLayoutManager(Relatorio.this);
                 recyclerView.setLayoutManager(llm);
 
-                AtendimentoAdapter adapter = new AtendimentoAdapter(pacienteAtendimentoList);
+                AtendimentoAdapter adapter = new AtendimentoAdapter(pacienteAtendimentoList,Relatorio.this);
                 recyclerView.setAdapter(adapter);
 
             }
-        }
+        });
 
+    }
+}
