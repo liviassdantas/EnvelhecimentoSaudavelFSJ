@@ -45,7 +45,7 @@ public class Atendimento {
     @ColumnInfo(name = "imc")
     private String IMC;
     @ColumnInfo(name = "rcq")
-    private Double RCQ;
+    private String RCQ;
     @ColumnInfo(name = "altura")
     private Double altura;
 
@@ -66,7 +66,7 @@ public class Atendimento {
     public Atendimento(Long atendimentoId, Long cpfPaciente, Date dataEHoraAtendimento, Double peso,
                        String pressaoArterial, String PApreTeste, String PAposTeste, String frequenciaCardiaca,
                        String distanciaTesteErg, String VOobtidoTesteErg, String oximetriaPre,
-                       String oximetriaPos, Double dobrasCutaneas, String IMC, Double RCQ, Double altura) {
+                       String oximetriaPos, Double dobrasCutaneas, String IMC, String RCQ, Double altura) {
 
         this.atendimentoId = atendimentoId;
         this.cpfPaciente = cpfPaciente;
@@ -200,8 +200,8 @@ public class Atendimento {
             }
         }
 
-        this.RCQ = restul;
-        return restul.toString() + " - " + RCQtipo;
+        this.RCQ = restul.toString() + " - " + RCQtipo;
+    return this.RCQ;
     }
 
     //pressão arterial
@@ -363,11 +363,11 @@ public class Atendimento {
         this.IMC = IMC;
     }
 
-    public Double getRCQ() {
+    public String getRCQ() {
         return RCQ;
     }
 
-    public void setRCQ(Double RCQ) {
+    public void setRCQ(String RCQ) {
         this.RCQ = RCQ;
     }
 }

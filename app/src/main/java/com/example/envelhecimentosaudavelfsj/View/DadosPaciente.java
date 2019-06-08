@@ -153,12 +153,7 @@ public class DadosPaciente extends AppCompatActivity {
     private boolean ValidarCampos() {
         return !(
                 Nome.getEditText().getText().toString().isEmpty() ||
-                        CPF.getEditText().getText().toString().isEmpty() ||
-                        Rua.getEditText().getText().toString().isEmpty() ||
-                        Bairro.getEditText().getText().toString().isEmpty() ||
-                        CEP.getEditText().getText().toString().isEmpty() ||
-                        Numero.getEditText().getText().toString().isEmpty() ||
-                        Cidade.getEditText().getText().toString().isEmpty());
+                        CPF.getEditText().getText().toString().isEmpty());
     }
 
     public String getUriCep() {
