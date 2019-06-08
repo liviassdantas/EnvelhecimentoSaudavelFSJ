@@ -63,7 +63,7 @@ public class DadosPaciente extends AppCompatActivity {
         btnMasculino = findViewById(R.id.telaPaciente_sexoMasculino);
         Complemento = findViewById(R.id.endereco_edtComplementoId);
         Estado = findViewById(R.id.endereco_spinnerEstados);
-
+        Estado.setSelection(18);
 
         CEP.getEditText().addTextChangedListener(new CepListener(this));
 
