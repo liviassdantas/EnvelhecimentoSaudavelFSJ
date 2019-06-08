@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,14 +12,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.envelhecimentosaudavelfsj.Dao.PacienteAtendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
 import com.example.envelhecimentosaudavelfsj.Util.TextListener;
+import com.example.envelhecimentosaudavelfsj.Util.Util;
 import com.google.gson.Gson;
 /*
  *Created by: Livia Dantas - 05/06/2019
@@ -37,7 +35,7 @@ public class OximetriaAntropometria extends AppCompatActivity {
     private TextInputLayout IMC;
     private TextInputLayout cintura;
     private TextInputLayout quadril;
-    private TextInputLayout RCQedt;
+    private EditText RCQedt;
     private Double cinturaRCQ;
     private Double quadrilRCQ;
     private Button btnProximo;
@@ -50,15 +48,11 @@ public class OximetriaAntropometria extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_oximetria_antro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        final View viewAlertRCQ = getLayoutInflater().inflate(R.layout.alert_rcq, null);
 
         final Atendimento atendimento = new Atendimento();
 
         final Paciente pacienteG = new Gson().fromJson(
                 getIntent().getStringExtra("paciente"), Paciente.class);
-
-        cintura = viewAlertRCQ.findViewById(R.id.RCQ_cintura);
-        quadril = viewAlertRCQ.findViewById(R.id.RCQ_quadril);
 
         vPreTeste = findViewById(R.id.oximetria_valor_pre_teste);
         vPosTeste = findViewById(R.id.oximetria_valor_pos_teste);
@@ -74,7 +68,7 @@ public class OximetriaAntropometria extends AppCompatActivity {
         findViewById(R.id.oximetria_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validarCampos()) {
+                if (/*validarCampos()*/ true) {
                     atendimento.setOximetriaPre(vPreTeste.getEditText().getText().toString());
                     atendimento.setOximetriaPos(vPosTeste.getEditText().getText().toString());
                     atendimento.setPeso(Double.parseDouble(peso.getEditText().getText().toString()));
@@ -104,6 +98,11 @@ public class OximetriaAntropometria extends AppCompatActivity {
         RCQedt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final View viewAlertRCQ = getLayoutInflater().inflate(R.layout.alert_rcq, null);
+
+                cintura = viewAlertRCQ.findViewById(R.id.RCQ_cintura);
+                quadril = viewAlertRCQ.findViewById(R.id.RCQ_quadril);
+
                 new AlertDialog.Builder(OximetriaAntropometria.this)
                         .setView(viewAlertRCQ)
                         .setTitle("Dados do RCQ")
@@ -114,16 +113,16 @@ public class OximetriaAntropometria extends AppCompatActivity {
                                 cinturaRCQ = Double.parseDouble(cintura.getEditText().getText().toString());
                                 quadrilRCQ = Double.parseDouble(quadril.getEditText().getText().toString());
 
-                                atendimento.RCQ(cinturaRCQ, quadrilRCQ, pacienteG.getSexo(), pacienteG.getIdade());
-                                atendimento.setRCQ(RCQedt.getEditText().getText().toString());
-                                Log.v("rcq", "" + atendimento.getRCQ());
+                                atendimento.setRCQ(new Util().RCQ(cinturaRCQ, quadrilRCQ, pacienteG.getSexo(), pacienteG.getIdade()));
 
+                                RCQedt.setText(atendimento.getRCQ());
                             }
                         })
                         .create()
                         .show();
             }
         });
+
         altura.getEditText().addTextChangedListener(new TextListener(this, "altura"));
         peso.getEditText().addTextChangedListener(new TextListener(this, "peso"));
     }
@@ -150,20 +149,20 @@ public class OximetriaAntropometria extends AppCompatActivity {
         );
     }
 
-    public void setAlturaInserida(String altura) {
-        this.alturaInserida = altura;
-    }
-
-    public void setPesoInserido(String peso) {
-        this.pesoInserido = peso;
-    }
-
     public String getAlturaInserida() {
         return alturaInserida;
     }
 
+    public void setAlturaInserida(String altura) {
+        this.alturaInserida = altura;
+    }
+
     public String getPesoInserido() {
         return pesoInserido;
+    }
+
+    public void setPesoInserido(String peso) {
+        this.pesoInserido = peso;
     }
 
     public void setIMC(String imc) {
@@ -171,6 +170,6 @@ public class OximetriaAntropometria extends AppCompatActivity {
     }
 
     public void setRCQed(String rcq) {
-        RCQedt.getEditText().setText(rcq);
+        RCQedt.setText(rcq);
     }
 }
