@@ -1,22 +1,18 @@
 package com.example.envelhecimentosaudavelfsj.Adapter;
 
-import android.os.AsyncTask;
+import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
-import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
+import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -25,20 +21,12 @@ import java.util.Locale;
 
 public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.CardViewRelatorio> {
 
-    private List<Atendimento> pacienteatendimentos;
-    private AppCompatActivity activity;
-    String nomeGeral;
-    String IMCGeral;
-    String DataGeral;
+    private Context mContext;
+    private List<Atendimento> mAtendimentos;
 
-    public AtendimentoAdapter(List<Atendimento> pacienteatendimentos, AppCompatActivity activity) {
-        this.pacienteatendimentos = pacienteatendimentos;
-        this.activity = activity;
-    }
-
-    @Override
-    public int getItemCount() {
-        return pacienteatendimentos.size();
+    public AtendimentoAdapter(Context context, List<Atendimento> atendimentos) {
+        this.mAtendimentos = atendimentos;
+        this.mContext = context;
     }
 
     @NonNull
@@ -51,67 +39,36 @@ public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final CardViewRelatorio cardViewRelatorio, final int i) {
+    public void onBindViewHolder(@NonNull final CardViewRelatorio cardViewRelatorio, final int position) {
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
+        final Atendimento atendimento = mAtendimentos.get(position);
 
-                final Paciente paciente = AtendimentoDatabase.getInstance(activity.getApplicationContext()).pacienteDao().getPacienteById(pacienteatendimentos.get(i).getCpfPaciente());
-                final List<Atendimento> atendimento = AtendimentoDatabase.getInstance(activity.getApplicationContext()).atendimentoDao().getByPaciente(pacienteatendimentos.get(i).getCpfPaciente());
+        cardViewRelatorio.nomePaciente.setText(new PacienteDAO(mContext).getPacienteByCpf(atendimento.getCpfPaciente()).getNome());
 
-                if (paciente != null && atendimento != null) {
+        cardViewRelatorio.imc.append(atendimento.getIMC());
 
-                    if (atendimento.size() > 0) {
+        String data = new SimpleDateFormat("dd/MM/yyyy HH:MM", new Locale("pt-BR")).format(atendimento.getDataEHoraAtendimento());
 
-                        activity.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-
-                                String nome = paciente.getNome();
-                                nomeGeral = nome;
-
-                                if (atendimento != null) {
-                                    String IMC = atendimento.get(i).getIMC();
-                                    IMCGeral = IMC;
-
-                                    DataGeral = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt-BR")).format(atendimento.get(i).getDataEHoraAtendimento());
-
-                                }
-
-                                if (IMCGeral == null) {
-                                    IMCGeral = " ";
-                                }
-
-                                cardViewRelatorio.txtNome.append(nomeGeral);
-                                cardViewRelatorio.txtIMC.append(IMCGeral);
-                                cardViewRelatorio.txtData.append(DataGeral);
-                            }
-                        });
-                    }
-                }
-            }
-        });
+        cardViewRelatorio.dataAtendimento.append(data);
     }
 
     @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
+    public int getItemCount() {
+        return mAtendimentos.size();
     }
 
     public static class CardViewRelatorio extends RecyclerView.ViewHolder {
 
-        CardView cv;
-        TextView txtNome, txtIMC, txtData;
+        private TextView imc;
+        private TextView nomePaciente;
+        private TextView dataAtendimento;
 
         CardViewRelatorio(View itemView) {
             super(itemView);
 
-            cv = itemView.findViewById(R.id.card);
-            txtNome = itemView.findViewById(R.id.cardView_paciente);
-            txtIMC = itemView.findViewById(R.id.cardView_imc);
-            txtData = itemView.findViewById(R.id.cardView_data);
-
+            imc = itemView.findViewById(R.id.cardView_imc);
+            nomePaciente = itemView.findViewById(R.id.cardView_paciente);
+            dataAtendimento = itemView.findViewById(R.id.cardView_data);
         }
     }
 }
