@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimensao_icones_tela_inicial">50dp</dimen>
+</resources>

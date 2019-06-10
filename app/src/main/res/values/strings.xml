@@ -21,7 +21,7 @@
     <string name="proximo">Próximo</string>
 
     <!--Strings da tela inicial-->
-    <string name="novo_paciente">Novo Paciente</string>
+    <string name="novo_paciente">Novo\nPaciente</string>
     <string name="relatório">Relatório</string>
 
     <!--Strings da tela Oximetria/Antropometria-->
