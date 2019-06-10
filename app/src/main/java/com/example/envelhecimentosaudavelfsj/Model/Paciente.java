@@ -1,10 +1,5 @@
 package com.example.envelhecimentosaudavelfsj.Model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -13,37 +8,37 @@ import java.util.List;
 /**
  * Created by Raphael Rodrigues on 04/06/2019.
  */
-@Entity(tableName = "paciente")
+//@Entity(tableName = "paciente")
 public class Paciente {
     //@Fields
 
-    @PrimaryKey
+//    @PrimaryKey
     private Long cpf;
-    @ColumnInfo(name = "servidorID")
+//    @ColumnInfo(name = "servidorID")
     private Long servidorId;
-    @ColumnInfo(name = "nome")
+//    @ColumnInfo(name = "nome")
     private String nome;
-    @ColumnInfo(name = "endereco")
+//    @ColumnInfo(name = "endereco")
     private Endereco endereco;
-    @ColumnInfo(name = "sexo")
+//    @ColumnInfo(name = "sexo")
     private String sexo;
-    @ColumnInfo(name = "nascimento")
+//    @ColumnInfo(name = "nascimento")
     private Date dataNascimento;
-    @ColumnInfo(name = "idade")
+//    @ColumnInfo(name = "idade")
     private Integer idade;
 
 
-    public List<Atendimento> getAtendimento() {
-        return atendimento;
+    public List<Atendimento> getAtendimentos() {
+        return atendimentos;
     }
 
-    public void setAtendimento(List<Atendimento> atendimento) {
-        this.atendimento = atendimento;
+    public void setAtendimentos(Atendimento atendimentos) {
+        this.atendimentos.add(atendimentos);
     }
 
     //Lista de atendimentos
-    @Ignore
-    List<Atendimento> atendimento = new ArrayList<>();
+//    @Ignore
+    List<Atendimento> atendimentos = new ArrayList<>();
 
     public Paciente() {
     }

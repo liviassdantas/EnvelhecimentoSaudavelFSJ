@@ -11,47 +11,46 @@ import java.util.Date;
  * Created by Raphael Rodrigues on 04/06/2019.
  */
 @SuppressWarnings("ALL")
-@Entity(tableName = "atendimento", foreignKeys = {@ForeignKey(
-        entity = Paciente.class, parentColumns = "cpf", childColumns = "cpfPaciente")})
+//@Entity(tableName = "atendimentos", foreignKeys = {@ForeignKey(
+//        entity = Paciente.class, parentColumns = "cpf", childColumns = "cpfPaciente")})
 public class Atendimento {
-    @PrimaryKey(autoGenerate = true)
+    //    @PrimaryKey(autoGenerate = true)
     private Long atendimentoId;
-    @ColumnInfo(name = "servidorID")
+    //    @ColumnInfo(name = "servidorID")
     private Long servidorId;
-    @ColumnInfo(name = "cpfPaciente")
+    //    @ColumnInfo(name = "cpfPaciente")
     private Long cpfPaciente;
-    @ColumnInfo(name = "dataAtendimento")
+    //    @ColumnInfo(name = "dataAtendimento")
     private Date dataEHoraAtendimento;
-    @ColumnInfo(name = "peso")
+    //    @ColumnInfo(name = "peso")
     private Double peso;
-    @ColumnInfo(name = "pressao")
+    //    @ColumnInfo(name = "pressao")
     private String pressaoArterial;
-    @ColumnInfo(name = "PApreTeste")
+    //    @ColumnInfo(name = "PApreTeste")
     private String PApreTeste;
-    @ColumnInfo(name = "PAposTeste")
+    //    @ColumnInfo(name = "PAposTeste")
     private String PAposTeste;
-    @ColumnInfo(name = "freqCardiaca")
+    //    @ColumnInfo(name = "freqCardiaca")
     private String frequenciaCardiaca;
-    @ColumnInfo(name = "distanciaTeste")
+    //    @ColumnInfo(name = "distanciaTeste")
     private String distanciaTesteErg;
-    @ColumnInfo(name = "VOobtido")
+    //    @ColumnInfo(name = "VOobtido")
     private String VOobtidoTesteErg;
-    @ColumnInfo(name = "oximetriaPre")
+    //    @ColumnInfo(name = "oximetriaPre")
     private String OximetriaPre;
-    @ColumnInfo(name = "oximetriaPos")
+    //    @ColumnInfo(name = "oximetriaPos")
     private String OximetriaPos;
-    @ColumnInfo(name = "dobrasResult")
+    //    @ColumnInfo(name = "dobrasResult")
     private Double dobrasCutaneas;
-    @ColumnInfo(name = "imc")
+    //    @ColumnInfo(name = "imc")
     private String IMC;
-    @ColumnInfo(name = "rcq")
+    //    @ColumnInfo(name = "rcq")
     private String RCQ;
-    @ColumnInfo(name = "altura")
+    //    @ColumnInfo(name = "altura")
     private Double altura;
 
     private String pressaoSis;
     private String pressaoDias;
-    
 
 
     public Atendimento() {

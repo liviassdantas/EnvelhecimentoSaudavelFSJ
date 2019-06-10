@@ -3,10 +3,11 @@ package com.example.envelhecimentosaudavelfsj.Model;
 import java.io.Serializable;
 
 /**
- * Created by Raphael Rodrigues on 29/04/2019.
+ * Created by Raphael Rodrigues on 04/06/2019.
  */
 public class Endereco implements Serializable {
     private long enderecoId;
+    private long cpfPaciente;
     private String cep;
     private String logradouro;
     private String numero;
@@ -43,6 +44,14 @@ public class Endereco implements Serializable {
 
     public void setEnderecoId(long enderecoId) {
         this.enderecoId = enderecoId;
+    }
+
+    public long getCpfPaciente() {
+        return cpfPaciente;
+    }
+
+    public void setCpfPaciente(long cpfPaciente) {
+        this.cpfPaciente = cpfPaciente;
     }
 
     public String getCep() {
