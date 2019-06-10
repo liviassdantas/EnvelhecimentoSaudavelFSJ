@@ -72,4 +72,37 @@
             android:textColor="@color/black"
             android:textSize="22sp" />
     </LinearLayout>
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/telaInicial_layout_Atendimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/telaInicial_layout_NovoPaciente"
+        android:layout_marginStart="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="32dp"
+        android:onClick="btnAtendimento"
+        android:orientation="vertical"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/telaInicial_layout_NovoPaciente">
+
+        <ImageView
+            android:id="@+id/imgview_tela_inicial_realizarAtendimento"
+            android:layout_width="@dimen/dimensao_icones_tela_inicial"
+            android:layout_height="@dimen/dimensao_icones_tela_inicial"
+            android:layout_gravity="center"
+            android:onClick="btnAtendimento"
+            android:src="@drawable/stethoscope"
+            android:tint="@color/pink" />
+
+        <TextView
+            android:id="@+id/Txv_tela_inicial_realizarAtendimento"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Atendimento"
+            android:textColor="@color/black"
+            android:textSize="22sp" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
