@@ -1,55 +1,56 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 
 import com.example.envelhecimentosaudavelfsj.Adapter.AtendimentoAdapter;
-import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
-import com.example.envelhecimentosaudavelfsj.Dao.Banco;
-import com.example.envelhecimentosaudavelfsj.Dao.PacienteAtendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.R;
+import com.example.envelhecimentosaudavelfsj.daoSQLite.AtendimentoDAO;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-@SuppressWarnings("ALL")
 //Criado por Yan Vitor 06/06/2019
 
+@SuppressWarnings("ALL")
 public class Relatorio extends AppCompatActivity {
 
-    RecyclerView recyclerView;
-    List<Atendimento> pacienteAtendimentoList;
-    String CPF;
+    private RecyclerView recyclerView;
+    private List<Atendimento> mAtendimentoList;
+    private String mCpf;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_relatorio);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView = findViewById(R.id.relatorio_recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
 
-        pacienteAtendimentoList = new ArrayList<>();
+        if (getIntent().getStringExtra("CPF") != null) {
+            mCpf = getIntent().getStringExtra("CPF");
 
-        CPF = getIntent().getStringExtra("cpf");  //pega o CPF digitado no alert dialog da tela anterior
+            mAtendimentoList = new ArrayList<>();
+            mAtendimentoList = new AtendimentoDAO(Relatorio.this).getAtendimentosByPaciente(Long.parseLong(mCpf));
 
-        AsyncTask.execute(new Runnable() {
-            @Override
-            public void run() {
+            AtendimentoAdapter adapter = new AtendimentoAdapter(this, mAtendimentoList);
+            recyclerView.setAdapter(adapter);
+        }
+    }
 
-                pacienteAtendimentoList = AtendimentoDatabase.getInstance(getApplicationContext()).atendimentoDao().getByPaciente(Long.parseLong(CPF));
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
 
-                LinearLayoutManager llm = new LinearLayoutManager(Relatorio.this);
-                recyclerView.setLayoutManager(llm);
-
-                AtendimentoAdapter adapter = new AtendimentoAdapter(pacienteAtendimentoList,Relatorio.this);
-                recyclerView.setAdapter(adapter);
-
-            }
-        });
-
+        return super.onOptionsItemSelected(item);
     }
 }
