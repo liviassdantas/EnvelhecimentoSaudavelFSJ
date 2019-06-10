@@ -51,8 +51,7 @@ public class OximetriaAntropometria extends AppCompatActivity {
 
         final Atendimento atendimento = new Atendimento();
 
-        final Paciente pacienteG = new Gson().fromJson(
-                getIntent().getStringExtra("paciente"), Paciente.class);
+        final Paciente pacienteG = new Gson().fromJson(getIntent().getStringExtra("paciente"), Paciente.class);
 
         vPreTeste = findViewById(R.id.oximetria_valor_pre_teste);
         vPosTeste = findViewById(R.id.oximetria_valor_pos_teste);
@@ -68,11 +67,12 @@ public class OximetriaAntropometria extends AppCompatActivity {
         findViewById(R.id.oximetria_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validarCampos()) {
+                if (/*validarCampos()*/ true) {
+
                     atendimento.setOximetriaPre("SaO2 "+vPreTeste.getEditText().getText().toString()+"%");
                     atendimento.setOximetriaPos("SaO2 "+vPosTeste.getEditText().getText().toString()+"%");
-                    atendimento.setPeso(Double.parseDouble(peso.getEditText().getText().toString()));
-                    atendimento.setAltura(Double.parseDouble(altura.getEditText().getText().toString()));
+                    atendimento.setPeso((!peso.getEditText().getText().toString().isEmpty()) ? Double.parseDouble(peso.getEditText().getText().toString()) : 0D);
+                    atendimento.setAltura((!altura.getEditText().getText().toString().isEmpty()) ? Double.parseDouble(altura.getEditText().getText().toString()) : 0D);
                     atendimento.setPressaoSis(pressaoSistolica.getEditText().getText().toString());
                     atendimento.setPressaoDias(pressaoDiastolica.getEditText().getText().toString());
                     atendimento.setPressaoArterial(atendimento.PressaoArterial());
@@ -85,6 +85,7 @@ public class OximetriaAntropometria extends AppCompatActivity {
                     String pacienteGs = new Gson().toJson(pacienteG);
                     atendimentoOximetria.putExtra("atendimentoOximetriaGson", atendiOximetria);
                     atendimentoOximetria.putExtra("pacienteGsonOxi", pacienteGs);
+                    atendimentoOximetria.putExtra("CPF", getIntent().getStringExtra("CPF"));
 
                     Log.v("teste1", "" + pacienteGs);
 

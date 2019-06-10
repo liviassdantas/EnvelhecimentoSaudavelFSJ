@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
@@ -32,22 +31,23 @@ public class DobrasCutaneas extends AppCompatActivity {
         findViewById(R.id.dobras_cutaneas_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!dobraResult.getEditText().getText().toString().isEmpty()) {
+                if (/*!dobraResult.getEditText().getText().toString().isEmpty()*/true) {
                     Atendimento atendDobras = new Gson().fromJson(getIntent()
                             .getStringExtra("atendimentoOximetriaGson"), Atendimento.class);
                     Paciente pacienteDobras = new Gson().fromJson(getIntent()
-                            .getStringExtra("pacienteGsonOxi"),Paciente.class);
+                            .getStringExtra("pacienteGsonOxi"), Paciente.class);
 
-                    atendDobras.setDobrasCutaneas( Double.parseDouble(dobraResult.getEditText().getText().toString()));
+                    atendDobras.setDobrasCutaneas((!dobraResult.getEditText().getText().toString().isEmpty() ? Double.parseDouble(dobraResult.getEditText().getText().toString()) : 0D));
 
                     String atendimentoDobras = new Gson().toJson(atendDobras);
                     String pacienteDobrasCut = new Gson().toJson(pacienteDobras);
                     Intent atendDobrasCut = new Intent(DobrasCutaneas.this, TesteCaminhada.class);
 
-                    atendDobrasCut.putExtra("atendimentoDobras",atendimentoDobras);
-                    atendDobrasCut.putExtra("pacientedobras",pacienteDobrasCut);
+                    atendDobrasCut.putExtra("atendimentoDobras", atendimentoDobras);
+                    atendDobrasCut.putExtra("pacientedobras", pacienteDobrasCut);
+                    atendDobrasCut.putExtra("CPF", getIntent().getStringExtra("CPF"));
 
-                    Log.v("dobras"," "+pacienteDobrasCut);
+                    Log.v("dobras", " " + pacienteDobrasCut);
                     startActivity(atendDobrasCut);
                 } else {
                     Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();

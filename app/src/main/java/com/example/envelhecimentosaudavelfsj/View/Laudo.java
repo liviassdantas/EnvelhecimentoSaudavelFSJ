@@ -14,12 +14,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
+//import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.Principal;
 import com.example.envelhecimentosaudavelfsj.R;
 import com.example.envelhecimentosaudavelfsj.Util.PDF;
+import com.example.envelhecimentosaudavelfsj.daoSQLite.AtendimentoDAO;
 import com.google.gson.Gson;
 /*
  *Created by: Livia Dantas - 05/06/2019
@@ -52,7 +53,7 @@ public class Laudo extends AppCompatActivity {
         setContentView(R.layout.activity_laudo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final AtendimentoDatabase banco = AtendimentoDatabase.getInstance(this.getApplicationContext());
+//        final AtendimentoDatabase banco = AtendimentoDatabase.getInstance(this.getApplicationContext());
 
         nomeExibe = findViewById(R.id.nomepessoa_laudo);
         idadeExibe = findViewById(R.id.idadeexibe_laudo);
@@ -74,10 +75,9 @@ public class Laudo extends AppCompatActivity {
 
         btnSalvar = findViewById(R.id.laudo_btnSalvar);
 
-        final Atendimento atendimentoLaudoExibe = new Gson().fromJson(getIntent()
-                .getStringExtra("atendimentoCaminhada"), Atendimento.class);
-        final Paciente pacienteLaudoExibe = new Gson().fromJson(getIntent()
-                .getStringExtra("pacienteCaminhada"), Paciente.class);
+        final Atendimento atendimentoLaudoExibe = new Gson().fromJson(getIntent().getStringExtra("atendimentoCaminhada"), Atendimento.class);
+        final Paciente pacienteLaudoExibe = new Paciente(); /*new Gson().fromJson(getIntent()
+                .getStringExtra("pacienteCaminhada"), Paciente.class);*/
 
         nomeExibe.setText(pacienteLaudoExibe.getNome());
         idadeExibe.setText(String.valueOf(pacienteLaudoExibe.getIdade()));
@@ -101,25 +101,31 @@ public class Laudo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (ActivityCompat.checkSelfPermission(Laudo.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Laudo.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
-                    return;
-                }
+//                if (ActivityCompat.checkSelfPermission(Laudo.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions(Laudo.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
+//                    return;
+//                }
 
-                        if (PDF.salvar(pacienteLaudoExibe.getNome(), Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath(), pacienteLaudoExibe.getNome(),
-                                String.valueOf(pacienteLaudoExibe.getIdade()), pacienteLaudoExibe.getSexo(), String.valueOf(atendimentoLaudoExibe.getPeso()),
-                                atendimentoLaudoExibe.getIMC(), atendimentoLaudoExibe.getFrequenciaCardiaca(),
-                                String.valueOf(atendimentoLaudoExibe.getAltura()), atendimentoLaudoExibe.getRCQ(), atendimentoLaudoExibe.getPressaoArterial(),
-                                String.valueOf(atendimentoLaudoExibe.getDobrasCutaneas()), atendimentoLaudoExibe.getDistanciaTesteErg(), atendimentoLaudoExibe.getPApreTeste(),
-                                atendimentoLaudoExibe.getPAposTeste(), atendimentoLaudoExibe.getVOobtidoTesteErg(),atendimentoLaudoExibe.getOximetriaPre(), atendimentoLaudoExibe.getOximetriaPos())) {
+//                        if (PDF.salvar(pacienteLaudoExibe.getNome(), Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath(), pacienteLaudoExibe.getNome(),
+//                                String.valueOf(pacienteLaudoExibe.getIdade()), pacienteLaudoExibe.getSexo(), String.valueOf(atendimentoLaudoExibe.getPeso()),
+//                                atendimentoLaudoExibe.getIMC(), atendimentoLaudoExibe.getFrequenciaCardiaca(),
+//                                String.valueOf(atendimentoLaudoExibe.getAltura()), atendimentoLaudoExibe.getRCQ(), atendimentoLaudoExibe.getPressaoArterial(),
+//                                String.valueOf(atendimentoLaudoExibe.getDobrasCutaneas()), atendimentoLaudoExibe.getDistanciaTesteErg(), atendimentoLaudoExibe.getPApreTeste(),
+//                                atendimentoLaudoExibe.getPAposTeste(), atendimentoLaudoExibe.getVOobtidoTesteErg(),atendimentoLaudoExibe.getOximetriaPre(), atendimentoLaudoExibe.getOximetriaPos())) {
+//
+//                            Toast.makeText(getApplicationContext(), "PDF Salvo", Toast.LENGTH_SHORT).show();
+//                        }else  {
+//                            Toast.makeText(getApplicationContext(), "Não salvo", Toast.LENGTH_SHORT).show();
+//                        }
 
-                            Toast.makeText(getApplicationContext(), "PDF Salvo", Toast.LENGTH_SHORT).show();
-                        }else  {
-                            Toast.makeText(getApplicationContext(), "Não salvo", Toast.LENGTH_SHORT).show();
-                        }
+                        Long mCpfPaciente = Long.parseLong(getIntent().getStringExtra("CPF"));
+                        atendimentoLaudoExibe.setCpfPaciente(mCpfPaciente);
 
-                Intent finalI = new Intent(Laudo.this, Principal.class);
-                startActivity(finalI);
+                        new AtendimentoDAO(getBaseContext()).insertAtendimento(atendimentoLaudoExibe);
+
+                        Intent finalI = new Intent(Laudo.this, Principal.class);
+                        finalI.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(finalI);
                     }
             });
         }

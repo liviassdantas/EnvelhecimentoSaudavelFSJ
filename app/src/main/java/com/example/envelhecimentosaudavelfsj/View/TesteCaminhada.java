@@ -68,6 +68,7 @@ public class TesteCaminhada extends AppCompatActivity {
 
                 atendimentoTCaminhada.putExtra("pacienteCaminhada", pacienteTesteCaminhada);
                 atendimentoTCaminhada.putExtra("atendimentoCaminhada",atendimentoTesteCaminhada);
+                atendimentoTCaminhada.putExtra("CPF", getIntent().getStringExtra("CPF"));
 
 
                 startActivity(atendimentoTCaminhada);
