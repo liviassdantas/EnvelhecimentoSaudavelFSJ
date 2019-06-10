@@ -2,10 +2,13 @@ package com.example.envelhecimentosaudavelfsj.View;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -14,12 +17,12 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
 import com.example.envelhecimentosaudavelfsj.Model.Endereco;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
+import com.example.envelhecimentosaudavelfsj.Principal;
 import com.example.envelhecimentosaudavelfsj.R;
 import com.example.envelhecimentosaudavelfsj.cep.CepListener;
-import com.google.gson.Gson;
+import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -38,9 +41,8 @@ public class DadosPaciente extends AppCompatActivity {
     private Spinner Estado;
     private RadioButton btnFeminino;
     private RadioButton btnMasculino;
+    private Long mCpfPaciente;
 
-
-    private AtendimentoDatabase banco;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -64,7 +66,12 @@ public class DadosPaciente extends AppCompatActivity {
 
         CEP.getEditText().addTextChangedListener(new CepListener(this));
 
-        banco = AtendimentoDatabase.getInstance(getApplicationContext());
+        if (getIntent().hasExtra("CPF")) {
+            mCpfPaciente = Long.parseLong(getIntent().getStringExtra("CPF"));
+            CPF.getEditText().setText(String.valueOf(mCpfPaciente));
+            CPF.getEditText().setEnabled(false);
+        }
+
         mDataNascimento = findViewById(R.id.telaPaciente_dataNascimento);
 
         mDataNascimento.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +103,6 @@ public class DadosPaciente extends AppCompatActivity {
         });
 
         findViewById(R.id.telaPaciente_btnProximo).setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SimpleDateFormat")
             @Override
             public void onClick(View v) {
                 if (validarCampos(R.id.telaPaciente_nomePaciente, R.id.telaPaciente_cpf, R.id.telaPaciente_dataNascimento)) {
@@ -115,34 +121,71 @@ public class DadosPaciente extends AppCompatActivity {
                     }
 
                     //data de nascimento
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt-BR"));
                     try {
-                        paciente.setDataNascimento(new SimpleDateFormat("dd/MM/YYYY").parse(mDataNascimento.getText().toString()));
+                        paciente.setDataNascimento(sdf.parse(mDataNascimento.getText().toString()));
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
 
                     paciente.setIdade(paciente.getIdade());
 
-
+                    endereco.setCpfPaciente(paciente.getCpf());
                     endereco.setBairro(Bairro.getEditText().getText().toString());
                     endereco.setCep(CEP.getEditText().getText().toString());
                     endereco.setComplemento(Complemento.getText().toString());
                     endereco.setLogradouro(Rua.getEditText().getText().toString());
                     endereco.setLocalidade(Cidade.getEditText().getText().toString());
                     endereco.setUf(Estado.getSelectedItem().toString());
-                    endereco.setNumero(Numero.getEditText().toString());
+                    endereco.setNumero(Numero.getEditText().getText().toString());
                     paciente.setEndereco(endereco);
 
-                    String pacienteGson = new Gson().toJson(paciente);
-                    Intent intentPaciente = new Intent(DadosPaciente.this, OximetriaAntropometria.class);
-                    intentPaciente.putExtra("paciente", pacienteGson);
+                    if (new PacienteDAO(getBaseContext()).insertPaciente(paciente)) {
+                        new AlertDialog.Builder(DadosPaciente.this)
+                                .setCancelable(false)
+                                .setTitle("Aviso")
+                                .setMessage("Paciente cadastrado com sucesso. Deseja iniciar o atendimento?")
+                                .setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(DadosPaciente.this, OximetriaAntropometria.class);
+                                        intent.putExtra("CPF", CPF.getEditText().getText().toString());
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                })
+                                .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(DadosPaciente.this, Principal.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .create()
+                                .show();
+                    } else {
+                        new AlertDialog.Builder(DadosPaciente.this)
+                                .setTitle("Erro")
+                                .setCancelable(false)
+                                .setMessage("Paciente não cadastrado")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent intent = new Intent(DadosPaciente.this, Principal.class);
+                                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                    }
+                                })
+                                .create()
+                                .show();
+                    }
 
-                    startActivity(intentPaciente);
+                    Log.i("BANCO", "onClick: " + paciente.getCpf() + " " + paciente.getEndereco().getLocalidade() + " " + paciente.getDataNascimento().toString());
 
                 } else {
                     Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
     }
