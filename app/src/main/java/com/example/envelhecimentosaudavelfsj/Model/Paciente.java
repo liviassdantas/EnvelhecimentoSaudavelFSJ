@@ -8,23 +8,14 @@ import java.util.List;
 /**
  * Created by Raphael Rodrigues on 04/06/2019.
  */
-//@Entity(tableName = "paciente")
 public class Paciente {
-    //@Fields
 
-//    @PrimaryKey
     private Long cpf;
-//    @ColumnInfo(name = "servidorID")
     private Long servidorId;
-//    @ColumnInfo(name = "nome")
     private String nome;
-//    @ColumnInfo(name = "endereco")
     private Endereco endereco;
-//    @ColumnInfo(name = "sexo")
     private String sexo;
-//    @ColumnInfo(name = "nascimento")
     private Date dataNascimento;
-//    @ColumnInfo(name = "idade")
     private Integer idade;
 
 
@@ -36,14 +27,9 @@ public class Paciente {
         this.atendimentos.add(atendimentos);
     }
 
-    //Lista de atendimentos
-//    @Ignore
-    List<Atendimento> atendimentos = new ArrayList<>();
+    public Paciente() {}
 
-    public Paciente() {
-    }
-
-    public Paciente(Long cpf, String nome, Endereco endereco, String sexo, Date dataNascimento, Integer idade, Double altura) {
+    public Paciente(Long cpf, String nome, Endereco endereco, String sexo, Date dataNascimento, Integer idade) {
         this.cpf = cpf;
         this.nome = nome;
         this.endereco = endereco;
@@ -52,6 +38,17 @@ public class Paciente {
         this.idade = idade;
     }
 
+    public List<Atendimento> getAtendimentos() {
+        return atendimentos;
+    }
+
+    public void setAtendimentos(Atendimento atendimento) {
+        this.atendimentos.add(atendimento);
+    }
+
+    public void setAtendimentos(List<Atendimento> atendimentos) {
+        this.atendimentos = atendimentos;
+    }
 
     public Long getCpf() {
         return cpf;
@@ -120,6 +117,7 @@ public class Paciente {
         }
         return this.idade;
     }
+
     public void setIdade(Integer idade) {
         this.idade = idade;
     }

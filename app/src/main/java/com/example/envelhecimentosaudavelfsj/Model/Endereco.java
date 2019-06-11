@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by Raphael Rodrigues on 04/06/2019.
  */
 public class Endereco implements Serializable {
+
     private long enderecoId;
     private long cpfPaciente;
     private String cep;
@@ -16,8 +17,7 @@ public class Endereco implements Serializable {
     private String uf;
     private String complemento;
 
-    public Endereco() {
-    }
+    public Endereco() {}
 
     public Endereco(String cep, String logradouro, String numero, String localidade, String uf, String bairro) {
         this.uf = uf;
