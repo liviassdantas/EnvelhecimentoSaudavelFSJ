@@ -20,20 +20,21 @@ import com.google.gson.Gson;
  */
 
 public class TesteCaminhada extends AppCompatActivity {
+
     private TextInputLayout distancia;
     private TextInputLayout vo2max;
     private TextInputLayout paSistolicapreTeste;
     private TextInputLayout paDiastolicapreTeste;
     private TextInputLayout paSistolicaposTeste;
     private TextInputLayout paDiastolicaposTeste;
-    private String pressaoPre;
-    private String pressaoPos;
+    private Paciente mPaciente;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_teste_caminhada);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         distancia = findViewById(R.id.teste_caminhada_distancia);
         vo2max = findViewById(R.id.teste_caminhada_vo2max);
         paSistolicapreTeste = findViewById(R.id.teste_caminhada_pa_sistolica_pre);
@@ -41,37 +42,35 @@ public class TesteCaminhada extends AppCompatActivity {
         paSistolicaposTeste = findViewById(R.id.teste_caminhada_pa_sistolica_pos);
         paDiastolicaposTeste = findViewById(R.id.teste_caminhada_pa_diastolica_pos);
 
+        if (getIntent().hasExtra("PACIENTE")) {
+            mPaciente = new Gson().fromJson(getIntent().getStringExtra("PACIENTE"), Paciente.class);
+        }
+
+        final Atendimento atendimento = mPaciente.getAtendimentos().get(mPaciente.getAtendimentos().size() - 1);
 
         findViewById(R.id.teste_caminhada_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Atendimento atendTesteCaminha = new Gson().fromJson(getIntent()
-                        .getStringExtra("atendimentoDobras"), Atendimento.class);
-                Paciente pacienteTesteCaminha = new Gson().fromJson(getIntent()
-                        .getStringExtra("pacientedobras"),Paciente.class);
 
-                atendTesteCaminha.setPressaoSis(paSistolicapreTeste.getEditText().getText().toString());
-                atendTesteCaminha.setPressaoDias(paDiastolicapreTeste.getEditText().getText().toString());
-                atendTesteCaminha.setPApreTeste(atendTesteCaminha.PressaoArterialPreTeste());
+                atendimento.setPApreTeste(
+                        paSistolicapreTeste.getEditText().getText().toString(),
+                        paDiastolicapreTeste.getEditText().getText().toString()
+                );
 
-                atendTesteCaminha.setPressaoSis(paSistolicaposTeste.getEditText().getText().toString());
-                atendTesteCaminha.setPressaoDias(paDiastolicaposTeste.getEditText().getText().toString());
-                atendTesteCaminha.setPAposTeste(atendTesteCaminha.PressaoArterialPosTeste());
+                atendimento.setPAposTeste(
+                        paSistolicaposTeste.getEditText().getText().toString(),
+                        paDiastolicaposTeste.getEditText().getText().toString()
+                );
 
-                atendTesteCaminha.setDistanciaTesteErg(distancia.getEditText().getText().toString());
-                atendTesteCaminha.setVOobtidoTesteErg(vo2max.getEditText().getText().toString());
+                atendimento.setDistanciaTesteErg(distancia.getEditText().getText().toString());
+                atendimento.setVOobtidoTesteErg(vo2max.getEditText().getText().toString());
 
-                String pacienteTesteCaminhada = new Gson().toJson(pacienteTesteCaminha);
-                String atendimentoTesteCaminhada = new Gson().toJson(atendTesteCaminha);
+                mPaciente.getAtendimentos().set(mPaciente.getAtendimentos().size() - 1, atendimento);
 
-                Intent atendimentoTCaminhada = new Intent(TesteCaminhada.this, Laudo.class);
+                Intent intent = new Intent(TesteCaminhada.this, Laudo.class);
+                intent.putExtra("PACIENTE", new Gson().toJson(mPaciente));
 
-                atendimentoTCaminhada.putExtra("pacienteCaminhada", pacienteTesteCaminhada);
-                atendimentoTCaminhada.putExtra("atendimentoCaminhada",atendimentoTesteCaminhada);
-                atendimentoTCaminhada.putExtra("CPF", getIntent().getStringExtra("CPF"));
-
-
-                startActivity(atendimentoTCaminhada);
+                startActivity(intent);
             }
         });
     }
@@ -85,5 +84,4 @@ public class TesteCaminhada extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

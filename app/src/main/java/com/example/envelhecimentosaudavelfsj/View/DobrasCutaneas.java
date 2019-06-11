@@ -4,12 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
 import com.google.gson.Gson;
@@ -18,6 +15,8 @@ import com.google.gson.Gson;
  *Created by: Livia Dantas - 05/06/2019
  */
 public class DobrasCutaneas extends AppCompatActivity {
+
+    private Paciente mPaciente;
     private TextInputLayout dobraResult;
 
     @Override
@@ -28,31 +27,22 @@ public class DobrasCutaneas extends AppCompatActivity {
 
         dobraResult = findViewById(R.id.dobras_cutaneas_valor);
 
+        if (getIntent().hasExtra("PACIENTE")) {
+            mPaciente = new Gson().fromJson(getIntent().getStringExtra("PACIENTE"), Paciente.class);
+        }
+
         findViewById(R.id.dobras_cutaneas_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (/*!dobraResult.getEditText().getText().toString().isEmpty()*/true) {
-                    Atendimento atendDobras = new Gson().fromJson(getIntent()
-                            .getStringExtra("atendimentoOximetriaGson"), Atendimento.class);
-                    Paciente pacienteDobras = new Gson().fromJson(getIntent()
-                            .getStringExtra("pacienteGsonOxi"), Paciente.class);
 
-                    atendDobras.setDobrasCutaneas((!dobraResult.getEditText().getText().toString().isEmpty() ? Double.parseDouble(dobraResult.getEditText().getText().toString()) : 0D));
+                mPaciente.getAtendimentos().get(mPaciente.getAtendimentos().size() - 1)
+                        .setDobrasCutaneas((!dobraResult.getEditText().getText().toString().isEmpty() ?
+                                Double.parseDouble(dobraResult.getEditText().getText().toString()) : 0D));
 
-                    String atendimentoDobras = new Gson().toJson(atendDobras);
-                    String pacienteDobrasCut = new Gson().toJson(pacienteDobras);
-                    Intent atendDobrasCut = new Intent(DobrasCutaneas.this, TesteCaminhada.class);
+                Intent intent = new Intent(DobrasCutaneas.this, TesteCaminhada.class);
+                intent.putExtra("PACIENTE", new Gson().toJson(mPaciente));
 
-                    atendDobrasCut.putExtra("atendimentoDobras", atendimentoDobras);
-                    atendDobrasCut.putExtra("pacientedobras", pacienteDobrasCut);
-                    atendDobrasCut.putExtra("CPF", getIntent().getStringExtra("CPF"));
-
-                    Log.v("dobras", " " + pacienteDobrasCut);
-                    startActivity(atendDobrasCut);
-                } else {
-                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                }
-
+                startActivity(intent);
             }
         });
     }

@@ -9,9 +9,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.envelhecimentosaudavelfsj.View.DadosPaciente;
+import com.example.envelhecimentosaudavelfsj.View.CadastroPaciente;
 import com.example.envelhecimentosaudavelfsj.View.OximetriaAntropometria;
 import com.example.envelhecimentosaudavelfsj.View.Relatorio;
+import com.example.envelhecimentosaudavelfsj.daoSQLite.AtendimentoDAO;
 import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
 
 public class Principal extends AppCompatActivity {
@@ -23,18 +24,10 @@ public class Principal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_inicial);
 
-        new PacienteDAO(getBaseContext()).getAllPacientes();
-
-//        findViewById(R.id.imgview_tela_inicial_realizarAtendimento).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(Principal.this, OximetriaAntropometria.class));
-//            }
-//        });
     }
 
     public void btnNovoPaciente(View v) {
-        startActivity(new Intent(Principal.this, DadosPaciente.class));
+        startActivity(new Intent(Principal.this, CadastroPaciente.class));
     }
 
     public void btnAtendimento(View v) {
@@ -58,7 +51,7 @@ public class Principal extends AppCompatActivity {
                 final String cpf = ((EditText) view.findViewById(R.id.alert_txt_cpf)).getText().toString();
 
                 if (cpf.length() == 11) {
-                    if (new PacienteDAO(getBaseContext()).getPacienteByCpf(Long.parseLong(cpf)) == null) {
+                    if (!new PacienteDAO(getBaseContext()).checkPacienteCadastrado(Long.parseLong(cpf))) {
 
                         new AlertDialog.Builder(Principal.this)
                                 .setTitle("Aviso")
@@ -67,7 +60,7 @@ public class Principal extends AppCompatActivity {
                                 .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
-                                        Intent i = new Intent(Principal.this, DadosPaciente.class);
+                                        Intent i = new Intent(Principal.this, CadastroPaciente.class);
                                         i.putExtra("CPF", cpf);
                                         startActivity(i);
                                         alertaConsultaCpf.dismiss();
@@ -79,6 +72,7 @@ public class Principal extends AppCompatActivity {
                         Intent i = new Intent(Principal.this, OximetriaAntropometria.class);
                         i.putExtra("CPF", cpf);
                         startActivity(i);
+                        alertaConsultaCpf.dismiss();
                     }
 
                 } else {
@@ -111,13 +105,17 @@ public class Principal extends AppCompatActivity {
                 String cpf = ((EditText) view.findViewById(R.id.alert_txt_cpf)).getText().toString();
 
                 if (cpf.length() == 11) {
-                    if (new PacienteDAO(getBaseContext()).getPacienteByCpf(Long.parseLong(cpf)) == null) {
-                        Toast.makeText(Principal.this, "Paciente não encotrado", Toast.LENGTH_SHORT).show();
+                    if (!new PacienteDAO(getBaseContext()).checkPacienteCadastrado(Long.parseLong(cpf))) {
+                        Toast.makeText(Principal.this, "Paciente não encontrado", Toast.LENGTH_SHORT).show();
                     } else {
-                        Intent i = new Intent(Principal.this, Relatorio.class);
-                        i.putExtra("CPF", cpf);
-                        startActivity(i);
-                        alertaConsultaCpf.dismiss();
+                        if (new AtendimentoDAO(getBaseContext()).checkPacienteAtendimento(Long.parseLong(cpf))) {
+                            Intent i = new Intent(Principal.this, Relatorio.class);
+                            i.putExtra("CPF", cpf);
+                            startActivity(i);
+                            alertaConsultaCpf.dismiss();
+                        } else {
+                            Toast.makeText(Principal.this, "Paciente não possui atendimento", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 } else {
                     Toast.makeText(Principal.this, "Insira um CPF válido", Toast.LENGTH_SHORT).show();
@@ -126,5 +124,21 @@ public class Principal extends AppCompatActivity {
         });
 
         alertaConsultaCpf.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(Principal.this)
+                .setTitle("Sair")
+                .setMessage("Deseja realmente sair do app?")
+                .setNegativeButton("Cancelar", null)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                })
+                .create()
+                .show();
     }
 }

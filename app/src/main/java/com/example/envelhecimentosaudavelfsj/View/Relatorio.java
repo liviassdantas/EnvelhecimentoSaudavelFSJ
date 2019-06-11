@@ -7,21 +7,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.example.envelhecimentosaudavelfsj.Adapter.AtendimentoAdapter;
-import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
+import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
-import com.example.envelhecimentosaudavelfsj.daoSQLite.AtendimentoDAO;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
 
 //Criado por Yan Vitor 06/06/2019
 
 @SuppressWarnings("ALL")
 public class Relatorio extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private List<Atendimento> mAtendimentoList;
     private String mCpf;
+    private RecyclerView mRecyclerView;
+    private Paciente mPaciente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +26,17 @@ public class Relatorio extends AppCompatActivity {
         setContentView(R.layout.activity_relatorio);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        recyclerView = findViewById(R.id.relatorio_recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+        mRecyclerView = findViewById(R.id.relatorio_recyclerView);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setHasFixedSize(true);
 
         if (getIntent().getStringExtra("CPF") != null) {
             mCpf = getIntent().getStringExtra("CPF");
 
-            mAtendimentoList = new ArrayList<>();
-            mAtendimentoList = new AtendimentoDAO(Relatorio.this).getAtendimentosByPaciente(Long.parseLong(mCpf));
+            mPaciente = new PacienteDAO(Relatorio.this).getPacienteByCpf(Long.parseLong(mCpf));
 
-            AtendimentoAdapter adapter = new AtendimentoAdapter(this, mAtendimentoList);
-            recyclerView.setAdapter(adapter);
+            AtendimentoAdapter adapter = new AtendimentoAdapter(this, mPaciente);
+            mRecyclerView.setAdapter(adapter);
         }
     }
 

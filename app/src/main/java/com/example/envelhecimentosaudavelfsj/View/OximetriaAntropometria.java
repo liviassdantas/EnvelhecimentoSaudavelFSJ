@@ -19,12 +19,16 @@ import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
 import com.example.envelhecimentosaudavelfsj.Util.TextListener;
 import com.example.envelhecimentosaudavelfsj.Util.Util;
+import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
 import com.google.gson.Gson;
+
+import java.util.Calendar;
 /*
  *Created by: Livia Dantas - 05/06/2019
  */
 
 public class OximetriaAntropometria extends AppCompatActivity {
+
     private TextInputLayout vPreTeste;
     private TextInputLayout vPosTeste;
     private TextInputLayout peso;
@@ -38,20 +42,18 @@ public class OximetriaAntropometria extends AppCompatActivity {
     private EditText RCQedt;
     private Double cinturaRCQ;
     private Double quadrilRCQ;
-    private Button btnProximo;
 
     private String alturaInserida;
     private String pesoInserido;
+
+    private Paciente mPaciente;
+    private Atendimento mAtendimento;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_oximetria_antro);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        final Atendimento atendimento = new Atendimento();
-
-        final Paciente pacienteG = new Gson().fromJson(getIntent().getStringExtra("paciente"), Paciente.class);
 
         vPreTeste = findViewById(R.id.oximetria_valor_pre_teste);
         vPosTeste = findViewById(R.id.oximetria_valor_pos_teste);
@@ -62,37 +64,47 @@ public class OximetriaAntropometria extends AppCompatActivity {
         frequeciaCardiaca = findViewById(R.id.antropometria_fc);
         IMC = findViewById(R.id.oximetria_imc);
         RCQedt = findViewById(R.id.oximetria_rcq_edit);
-        btnProximo = findViewById(R.id.oximetria_btnProximo);
+
+        if (getIntent().hasExtra("CPF")) {
+            Long cpf = Long.parseLong(getIntent().getStringExtra("CPF"));
+            mPaciente = new PacienteDAO(getBaseContext()).getPacienteByCpf(cpf);
+        }
+
+        mAtendimento = new Atendimento();
 
         findViewById(R.id.oximetria_btnProximo).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (/*validarCampos()*/ true) {
 
-                    atendimento.setOximetriaPre("SaO2 "+vPreTeste.getEditText().getText().toString()+"%");
-                    atendimento.setOximetriaPos("SaO2 "+vPosTeste.getEditText().getText().toString()+"%");
-                    atendimento.setPeso((!peso.getEditText().getText().toString().isEmpty()) ? Double.parseDouble(peso.getEditText().getText().toString()) : 0D);
-                    atendimento.setAltura((!altura.getEditText().getText().toString().isEmpty()) ? Double.parseDouble(altura.getEditText().getText().toString()) : 0D);
-                    atendimento.setPressaoSis(pressaoSistolica.getEditText().getText().toString());
-                    atendimento.setPressaoDias(pressaoDiastolica.getEditText().getText().toString());
-                    atendimento.setPressaoArterial(atendimento.PressaoArterial());
-                    atendimento.setFrequenciaCardiaca(frequeciaCardiaca.getEditText().getText().toString());
-                    atendimento.setIMC(IMC.getEditText().getText().toString());
+                    mAtendimento.setDataEHoraAtendimento(Calendar.getInstance().getTime());
 
-                    Intent atendimentoOximetria = new Intent(OximetriaAntropometria.this, DobrasCutaneas.class);
+                    mAtendimento.setOximetriaPre((!vPreTeste.getEditText().getText().toString().isEmpty()) ?
+                            "SaO2 " + vPreTeste.getEditText().getText().toString() + "%" : "");
 
-                    String atendiOximetria = new Gson().toJson(atendimento);
-                    String pacienteGs = new Gson().toJson(pacienteG);
-                    atendimentoOximetria.putExtra("atendimentoOximetriaGson", atendiOximetria);
-                    atendimentoOximetria.putExtra("pacienteGsonOxi", pacienteGs);
-                    atendimentoOximetria.putExtra("CPF", getIntent().getStringExtra("CPF"));
+                    mAtendimento.setOximetriaPos((!vPosTeste.getEditText().getText().toString().isEmpty()) ?
+                            "SaO2 " + vPosTeste.getEditText().getText().toString() + "%" : "");
 
-                    Log.v("teste1", "" + pacienteGs);
+                    mAtendimento.setPeso((!peso.getEditText().getText().toString().isEmpty()) ?
+                            Double.parseDouble(peso.getEditText().getText().toString()) : 0D);
 
-                    startActivity(atendimentoOximetria);
-                } else {
-                    Toast.makeText(getBaseContext(), "Preencha todos os campos", Toast.LENGTH_SHORT).show();
-                }
+                    mAtendimento.setAltura((!altura.getEditText().getText().toString().isEmpty()) ?
+                            Double.parseDouble(altura.getEditText().getText().toString()) : 0D);
+
+                    mAtendimento.setPressaoArterial(
+                            pressaoSistolica.getEditText().getText().toString(),
+                            pressaoDiastolica.getEditText().getText().toString()
+                    );
+
+                    mAtendimento.setFrequenciaCardiaca(frequeciaCardiaca.getEditText().getText().toString());
+                    mAtendimento.setIMC(IMC.getEditText().getText().toString());
+
+                    mAtendimento.setCpfPaciente(mPaciente.getCpf());
+                    mPaciente.setAtendimentos(mAtendimento);
+
+                    Intent intent = new Intent(OximetriaAntropometria.this, DobrasCutaneas.class);
+                    intent.putExtra("PACIENTE", new Gson().toJson(mPaciente));
+
+                    startActivity(intent);
             }
         });
 
@@ -110,16 +122,15 @@ public class OximetriaAntropometria extends AppCompatActivity {
                         .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //convertidas
                                 if (!cintura.getEditText().getText().toString().isEmpty() &&
                                         !quadril.getEditText().getText().toString().isEmpty()) {
 
                                     cinturaRCQ = Double.parseDouble(cintura.getEditText().getText().toString());
                                     quadrilRCQ = Double.parseDouble(quadril.getEditText().getText().toString());
 
-                                    atendimento.setRCQ(new Util().RCQ(cinturaRCQ, quadrilRCQ, pacienteG.getSexo(), pacienteG.getIdade()));
+                                    mAtendimento.setRCQ(new Util().RCQ(cinturaRCQ, quadrilRCQ, mPaciente.getSexo(), mPaciente.getIdade()));
 
-                                    RCQedt.setText(atendimento.getRCQ());
+                                    RCQedt.setText(mAtendimento.getRCQ());
                                 }
                             }
                         })
@@ -142,18 +153,6 @@ public class OximetriaAntropometria extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private boolean validarCampos() {
-        return !(
-                vPreTeste.getEditText().getText().toString().isEmpty() ||
-                        vPosTeste.getEditText().getText().toString().isEmpty() ||
-                        peso.getEditText().getText().toString().isEmpty() ||
-                        altura.getEditText().getText().toString().isEmpty() ||
-                        pressaoDiastolica.getEditText().getText().toString().isEmpty() ||
-                        pressaoSistolica.getEditText().getText().toString().isEmpty() ||
-                        frequeciaCardiaca.getEditText().getText().toString().isEmpty()
-        );
-    }
-
     public String getAlturaInserida() {
         return alturaInserida;
     }
@@ -172,9 +171,5 @@ public class OximetriaAntropometria extends AppCompatActivity {
 
     public void setIMC(String imc) {
         IMC.getEditText().setText(imc);
-    }
-
-    public void setRCQed(String rcq) {
-        RCQedt.setText(rcq);
     }
 }

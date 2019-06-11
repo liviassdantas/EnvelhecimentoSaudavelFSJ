@@ -1,32 +1,24 @@
 package com.example.envelhecimentosaudavelfsj.View;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-//import com.example.envelhecimentosaudavelfsj.Dao.AtendimentoDatabase;
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.Principal;
 import com.example.envelhecimentosaudavelfsj.R;
-import com.example.envelhecimentosaudavelfsj.Util.PDF;
 import com.example.envelhecimentosaudavelfsj.daoSQLite.AtendimentoDAO;
 import com.google.gson.Gson;
+
 /*
  *Created by: Livia Dantas - 05/06/2019
  */
-
 public class Laudo extends AppCompatActivity {
+
     private TextView nomeExibe;
     private TextView idadeExibe;
     private TextView sexoExibe;
@@ -44,16 +36,14 @@ public class Laudo extends AppCompatActivity {
     private TextView pressaoPosExibe;
     private TextView vo2maxExibe;
 
-    private Button btnSalvar;
-
+    private Paciente mPaciente;
+    private Atendimento mAtendimento;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_laudo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-//        final AtendimentoDatabase banco = AtendimentoDatabase.getInstance(this.getApplicationContext());
 
         nomeExibe = findViewById(R.id.nomepessoa_laudo);
         idadeExibe = findViewById(R.id.idadeexibe_laudo);
@@ -73,31 +63,36 @@ public class Laudo extends AppCompatActivity {
         pressaoPosExibe = findViewById(R.id.paPosTesteExibe_laudo);
         vo2maxExibe = findViewById(R.id.vo2maxExibe_laudo);
 
-        btnSalvar = findViewById(R.id.laudo_btnSalvar);
+        if (getIntent().hasExtra("PACIENTE")) {
+            mPaciente = new Gson().fromJson(getIntent().getStringExtra("PACIENTE"), Paciente.class);
+            mAtendimento = mPaciente.getAtendimentos().get(mPaciente.getAtendimentos().size() - 1);
+        } else if (getIntent().hasExtra("PACIENTE_ADAPTER")) {
+            mPaciente = new Gson().fromJson(getIntent().getStringExtra("PACIENTE_ADAPTER"), Paciente.class);
+            mAtendimento = mPaciente.getAtendimentos().get(getIntent().getIntExtra("POSITION", 0));
 
-        final Atendimento atendimentoLaudoExibe = new Gson().fromJson(getIntent().getStringExtra("atendimentoCaminhada"), Atendimento.class);
-        final Paciente pacienteLaudoExibe = new Paciente(); /*new Gson().fromJson(getIntent()
-                .getStringExtra("pacienteCaminhada"), Paciente.class);*/
+            findViewById(R.id.laudo_btnSalvar).setVisibility(View.INVISIBLE);
+            findViewById(R.id.laudo_numeroPasso).setVisibility(View.INVISIBLE);
+        }
 
-        nomeExibe.setText(pacienteLaudoExibe.getNome());
-        idadeExibe.setText(String.valueOf(pacienteLaudoExibe.getIdade()));
-        sexoExibe.setText(pacienteLaudoExibe.getSexo());
+        nomeExibe.setText(mPaciente.getNome());
+        idadeExibe.setText(String.valueOf(mPaciente.getIdade()));
+        sexoExibe.setText(mPaciente.getSexo());
 
-        pesoExibe.setText(String.valueOf(atendimentoLaudoExibe.getPeso()));
-        imcExibe.setText(atendimentoLaudoExibe.getIMC());
-        freqCardExibe.setText(atendimentoLaudoExibe.getFrequenciaCardiaca());
-        alturaExibe.setText(String.valueOf(atendimentoLaudoExibe.getAltura()));
-        rcqExibe.setText(String.valueOf(atendimentoLaudoExibe.getRCQ()));
-        pressaoExibe.setText(atendimentoLaudoExibe.getPressaoArterial());
-        oximetriaPreExibe.setText(String.valueOf(atendimentoLaudoExibe.getOximetriaPre()));
-        oximetriaPosExibe.setText(String.valueOf(atendimentoLaudoExibe.getOximetriaPos()));
-        dobrasCutExibe.setText(String.valueOf(atendimentoLaudoExibe.getDobrasCutaneas()));
-        distanciaTesteExibe.setText(String.valueOf(atendimentoLaudoExibe.getDistanciaTesteErg()));
-        pressaoPreExibe.setText(atendimentoLaudoExibe.getPApreTeste());
-        pressaoPosExibe.setText(atendimentoLaudoExibe.getPAposTeste());
-        vo2maxExibe.setText(String.valueOf(atendimentoLaudoExibe.getVOobtidoTesteErg()));
+        pesoExibe.setText(String.valueOf(mAtendimento.getPeso()));
+        imcExibe.setText(mAtendimento.getIMC());
+        freqCardExibe.setText(mAtendimento.getFrequenciaCardiaca());
+        alturaExibe.setText(String.valueOf(mAtendimento.getAltura()));
+        rcqExibe.setText(String.valueOf(mAtendimento.getRCQ()));
+        pressaoExibe.setText(mAtendimento.getPressaoArterial());
+        oximetriaPreExibe.setText(String.valueOf(mAtendimento.getOximetriaPre()));
+        oximetriaPosExibe.setText(String.valueOf(mAtendimento.getOximetriaPos()));
+        dobrasCutExibe.setText(String.valueOf(mAtendimento.getDobrasCutaneas()));
+        distanciaTesteExibe.setText(String.valueOf(mAtendimento.getDistanciaTesteErg()));
+        pressaoPreExibe.setText(mAtendimento.getPApreTeste());
+        pressaoPosExibe.setText(mAtendimento.getPAposTeste());
+        vo2maxExibe.setText(String.valueOf(mAtendimento.getVOobtidoTesteErg()));
 
-        btnSalvar.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.laudo_btnSalvar).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -105,39 +100,38 @@ public class Laudo extends AppCompatActivity {
 //                    ActivityCompat.requestPermissions(Laudo.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 101);
 //                    return;
 //                }
-
-//                        if (PDF.salvar(pacienteLaudoExibe.getNome(), Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath(), pacienteLaudoExibe.getNome(),
-//                                String.valueOf(pacienteLaudoExibe.getIdade()), pacienteLaudoExibe.getSexo(), String.valueOf(atendimentoLaudoExibe.getPeso()),
-//                                atendimentoLaudoExibe.getIMC(), atendimentoLaudoExibe.getFrequenciaCardiaca(),
-//                                String.valueOf(atendimentoLaudoExibe.getAltura()), atendimentoLaudoExibe.getRCQ(), atendimentoLaudoExibe.getPressaoArterial(),
-//                                String.valueOf(atendimentoLaudoExibe.getDobrasCutaneas()), atendimentoLaudoExibe.getDistanciaTesteErg(), atendimentoLaudoExibe.getPApreTeste(),
-//                                atendimentoLaudoExibe.getPAposTeste(), atendimentoLaudoExibe.getVOobtidoTesteErg(),atendimentoLaudoExibe.getOximetriaPre(), atendimentoLaudoExibe.getOximetriaPos())) {
 //
-//                            Toast.makeText(getApplicationContext(), "PDF Salvo", Toast.LENGTH_SHORT).show();
-//                        }else  {
-//                            Toast.makeText(getApplicationContext(), "Não salvo", Toast.LENGTH_SHORT).show();
-//                        }
+//                if (PDF.salvar(pacienteLaudoExibe.getNome(), Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath(), pacienteLaudoExibe.getNome(),
+//                        String.valueOf(pacienteLaudoExibe.getIdade()), pacienteLaudoExibe.getSexo(), String.valueOf(mAtendimento.getPeso()),
+//                        mAtendimento.getIMC(), mAtendimento.getFrequenciaCardiaca(),
+//                        String.valueOf(mAtendimento.getAltura()), mAtendimento.getRCQ(), mAtendimento.getPressaoArterial(),
+//                        String.valueOf(mAtendimento.getDobrasCutaneas()), mAtendimento.getDistanciaTesteErg(), mAtendimento.getPApreTeste(),
+//                        mAtendimento.getPAposTeste(), mAtendimento.getVOobtidoTesteErg(), mAtendimento.getOximetriaPre(), mAtendimento.getOximetriaPos())) {
+//
+//                    Toast.makeText(getApplicationContext(), "PDF Salvo", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "Não salvo", Toast.LENGTH_SHORT).show();
+//                }
 
-                        Long mCpfPaciente = Long.parseLong(getIntent().getStringExtra("CPF"));
-                        atendimentoLaudoExibe.setCpfPaciente(mCpfPaciente);
+                if (mAtendimento != null) {
+                    new AtendimentoDAO(getBaseContext()).insertAtendimento(mAtendimento);
+                }
 
-                        new AtendimentoDAO(getBaseContext()).insertAtendimento(atendimentoLaudoExibe);
-
-                        Intent finalI = new Intent(Laudo.this, Principal.class);
-                        finalI.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(finalI);
-                    }
-            });
-        }
-
-
-        @Override
-        public boolean onOptionsItemSelected (MenuItem item){
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                finish();
+                Intent finalI = new Intent(Laudo.this, Principal.class);
+                finalI.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(finalI);
             }
-
-            return super.onOptionsItemSelected(item);
-        }
+        });
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            finish();
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+}
