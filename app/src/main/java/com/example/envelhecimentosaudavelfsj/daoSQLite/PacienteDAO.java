@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 import com.example.envelhecimentosaudavelfsj.Model.Endereco;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
@@ -23,7 +22,7 @@ import java.util.Locale;
 public class PacienteDAO {
 
     public static final String TABELA_PACIENTE = "TABELA_PACIENTE";
-    public static final String CAMPOS = "CPF, SERVIDOR_ID, NOME, SEXO, DATA_NASCIMENTO, IDADE";
+    public static final String CAMPOS = "CPF, SERVIDOR_ID, NOME, SEXO, DATA_NASCIMENTO, IDADE, TELEFONE";
 
     private Context context;
 
@@ -40,27 +39,26 @@ public class PacienteDAO {
         create.append("     NOME            TEXT,");
         create.append("     SEXO            TEXT,");
         create.append("     DATA_NASCIMENTO TEXT,");
-        create.append("     IDADE           INTEGER");
+        create.append("     IDADE           INTEGER,");
+        create.append("     TELEFONE        TEXT");
         create.append(")");
         db.execSQL(create.toString());
     }
 
     public boolean insertPaciente(Paciente paciente) {
 
-//        if (getPacienteByCpf(paciente.getCpf()) != null) {
-//            updatePaciente(paciente);
-//        }
-
-        String dataNascimento = new SimpleDateFormat("yyyy-MM-dd", new Locale("en-US"))
-                .format(paciente.getDataNascimento());
-
         ContentValues values = new ContentValues();
         values.put("CPF",               paciente.getCpf());
         values.put("SERVIDOR_ID",       paciente.getServidorId());
         values.put("NOME",              paciente.getNome());
         values.put("SEXO",              paciente.getSexo());
+
+        String dataNascimento = new SimpleDateFormat("yyyy-MM-dd", new Locale("en-US"))
+                .format(paciente.getDataNascimento());
+
         values.put("DATA_NASCIMENTO",   dataNascimento);
         values.put("IDADE",             paciente.getIdade());
+        values.put("TELEFONE",          paciente.getTelefone());
 
         SQLiteDatabase banco = BancoSQLite.getInstance(context).getWritableDatabase();
 
@@ -92,6 +90,7 @@ public class PacienteDAO {
             paciente.setNome(cursor.getString(cursor.getColumnIndex("NOME")));
             paciente.setEndereco(endereco);
             paciente.setSexo(cursor.getString(cursor.getColumnIndex("SEXO")));
+            paciente.setAtendimentos(atendimentos);
 
             String dataNascimento;
             dataNascimento = cursor.getString(cursor.getColumnIndex("DATA_NASCIMENTO"));
@@ -111,6 +110,7 @@ public class PacienteDAO {
             }
             paciente.setDataNascimento(date);
             paciente.setIdade(cursor.getInt(cursor.getColumnIndex("IDADE")));
+            paciente.setTelefone(cursor.getString(cursor.getColumnIndex("TELEFONE")));
         }
         cursor.close();
 
@@ -158,16 +158,9 @@ public class PacienteDAO {
                 }
                 paciente.setDataNascimento(date);
                 paciente.setIdade(cursor.getInt(cursor.getColumnIndex("IDADE")));
+                paciente.setTelefone(cursor.getString(cursor.getColumnIndex("TELEFONE")));
 
                 pacientes.add(paciente);
-
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", new Locale("pt-BR"));
-                String data = sdf.format(paciente.getDataNascimento());
-
-                Log.i("BANCO", "Pacientes: Cpf " + paciente.getCpf() + " Nascimento " + data + " Nome " + paciente.getNome() +
-                        " Endereco " + paciente.getEndereco().getLogradouro() + " " + paciente.getEndereco().getBairro() +
-                        " " + paciente.getEndereco().getCep() + " " + paciente.getEndereco().getLocalidade() + " " + paciente.getEndereco().getUf()
-                );
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -189,6 +182,7 @@ public class PacienteDAO {
         values.put("SEXO",              paciente.getSexo());
         values.put("DATA_NASCIMENTO",   dataNascimento);
         values.put("IDADE",             paciente.getIdade());
+        values.put("TELEFONE",          paciente.getTelefone());
 
         SQLiteDatabase banco = BancoSQLite.getInstance(context).getWritableDatabase();
 

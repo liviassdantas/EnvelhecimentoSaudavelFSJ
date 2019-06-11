@@ -17,15 +17,8 @@ public class Paciente {
     private String sexo;
     private Date dataNascimento;
     private Integer idade;
-
-
-    public List<Atendimento> getAtendimentos() {
-        return atendimentos;
-    }
-
-    public void setAtendimentos(Atendimento atendimentos) {
-        this.atendimentos.add(atendimentos);
-    }
+    private String telefone;
+    private List<Atendimento> atendimentos = new ArrayList<>();
 
     public Paciente() {}
 
@@ -120,5 +113,13 @@ public class Paciente {
 
     public void setIdade(Integer idade) {
         this.idade = idade;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 }
