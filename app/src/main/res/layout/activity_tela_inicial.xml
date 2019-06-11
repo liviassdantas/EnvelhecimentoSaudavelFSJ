@@ -3,10 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:baselineAligned="false"
-    android:orientation="horizontal"
-    android:padding="16dp"
-    android:weightSum="2">
+    android:padding="16dp">
 
     <LinearLayout
         android:id="@+id/telaInicial_layout_NovoPaciente"
@@ -14,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         android:padding="10dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +24,7 @@
             android:layout_gravity="center"
             android:onClick="btnNovoPaciente"
             android:src="@drawable/ic_048_start"
-            android:tint="@color/pink" />
+            android:tint="@color/cor_cinza_padrao_sistema" />
 
         <TextView
             android:id="@+id/Txv_tela_inicial_cadatrar"
@@ -36,7 +33,7 @@
             android:layout_gravity="center"
             android:text="@string/novo_paciente"
             android:textAlignment="center"
-            android:textColor="@color/black"
+            android:textColor="@color/cor_cinza_padrao_sistema"
             android:textSize="22sp" />
     </LinearLayout>
 
@@ -44,7 +41,7 @@
         android:id="@+id/telaInicial_layout_Relatorio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:layout_toEndOf="@id/telaInicial_layout_NovoPaciente"
@@ -61,7 +58,7 @@
             android:layout_gravity="center"
             android:onClick="btnRelatorio"
             android:src="@drawable/ic_045_search"
-            android:tint="@color/pink" />
+            android:tint="@color/cor_cinza_padrao_sistema" />
 
         <TextView
             android:id="@+id/Txv_tela_inicial_relatório"
@@ -69,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/relatório"
-            android:textColor="@color/black"
+            android:textColor="@color/cor_cinza_padrao_sistema"
             android:textSize="22sp" />
     </LinearLayout>
 
@@ -78,8 +75,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/telaInicial_layout_NovoPaciente"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="32dp"
         android:onClick="btnAtendimento"
         android:orientation="vertical"
@@ -94,7 +91,7 @@
             android:layout_gravity="center"
             android:onClick="btnAtendimento"
             android:src="@drawable/stethoscope"
-            android:tint="@color/pink" />
+            android:tint="@color/cor_cinza_padrao_sistema" />
 
         <TextView
             android:id="@+id/Txv_tela_inicial_realizarAtendimento"
@@ -102,7 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Atendimento"
-            android:textColor="@color/black"
+            android:textColor="@color/cor_cinza_padrao_sistema"
             android:textSize="22sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

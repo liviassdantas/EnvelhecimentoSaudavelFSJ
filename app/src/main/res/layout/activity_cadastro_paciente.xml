@@ -25,16 +25,6 @@
                     android:textColor="@color/cinza40"
                     android:textSize="26sp"
                     android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:text="1/5"
-                    android:textColor="@color/cinza40"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
             </RelativeLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -46,7 +36,8 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/nome" />
+                    android:hint="@string/nome"
+                    android:inputType="textCapSentences" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
@@ -58,9 +49,9 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/cpf"
                     android:inputType="number"
-                    android:maxLength="11"
-                    android:hint="@string/cpf" />
+                    android:maxLength="11" />
             </android.support.design.widget.TextInputLayout>
 
             <TextView
@@ -256,8 +247,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="@string/proximo"
-                android:textColor="@color/pink" />
+                android:text="@string/salvar"
+                android:textColor="@color/cinza40" />
         </LinearLayout>
     </ScrollView>
 

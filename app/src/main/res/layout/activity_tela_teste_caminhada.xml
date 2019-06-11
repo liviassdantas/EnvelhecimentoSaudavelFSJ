@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:text="4/5"
+            android:text="3/4"
             android:textColor="@color/cinza40"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -144,7 +144,6 @@
         </TableLayout>
 
     </RelativeLayout>
-    <!--</ScrollView>-->
 
     <Button
         android:id="@+id/teste_caminhada_btnProximo"
@@ -155,7 +154,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/proximo"
-        android:textColor="@color/pink"
+        android:textColor="@color/cor_cinza_padrao_sistema"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

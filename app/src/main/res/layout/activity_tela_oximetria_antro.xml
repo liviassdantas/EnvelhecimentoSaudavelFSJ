@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="2/5"
+                android:text="1/4"
                 android:textColor="@color/cinza40"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -196,7 +196,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 android:text="@string/proximo"
-                android:textColor="@color/pink" />
+                android:textColor="@color/cor_cinza_padrao_sistema" />
 
         </RelativeLayout>
     </ScrollView>

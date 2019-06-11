@@ -25,11 +25,12 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/laudo_numeroPasso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="5/5"
+                android:text="4/4"
                 android:textColor="@color/cinza40"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -460,5 +461,5 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/salvar"
-        android:textColor="@color/pink" />
+        android:textColor="@color/cor_cinza_padrao_sistema" />
 </RelativeLayout>
