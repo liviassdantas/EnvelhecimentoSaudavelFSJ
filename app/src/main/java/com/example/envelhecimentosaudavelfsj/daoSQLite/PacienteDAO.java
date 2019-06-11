@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Endereco;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.banco.BancoSQLite;
@@ -81,9 +82,12 @@ public class PacienteDAO {
 
         Endereco endereco;
 
+        List<Atendimento> atendimentos;
+
         if (cursor.moveToFirst()) {
             paciente = new Paciente();
             endereco = new EnderecoDAO(context).getEnderecoPaciente(cpfPaciente);
+            atendimentos = new AtendimentoDAO(context).getAtendimentosByPaciente(cpfPaciente);
 
             paciente.setCpf(cursor.getLong(cursor.getColumnIndex("CPF")));
             paciente.setServidorId(cursor.getLong(cursor.getColumnIndex("SERVIDOR_ID")));
@@ -115,6 +119,19 @@ public class PacienteDAO {
         cursor.close();
 
         return paciente;
+    }
+
+    public boolean checkPacienteCadastrado(Long cpfPaciente) {
+        SQLiteDatabase banco = BancoSQLite.getInstance(context).getReadableDatabase();
+
+        String select = String.format("SELECT NOME FROM %s WHERE CPF = ?", TABELA_PACIENTE);
+
+        Cursor cursor = banco.rawQuery(select, new String[]{String.valueOf(cpfPaciente)});
+
+        boolean resultadoBusca = cursor.moveToFirst();
+        cursor.close();
+
+        return resultadoBusca;
     }
 
     public List<Paciente> getAllPacientes() {

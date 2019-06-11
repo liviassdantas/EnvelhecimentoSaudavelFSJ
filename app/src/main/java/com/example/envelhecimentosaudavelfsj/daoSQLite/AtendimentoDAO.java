@@ -49,18 +49,15 @@ public class AtendimentoDAO {
         create.append("     OXIMETRIA_PRE       TEXT,");
         create.append("     OXIMETRIA_POS       TEXT,");
         create.append("     DOBRAS_CUTANEAS     REAL,");
-        create.append("     DATA_ATENDIMENTO    TEXT");
+        create.append("     DATA_ATENDIMENTO    TEXT,");
+        create.append("     FOREIGN KEY (FK_CPF_PACIENTE) REFERENCES TABELA_PACIENTE (CPF)");
         create.append(")");
         db.execSQL(create.toString());
     }
 
     public boolean insertAtendimento(Atendimento atendimento) {
 
-        String dataAtendimento = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS", new Locale("en-US"))
-                .format(atendimento.getDataEHoraAtendimento());
-
         ContentValues values = new ContentValues();
-        values.put("ID",                atendimento.getAtendimentoId());
         values.put("FK_CPF_PACIENTE",   atendimento.getCpfPaciente());
         values.put("PESO",              atendimento.getPeso());
         values.put("ALTURA",            atendimento.getAltura());
@@ -75,9 +72,13 @@ public class AtendimentoDAO {
         values.put("OXIMETRIA_PRE",     atendimento.getOximetriaPre());
         values.put("OXIMETRIA_POS",     atendimento.getOximetriaPos());
         values.put("DOBRAS_CUTANEAS",   atendimento.getDobrasCutaneas());
+
+        String dataAtendimento = new SimpleDateFormat("yyyy-MM-dd HH:mm", new Locale("en-US"))
+                .format(atendimento.getDataEHoraAtendimento());
         values.put("DATA_ATENDIMENTO",  dataAtendimento);
 
         SQLiteDatabase banco = BancoSQLite.getInstance(context).getWritableDatabase();
+
 
         return banco.insert(TABELA_ATENDIMENTO, null, values) != -1;
     }
@@ -92,48 +93,52 @@ public class AtendimentoDAO {
         Atendimento atendimento = null;
         List<Atendimento> atendimentos = new ArrayList<>();
 
-        if (cursor.moveToFirst()) {
-            do {
-                atendimento = new Atendimento();
-                atendimento.setAtendimentoId(cursor.getLong(cursor.getColumnIndex("ID")));
-                atendimento.setCpfPaciente(cursor.getLong(cursor.getColumnIndex("FK_CPF_PACIENTE")));
-                atendimento.setPeso(cursor.getDouble(cursor.getColumnIndex("PESO")));
-                atendimento.setAltura(cursor.getDouble(cursor.getColumnIndex("ALTURA")));
-                atendimento.setPressaoArterial(cursor.getString(cursor.getColumnIndex("PRESSAO")));
-                atendimento.setIMC(cursor.getString(cursor.getColumnIndex("IMC")));
-                atendimento.setRCQ(cursor.getString(cursor.getColumnIndex("RCQ")));
-                atendimento.setPApreTeste(cursor.getString(cursor.getColumnIndex("PA_PRE_TESTE")));
-                atendimento.setPAposTeste(cursor.getString(cursor.getColumnIndex("PA_POS_TESTE")));
-                atendimento.setFrequenciaCardiaca(cursor.getString(cursor.getColumnIndex("FREQ_CARDIACA")));
-                atendimento.setDistanciaTesteErg(cursor.getString(cursor.getColumnIndex("DISTANCIA_TESTE")));
-                atendimento.setVOobtidoTesteErg(cursor.getString(cursor.getColumnIndex("VO_OBTIDO")));
-                atendimento.setOximetriaPre(cursor.getString(cursor.getColumnIndex("OXIMETRIA_PRE")));
-                atendimento.setOximetriaPos(cursor.getString(cursor.getColumnIndex("OXIMETRIA_POS")));
-                atendimento.setDobrasCutaneas(cursor.getDouble(cursor.getColumnIndex("DOBRAS_CUTANEAS")));
+        try {
+            if (cursor.moveToFirst()) {
+                do {
+                    atendimento = new Atendimento();
+                    atendimento.setAtendimentoId(cursor.getLong(cursor.getColumnIndex("ID")));
+                    atendimento.setCpfPaciente(cursor.getLong(cursor.getColumnIndex("FK_CPF_PACIENTE")));
+                    atendimento.setPeso(cursor.getDouble(cursor.getColumnIndex("PESO")));
+                    atendimento.setAltura(cursor.getDouble(cursor.getColumnIndex("ALTURA")));
+                    atendimento.setPressaoArterial(cursor.getString(cursor.getColumnIndex("PRESSAO")));
+                    atendimento.setIMC(cursor.getString(cursor.getColumnIndex("IMC")));
+                    atendimento.setRCQ(cursor.getString(cursor.getColumnIndex("RCQ")));
+                    atendimento.setPApreTeste(cursor.getString(cursor.getColumnIndex("PA_PRE_TESTE")));
+                    atendimento.setPAposTeste(cursor.getString(cursor.getColumnIndex("PA_POS_TESTE")));
+                    atendimento.setFrequenciaCardiaca(cursor.getString(cursor.getColumnIndex("FREQ_CARDIACA")));
+                    atendimento.setDistanciaTesteErg(cursor.getString(cursor.getColumnIndex("DISTANCIA_TESTE")));
+                    atendimento.setVOobtidoTesteErg(cursor.getString(cursor.getColumnIndex("VO_OBTIDO")));
+                    atendimento.setOximetriaPre(cursor.getString(cursor.getColumnIndex("OXIMETRIA_PRE")));
+                    atendimento.setOximetriaPos(cursor.getString(cursor.getColumnIndex("OXIMETRIA_POS")));
+                    atendimento.setDobrasCutaneas(cursor.getDouble(cursor.getColumnIndex("DOBRAS_CUTANEAS")));
 
-                String dataNascimento;
-                dataNascimento = cursor.getString(cursor.getColumnIndex("DATA_ATENDIMENTO"));
+                    String dataNascimento;
+                    dataNascimento = cursor.getString(cursor.getColumnIndex("DATA_ATENDIMENTO"));
 
-                Date date = null;
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS", new Locale("en-US"));
-                    date = sdf.parse(dataNascimento);
+                    Date date = null;
+                    try {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm", new Locale("en-US"));
+                        date = sdf.parse(dataNascimento);
 
-                    sdf = new SimpleDateFormat("dd/MM/yyyy HH:MM:SS", new Locale("pt-BR"));
-                    dataNascimento = sdf.format(date);
+                        sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm", new Locale("pt-BR"));
+                        dataNascimento = sdf.format(date);
 
-                    date = sdf.parse(dataNascimento);
+                        date = sdf.parse(dataNascimento);
+                        atendimento.setDataEHoraAtendimento(date);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     atendimento.setDataEHoraAtendimento(date);
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-                atendimento.setDataEHoraAtendimento(date);
 
-                atendimentos.add(atendimento);
-            } while (cursor.moveToNext());
+                    atendimentos.add(atendimento);
+                } while (cursor.moveToNext());
+            }
+        } finally {
+            cursor.close();
+            banco.close();
         }
-        cursor.close();
-        banco.close();
+
         return atendimentos;
     }
 
@@ -171,5 +176,18 @@ public class AtendimentoDAO {
 
         String[] args = new String[]{String.valueOf(atendimento.getAtendimentoId()), String.valueOf(atendimento.getCpfPaciente())};
         return banco.update(TABELA_ATENDIMENTO, values, "ID = ? AND FK_CPF_PACIENTE = ?", args) > 0;
+    }
+
+    public boolean checkPacienteAtendimento(Long cpfPaciente) {
+        SQLiteDatabase banco = BancoSQLite.getInstance(context).getReadableDatabase();
+
+        String select = String.format("SELECT ID FROM %s WHERE FK_CPF_PACIENTE = ?", TABELA_ATENDIMENTO);
+
+        Cursor cursor = banco.rawQuery(select, new String[]{String.valueOf(cpfPaciente)});
+
+        boolean resultadoBusca = cursor.moveToFirst();
+        cursor.close();
+
+        return resultadoBusca;
     }
 }
