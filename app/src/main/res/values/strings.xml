@@ -67,6 +67,7 @@
     <string name="salvar">Salvar</string>
     <string name="rcq">RCQ</string>
     <string name="imc">IMC</string>
+    <string name="telefone">Telefone</string>
     <!--Array de estados-->
     <string-array name="estados">
         <item>AC</item>

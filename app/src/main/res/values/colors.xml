@@ -7,4 +7,5 @@
     <color name="pink">#D81B60</color>
     <color name="black">#000</color>
     <color name="cinza40">#99000000</color>
+    <color name="cor_cinza_padrao_sistema">#FF424242</color>
 </resources>

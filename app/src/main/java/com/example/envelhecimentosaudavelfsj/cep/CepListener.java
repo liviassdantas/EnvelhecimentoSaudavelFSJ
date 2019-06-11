@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.text.Editable;
 import android.text.TextWatcher;
 
-import com.example.envelhecimentosaudavelfsj.View.DadosPaciente;
+import com.example.envelhecimentosaudavelfsj.View.CadastroPaciente;
 
 /**
  * Created by Raphael Rodrigues on 29/04/2019.
@@ -37,7 +37,7 @@ public class CepListener implements TextWatcher {
     public void afterTextChanged(Editable s) {
         String cep = s.toString();
         if (cep.length() == 8) {
-            new RequisitarEndereco((DadosPaciente) mActivity).execute();
+            new RequisitarEndereco((CadastroPaciente) mActivity).execute();
         }
 
     }

@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.Model.Endereco;
 import com.example.envelhecimentosaudavelfsj.R;
-import com.example.envelhecimentosaudavelfsj.View.DadosPaciente;
+import com.example.envelhecimentosaudavelfsj.View.CadastroPaciente;
 import com.google.gson.Gson;
 
 import java.lang.ref.WeakReference;
@@ -21,9 +21,9 @@ import java.lang.ref.WeakReference;
  */
 public class RequisitarEndereco extends AsyncTask<Void, Void, Endereco> {
 
-    private WeakReference<DadosPaciente> dadosPacienteWeakReference;
+    private WeakReference<CadastroPaciente> dadosPacienteWeakReference;
 
-    public RequisitarEndereco(DadosPaciente activity) {
+    public RequisitarEndereco(CadastroPaciente activity) {
         this.dadosPacienteWeakReference = new WeakReference<>(activity);
     }
 
