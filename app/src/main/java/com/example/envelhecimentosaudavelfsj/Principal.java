@@ -12,8 +12,8 @@ import android.widget.Toast;
 import com.example.envelhecimentosaudavelfsj.View.CadastroPaciente;
 import com.example.envelhecimentosaudavelfsj.View.OximetriaAntropometria;
 import com.example.envelhecimentosaudavelfsj.View.Relatorio;
-import com.example.envelhecimentosaudavelfsj.daoSQLite.AtendimentoDAO;
-import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
+import com.example.envelhecimentosaudavelfsj.dao.AtendimentoDAO;
+import com.example.envelhecimentosaudavelfsj.dao.PacienteDAO;
 
 public class Principal extends AppCompatActivity {
 

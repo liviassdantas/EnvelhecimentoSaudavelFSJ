@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import com.example.envelhecimentosaudavelfsj.Adapter.AtendimentoAdapter;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
-import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
+import com.example.envelhecimentosaudavelfsj.dao.PacienteDAO;
 
 //Criado por Yan Vitor 06/06/2019
 

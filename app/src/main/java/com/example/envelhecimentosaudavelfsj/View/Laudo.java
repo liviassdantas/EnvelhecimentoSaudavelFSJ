@@ -11,7 +11,7 @@ import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.Principal;
 import com.example.envelhecimentosaudavelfsj.R;
-import com.example.envelhecimentosaudavelfsj.daoSQLite.AtendimentoDAO;
+import com.example.envelhecimentosaudavelfsj.dao.AtendimentoDAO;
 import com.google.gson.Gson;
 
 /*

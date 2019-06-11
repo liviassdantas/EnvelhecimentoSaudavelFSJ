@@ -4,9 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.envelhecimentosaudavelfsj.daoSQLite.AtendimentoDAO;
-import com.example.envelhecimentosaudavelfsj.daoSQLite.EnderecoDAO;
-import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
+import com.example.envelhecimentosaudavelfsj.dao.AtendimentoDAO;
+import com.example.envelhecimentosaudavelfsj.dao.EnderecoDAO;
+import com.example.envelhecimentosaudavelfsj.dao.PacienteDAO;
 
 /**
  * Created by Raphael Rodrigues on 08/06/2019.

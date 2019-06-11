@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -22,7 +21,7 @@ import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.Principal;
 import com.example.envelhecimentosaudavelfsj.R;
 import com.example.envelhecimentosaudavelfsj.cep.CepListener;
-import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
+import com.example.envelhecimentosaudavelfsj.dao.PacienteDAO;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

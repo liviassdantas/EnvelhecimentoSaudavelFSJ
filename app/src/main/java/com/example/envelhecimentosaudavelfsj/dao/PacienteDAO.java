@@ -1,4 +1,4 @@
-package com.example.envelhecimentosaudavelfsj.daoSQLite;
+package com.example.envelhecimentosaudavelfsj.dao;
 
 import android.content.ContentValues;
 import android.content.Context;

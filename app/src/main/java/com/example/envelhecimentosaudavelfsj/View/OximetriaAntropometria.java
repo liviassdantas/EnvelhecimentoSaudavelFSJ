@@ -7,19 +7,16 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.envelhecimentosaudavelfsj.Model.Atendimento;
 import com.example.envelhecimentosaudavelfsj.Model.Paciente;
 import com.example.envelhecimentosaudavelfsj.R;
 import com.example.envelhecimentosaudavelfsj.Util.TextListener;
 import com.example.envelhecimentosaudavelfsj.Util.Util;
-import com.example.envelhecimentosaudavelfsj.daoSQLite.PacienteDAO;
+import com.example.envelhecimentosaudavelfsj.dao.PacienteDAO;
 import com.google.gson.Gson;
 
 import java.util.Calendar;
