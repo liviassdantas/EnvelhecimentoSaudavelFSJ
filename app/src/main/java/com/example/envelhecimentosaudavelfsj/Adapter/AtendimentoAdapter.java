@@ -47,7 +47,7 @@ public class AtendimentoAdapter extends RecyclerView.Adapter<AtendimentoAdapter.
 
         cardViewRelatorio.nomePaciente.setText(mPaciente.getNome());
 
-        cardViewRelatorio.imc.append(atendimento.getIMC().substring(0, 5));
+        cardViewRelatorio.imc.append((!atendimento.getIMC().isEmpty() ? atendimento.getIMC().substring(0, 5) : ""));
 
         String data = new SimpleDateFormat("dd/MM/yyyy HH:mm", new Locale("pt-BR")).format(atendimento.getDataEHoraAtendimento());
 
