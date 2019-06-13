@@ -78,19 +78,19 @@ public class Laudo extends AppCompatActivity {
         idadeExibe.append(" " + mPaciente.getIdade());
         sexoExibe.append(" "  + mPaciente.getSexo());
 
-        pesoExibe.append( (mAtendimento.getPeso() != 0) ? mAtendimento.getPeso() + " Kg" : "");
+        pesoExibe.append( (mAtendimento.getPeso() != 0) ? " " + mAtendimento.getPeso() + " Kg" : "");
         imcExibe.append(" " + mAtendimento.getIMC());
-        freqCardExibe.append( (!mAtendimento.getFrequenciaCardiaca().isEmpty()) ? mAtendimento.getFrequenciaCardiaca() + " bpm": "");
-        alturaExibe.append( (mAtendimento.getAltura() != 0) ? mAtendimento.getAltura() + " m" : "");
-        rcqExibe.append( (mAtendimento.getRCQ() != null)  ? mAtendimento.getRCQ() : "");
+        freqCardExibe.append( (!mAtendimento.getFrequenciaCardiaca().isEmpty()) ? " " + mAtendimento.getFrequenciaCardiaca() + " bpm": "");
+        alturaExibe.append( (mAtendimento.getAltura() != 0) ? " " + mAtendimento.getAltura() + " m" : "");
+        rcqExibe.append( (mAtendimento.getRCQ() != null)  ? " " + mAtendimento.getRCQ() : "");
         pressaoExibe.append(" " + mAtendimento.getPressaoArterial());
         oximetriaPreExibe.append(" " + mAtendimento.getOximetriaPre());
         oximetriaPosExibe.append(" " + mAtendimento.getOximetriaPos());
-        dobrasCutExibe.append( (mAtendimento.getDobrasCutaneas()) != 0 ? mAtendimento.getDobrasCutaneas() + "%" : "");
-        distanciaTesteExibe.append( (!mAtendimento.getDistanciaTesteErg().isEmpty()) ? mAtendimento.getDistanciaTesteErg() + " Km" : "");
-        pressaoPreExibe.append( (mAtendimento.getPApreTeste() != null) ? mAtendimento.getPApreTeste() : "");
-        pressaoPosExibe.append( (mAtendimento.getPAposTeste() != null) ? mAtendimento.getPAposTeste() : "");
-        vo2maxExibe.append( (!mAtendimento.getVOobtidoTesteErg().isEmpty()) ? mAtendimento.getVOobtidoTesteErg() + " ml" : "");
+        dobrasCutExibe.append( (mAtendimento.getDobrasCutaneas()) != 0 ? " " + mAtendimento.getDobrasCutaneas() + "%" : "");
+        distanciaTesteExibe.append( (!mAtendimento.getDistanciaTesteErg().isEmpty()) ? " " + mAtendimento.getDistanciaTesteErg() + " Km" : "");
+        pressaoPreExibe.append( (mAtendimento.getPApreTeste() != null) ? " " + mAtendimento.getPApreTeste() : "");
+        pressaoPosExibe.append( (mAtendimento.getPAposTeste() != null) ? " " + mAtendimento.getPAposTeste() : "");
+        vo2maxExibe.append( (!mAtendimento.getVOobtidoTesteErg().isEmpty()) ? " " + mAtendimento.getVOobtidoTesteErg() + " ml" : "");
 
         findViewById(R.id.laudo_btnSalvar).setOnClickListener(new View.OnClickListener() {
             @Override
