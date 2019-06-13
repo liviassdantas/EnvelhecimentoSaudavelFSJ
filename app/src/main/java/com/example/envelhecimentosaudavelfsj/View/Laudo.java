@@ -45,23 +45,23 @@ public class Laudo extends AppCompatActivity {
         setContentView(R.layout.activity_laudo);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        nomeExibe = findViewById(R.id.nomepessoa_laudo);
-        idadeExibe = findViewById(R.id.idadeexibe_laudo);
-        sexoExibe = findViewById(R.id.sexoExibir_laudo);
+        nomeExibe = findViewById(R.id.laudo_nomePaciente);
+        idadeExibe = findViewById(R.id.laudo_idade);
+        sexoExibe = findViewById(R.id.laudo_sexo);
 
-        pesoExibe = findViewById(R.id.pesoexibe_laudo);
-        imcExibe = findViewById(R.id.resultado_imc_laudo);
-        freqCardExibe = findViewById(R.id.frequencia_exibe_laudo);
-        alturaExibe = findViewById(R.id.alturaexibe_laudo);
-        rcqExibe = findViewById(R.id.rcqExibe);
-        pressaoExibe = findViewById(R.id.pa_exibe_laudo);
-        oximetriaPreExibe = findViewById(R.id.valorpretesteoximetriaexibe_laudo);
-        oximetriaPosExibe = findViewById(R.id.valorpostesteoximetriaexibe_laudo);
-        dobrasCutExibe = findViewById(R.id.resultadoDobrasExibe_laudo);
-        distanciaTesteExibe = findViewById(R.id.distanciaCaminhadaExibe_laudo);
-        pressaoPreExibe = findViewById(R.id.paPreTesteExibe_laudo);
-        pressaoPosExibe = findViewById(R.id.paPosTesteExibe_laudo);
-        vo2maxExibe = findViewById(R.id.vo2maxExibe_laudo);
+        pesoExibe = findViewById(R.id.laudo_peso);
+        imcExibe = findViewById(R.id.laudo_imc);
+        freqCardExibe = findViewById(R.id.laudo_frequenciaCardiaca);
+        alturaExibe = findViewById(R.id.laudo_altura);
+        rcqExibe = findViewById(R.id.laudo_rcq);
+        pressaoExibe = findViewById(R.id.laudo_pressaArterial);
+        oximetriaPreExibe = findViewById(R.id.laudo_oximetriaPreTeste);
+        oximetriaPosExibe = findViewById(R.id.laudo_oximetriaPosTeste);
+        dobrasCutExibe = findViewById(R.id.laudo_dobrasCutaneas);
+        distanciaTesteExibe = findViewById(R.id.laudo_distanciaPercorrido);
+        pressaoPreExibe = findViewById(R.id.laudo_pressaoPreTeste);
+        pressaoPosExibe = findViewById(R.id.laudo_pressaoPosTeste);
+        vo2maxExibe = findViewById(R.id.laudo_vo2Max);
 
         if (getIntent().hasExtra("PACIENTE")) {
             mPaciente = new Gson().fromJson(getIntent().getStringExtra("PACIENTE"), Paciente.class);
@@ -71,26 +71,26 @@ public class Laudo extends AppCompatActivity {
             mAtendimento = mPaciente.getAtendimentos().get(getIntent().getIntExtra("POSITION", 0));
 
             findViewById(R.id.laudo_btnSalvar).setVisibility(View.INVISIBLE);
-            findViewById(R.id.laudo_numeroPasso).setVisibility(View.INVISIBLE);
+//            findViewById(R.id.laudo_numeroPasso).setVisibility(View.INVISIBLE);
         }
 
         nomeExibe.setText(mPaciente.getNome());
-        idadeExibe.setText(String.valueOf(mPaciente.getIdade()));
-        sexoExibe.setText(mPaciente.getSexo());
+        idadeExibe.append(" " + mPaciente.getIdade());
+        sexoExibe.append(" "  + mPaciente.getSexo());
 
-        pesoExibe.setText(String.valueOf(mAtendimento.getPeso()));
-        imcExibe.setText(mAtendimento.getIMC());
-        freqCardExibe.setText(mAtendimento.getFrequenciaCardiaca());
-        alturaExibe.setText(String.valueOf(mAtendimento.getAltura()));
-        rcqExibe.setText(String.valueOf(mAtendimento.getRCQ()));
-        pressaoExibe.setText(mAtendimento.getPressaoArterial());
-        oximetriaPreExibe.setText(String.valueOf(mAtendimento.getOximetriaPre()));
-        oximetriaPosExibe.setText(String.valueOf(mAtendimento.getOximetriaPos()));
-        dobrasCutExibe.setText(String.valueOf(mAtendimento.getDobrasCutaneas()));
-        distanciaTesteExibe.setText(String.valueOf(mAtendimento.getDistanciaTesteErg()));
-        pressaoPreExibe.setText(mAtendimento.getPApreTeste());
-        pressaoPosExibe.setText(mAtendimento.getPAposTeste());
-        vo2maxExibe.setText(String.valueOf(mAtendimento.getVOobtidoTesteErg()));
+        pesoExibe.append( (mAtendimento.getPeso() != 0) ? mAtendimento.getPeso() + " Kg" : "");
+        imcExibe.append(" " + mAtendimento.getIMC());
+        freqCardExibe.append( (!mAtendimento.getFrequenciaCardiaca().isEmpty()) ? mAtendimento.getFrequenciaCardiaca() + " bpm": "");
+        alturaExibe.append( (mAtendimento.getAltura() != 0) ? mAtendimento.getAltura() + " m" : "");
+        rcqExibe.append( (mAtendimento.getRCQ() != null)  ? mAtendimento.getRCQ() : "");
+        pressaoExibe.append(" " + mAtendimento.getPressaoArterial());
+        oximetriaPreExibe.append(" " + mAtendimento.getOximetriaPre());
+        oximetriaPosExibe.append(" " + mAtendimento.getOximetriaPos());
+        dobrasCutExibe.append( (mAtendimento.getDobrasCutaneas()) != 0 ? mAtendimento.getDobrasCutaneas() + "%" : "");
+        distanciaTesteExibe.append( (!mAtendimento.getDistanciaTesteErg().isEmpty()) ? mAtendimento.getDistanciaTesteErg() + " Km" : "");
+        pressaoPreExibe.append( (mAtendimento.getPApreTeste() != null) ? mAtendimento.getPApreTeste() : "");
+        pressaoPosExibe.append( (mAtendimento.getPAposTeste() != null) ? mAtendimento.getPAposTeste() : "");
+        vo2maxExibe.append( (!mAtendimento.getVOobtidoTesteErg().isEmpty()) ? mAtendimento.getVOobtidoTesteErg() + " ml" : "");
 
         findViewById(R.id.laudo_btnSalvar).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,9 +117,9 @@ public class Laudo extends AppCompatActivity {
                     new AtendimentoDAO(getBaseContext()).insertAtendimento(mAtendimento);
                 }
 
-                Intent finalI = new Intent(Laudo.this, Principal.class);
-                finalI.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(finalI);
+                Intent intent = new Intent(Laudo.this, Principal.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }
