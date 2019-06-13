@@ -122,7 +122,11 @@ public class Atendimento {
     }
 
     public void setPressaoArterial(String pressaoSis, String pressaoDias) {
-        this.pressaoArterial = pressaoSis + "X" + pressaoDias + " mmHg";
+        if (pressaoSis.isEmpty() || pressaoDias.isEmpty()) {
+            this.pressaoArterial = "";
+            return;
+        }
+        this.pressaoArterial = pressaoSis + " x " + pressaoDias + " mmHg";
     }
 
     public void setPressaoArterial(String pressaoArterial) {
@@ -138,7 +142,11 @@ public class Atendimento {
     }
 
     public void setPApreTeste(String pressaoSis, String pressaoDias) {
-        this.PApreTeste = pressaoSis + "X" + pressaoDias + " mmHg";
+        if (pressaoSis.isEmpty() || pressaoDias.isEmpty()) {
+            this.PApreTeste = "";
+            return;
+        }
+        this.PApreTeste = pressaoSis + " x " + pressaoDias + " mmHg";
     }
 
     public String getPAposTeste() {
@@ -146,7 +154,11 @@ public class Atendimento {
     }
 
     public void setPAposTeste(String pressaoSis, String pressaoDias) {
-        this.PAposTeste = pressaoSis + "X" + pressaoDias + " mmHg";
+        if (pressaoSis.isEmpty() || pressaoDias.isEmpty()) {
+            this.PAposTeste = "";
+            return;
+        }
+        this.PAposTeste = pressaoSis + " x " + pressaoDias + " mmHg";
     }
 
     public void setPAposTeste(String PAposTeste) {
