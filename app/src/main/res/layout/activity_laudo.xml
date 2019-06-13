@@ -3,450 +3,251 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
-        <!--Resultado-->
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
             <TextView
-                android:id="@+id/resultado"
-                android:layout_width="wrap_content"
+                android:id="@+id/laudo_nomePaciente"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/resultado"
+                android:textAlignment="center"
                 android:textColor="@color/cinza40"
                 android:textSize="26sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/laudo_numeroPasso"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:text="4/4"
-                android:textColor="@color/cinza40"
-                android:textSize="15sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/cor_cinza_padrao_sistema" />
 
-        <!--Informações da pessoa-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/nome_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nome:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/nomepessoa_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_toEndOf="@id/nome_laudo"
-                android:layout_toRightOf="@id/nome_laudo"
-                android:text="@string/nomepessoa"
-                android:textColor="@color/black" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/idade_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Idade:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/idadeexibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/idade_laudo"
-                android:layout_toRightOf="@id/idade_laudo"
-                android:text="@string/idade"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/sexoExibe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_toEndOf="@id/idadeexibe_laudo"
-                android:layout_toRightOf="@id/idade_laudo"
-                android:text="Sexo:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/sexoExibir_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/sexoExibe"
-                android:layout_toRightOf="@id/sexoExibe"
-                android:text="Masculino"
-                android:textColor="@color/black" />
-        </RelativeLayout>
-
-        <!--Antropometria-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
-
-            <TextView
-                android:id="@+id/antropometria_laudo"
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/antropometria"
+                android:layout_marginTop="5dp">
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/laudo_idade"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".40"
+                        android:text="Idade:"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/laudo_sexo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".60"
+                        android:text="Sexo:"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/laudo_peso"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".40"
+                        android:text="Peso:"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/laudo_imc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".60"
+                        android:text="IMC:"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/laudo_altura"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".40"
+                        android:text="Altura:"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/laudo_frequenciaCardiaca"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".60"
+                        android:text="F.C.:"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:weightSum="1">
+
+                    <TextView
+                        android:id="@+id/laudo_pressaArterial"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".40"
+                        android:text="P.A.:"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:id="@+id/laudo_rcq"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".60"
+                        android:text="RCQ:"
+                        android:textColor="@color/black" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:text="@string/oximetria"
                 android:textColor="@color/cinza40"
                 android:textSize="23sp"
                 android:textStyle="bold" />
-        </RelativeLayout>
 
-        <!--peso, IMC e FC-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/cor_cinza_padrao_sistema" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/laudo_oximetriaPreTeste"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Valor pré-teste:"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/laudo_oximetriaPosTeste"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:text="Valor pós-teste:"
+                    android:textColor="@color/black" />
+
+            </TableLayout>
 
             <TextView
-                android:id="@+id/peso_laudo"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Peso:"
-                android:textColor="@color/black" />
+                android:layout_marginTop="35dp"
+                android:text="@string/dobrascutaneas"
+                android:textColor="@color/cinza40"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/cor_cinza_padrao_sistema" />
 
             <TextView
-                android:id="@+id/pesoexibe_laudo"
+                android:id="@+id/laudo_dobrasCutaneas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/peso_laudo"
-                android:layout_toRightOf="@id/peso_laudo"
-                android:text="@string/peso"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/imcExibe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_toEndOf="@id/pesoexibe_laudo"
-                android:layout_toRightOf="@id/pesoexibe_laudo"
-                android:text="IMC:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/resultado_imc_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/imcExibe"
-                android:layout_toRightOf="@id/imcExibe"
-                android:text="@string/IMCresult"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/fcExibe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_toEndOf="@id/resultado_imc_laudo"
-                android:layout_toRightOf="@id/resultado_imc_laudo"
-                android:text="F.C.:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/frequencia_exibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/fcExibe"
-                android:layout_toRightOf="@id/fcExibe"
-                android:text="@string/fcResultLaudo"
-                android:textColor="@color/black" />
-        </RelativeLayout>
-
-        <!--Altura, PA, RCQ-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/altura_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Altura:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/alturaexibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/altura_laudo"
-                android:layout_toRightOf="@id/altura_laudo"
-                android:text="@string/altura"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/rcqExibe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_toEndOf="@id/alturaexibe_laudo"
-                android:layout_toRightOf="@id/alturaexibe_laudo"
-                android:text="RCQ:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/rcq_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/rcqExibe"
-                android:layout_toRightOf="@id/rcqExibe"
-                android:text="@string/IMCresult"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/paExibe"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_toEndOf="@id/rcq_laudo"
-                android:layout_toRightOf="@id/rcq_laudo"
-                android:text="P.A.:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/pa_exibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/paExibe"
-                android:layout_toRightOf="@id/paExibe"
-                android:text="@string/PAResultado"
-                android:textColor="@color/black" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/oximetria_laudo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/oximetria"
-            android:textColor="@color/cinza40"
-            android:textSize="23sp"
-            android:textStyle="bold" />
-        <!--Oximetria-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/vpretesteoximetria_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Valor pré-teste:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/valorpretesteoximetriaexibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/vpretesteoximetria_laudo"
-                android:layout_toRightOf="@id/vpretesteoximetria_laudo"
-                android:text="@string/laudo_exibe_valorpreoximetria"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/vpostesteoximetria_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
-                android:layout_toEndOf="@id/valorpretesteoximetriaexibe_laudo"
-                android:layout_toRightOf="@id/valorpretesteoximetriaexibe_laudo"
-                android:text="Valor pós-teste:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/valorpostesteoximetriaexibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/vpostesteoximetria_laudo"
-                android:layout_toRightOf="@id/vpostesteoximetria_laudo"
-                android:text="@string/laudo_oximetria_valorposteste"
-                android:textColor="@color/black" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/dobras_laudo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/dobrascutaneas"
-            android:textColor="@color/cinza40"
-            android:textSize="23sp"
-            android:textStyle="bold" />
-        <!--Dobras Cutâneas-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/resultadoDobras_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="Resultado em Percentual:"
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/resultadoDobrasExibe_laudo"
-                android:layout_width="wrap_content"
+                android:id="@+id/testecaminhada_laudo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/resultadoDobras_laudo"
-                android:layout_toRightOf="@id/resultadoDobras_laudo"
-                android:text="@string/laudo_exibe_valorpreoximetria"
-                android:textColor="@color/black" />
-        </RelativeLayout>
+                android:layout_marginTop="35dp"
+                android:text="@string/testecaminhada"
+                android:textColor="@color/cinza40"
+                android:textSize="23sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/testecaminhada_laudo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="@string/testecaminhada"
-            android:textColor="@color/cinza40"
-            android:textSize="23sp"
-            android:textStyle="bold" />
-        <!--Teste de Caminhada-->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/cor_cinza_padrao_sistema" />
 
-            <TextView
-                android:id="@+id/distanciaCaminhada_laudo"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Distância(km):"
-                android:textColor="@color/black" />
+                android:layout_marginTop="5dp">
 
-            <TextView
-                android:id="@+id/distanciaCaminhadaExibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/distanciaCaminhada_laudo"
-                android:layout_toRightOf="@id/distanciaCaminhada_laudo"
-                android:text="@string/laudo_exibe_valorpreoximetria"
-                android:textColor="@color/black" />
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:weightSum="1">
 
-            <TextView
-                android:id="@+id/paPreTesteCaminhada_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_toEndOf="@id/distanciaCaminhadaExibe_laudo"
-                android:layout_toRightOf="@id/distanciaCaminhadaExibe_laudo"
-                android:text="P.A.Pré-Teste:"
-                android:textColor="@color/black"
-                android:layout_marginStart="15dp" />
+                    <TextView
+                        android:id="@+id/laudo_distanciaPercorrido"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4"
+                        android:text="Distância:"
+                        android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/paPreTesteExibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginLeft="2dp"
-                android:layout_toEndOf="@id/paPreTesteCaminhada_laudo"
-                android:layout_toRightOf="@id/paPreTesteCaminhada_laudo"
-                android:text="@string/pressaoPreTesteCaminhada_laudo"
-                android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/laudo_pressaoPreTeste"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".60"
+                        android:text="P.A.Pré-Teste:"
+                        android:textColor="@color/black" />
+                </TableRow>
 
-        </RelativeLayout>
+                <TableRow
+                    android:layout_marginTop="5dp"
+                    android:weightSum="1">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/laudo_vo2Max"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".4"
+                        android:text="VO²Max:"
+                        android:textColor="@color/black" />
 
-            <TextView
-                android:id="@+id/vo2Max_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="VO²Max:"
-                android:textColor="@color/black" />
+                    <TextView
+                        android:id="@+id/laudo_pressaoPosTeste"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="P.A.Pós-Teste:"
+                        android:textColor="@color/black" />
+                </TableRow>
+            </TableLayout>
 
-            <TextView
-                android:id="@+id/vo2maxExibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_toEndOf="@id/vo2Max_laudo"
-                android:layout_toRightOf="@id/vo2Max_laudo"
-                android:text="@string/vo2maxLaudoExibe"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/paPosTesteCaminhada_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_toEndOf="@id/vo2maxExibe_laudo"
-                android:layout_toRightOf="@id/vo2maxExibe_laudo"
-                android:text="P.A.Pós-Teste:"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/paPosTesteExibe_laudo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_toEndOf="@id/paPosTesteCaminhada_laudo"
-                android:layout_toRightOf="@id/paPosTesteCaminhada_laudo"
-                android:text="@string/pressaoPosTesteCaminhada_laudo"
-                android:textColor="@color/black" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/laudo_btnSalvar"
@@ -456,7 +257,6 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_gravity="end"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
