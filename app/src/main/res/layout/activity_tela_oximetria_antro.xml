@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:text="1/4"
+                android:text="1/3"
                 android:textColor="@color/cinza40"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -82,7 +82,7 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/peso"
+                    android:hint="@string/peso_kg"
                     android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
 
@@ -96,7 +96,7 @@
                 <android.support.design.widget.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/altura"
+                    android:hint="@string/altura_m"
                     android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
 

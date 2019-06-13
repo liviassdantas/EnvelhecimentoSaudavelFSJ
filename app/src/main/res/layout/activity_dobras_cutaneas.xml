@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:text="2/4"
+        android:text="2/3"
         android:textColor="@color/cinza40"
         android:textSize="15sp"
         android:textStyle="bold" />

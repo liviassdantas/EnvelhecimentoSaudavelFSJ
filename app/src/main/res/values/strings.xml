@@ -68,6 +68,8 @@
     <string name="rcq">RCQ</string>
     <string name="imc">IMC</string>
     <string name="telefone">Telefone</string>
+    <string name="peso_kg">Peso (Kg)</string>
+    <string name="altura_m">Altura (m)</string>
     <!--Array de estados-->
     <string-array name="estados">
         <item>AC</item>
